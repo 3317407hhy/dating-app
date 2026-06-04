@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页 / 黄浩洋</title>
+    <style>
+        :root {
+            --bg: #000000;
+            --bg-secondary: #16181c;
+            --bg-hover: #1d1f23;
+            --border: #2f3336;
+            --text: #e7e9ea;
+            --text-secondary: #71767b;
+            --blue: #1d9bf0;
+            --blue-hover: #1a8cd8;
+            --green: #00ba7c;
+            --red: #f91880;
+            --radius: 9999px;
+            --radius-md: 16px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* ============ 布局 ============ */
+        .app {
+            display: flex;
+            width: 100%;
+            max-width: 1265px;
+            min-height: 100vh;
+        }
+
+        /* ============ 左侧导航 ============ */
+        .sidebar {
+            width: 275px;
+            padding: 0 12px;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+
+        .logo {
+            padding: 16px 12px;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -1px;
+        }
+
+        .nav-list {
+            list-style: none;
+            flex: 1;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 16px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: background 0.2s;
+            text-decoration: none;
+            color: var(--text);
+            font-size: 19px;
+            font-weight: 400;
+        }
+
+        .nav-item:hover { background: var(--bg-hover); }
+        .nav-item.active { font-weight: 700; }
+
+        .nav-item .icon {
+            font-size: 24px;
+            width: 28px;
+            text-align: center;
+        }
+
+        .tweet-btn {
+            background: var(--blue);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            padding: 16px;
+            font-size: 17px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 90%;
+            margin: 12px 0;
+            transition: background 0.2s;
+        }
+
+        .tweet-btn:hover { background: var(--blue-hover); }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: var(--radius);
+            cursor: pointer;
+            margin-bottom: 12px;
+            transition: background 0.2s;
+        }
+
+        .user-menu:hover { background: var(--bg-hover); }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 16px;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        .user-info { flex: 1; min-width: 0; }
+        .user-name { font-weight: 700; font-size: 15px; }
+        .user-handle { color: var(--text-secondary); font-size: 14px; }
+
+        /* ============ 主内容区 ============ */
+        .main {
+            flex: 1;
+            max-width: 600px;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            min-height: 100vh;
+        }
+
+        .main-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border);
+            font-size: 20px;
+            font-weight: 700;
+            position: sticky;
+            top: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+            z-index: 10;
+        }
+
+        .tabs-row {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .main-tab {
+            flex: 1;
+            text-align: center;
+            padding: 16px;
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            position: relative;
+            transition: background 0.2s;
+            border: none;
+            background: none;
+        }
+
+        .main-tab:hover { background: var(--bg-hover); }
+        .main-tab.active {
+            color: var(--text);
+            font-weight: 700;
+        }
+        .main-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 56px;
+            height: 4px;
+            background: var(--blue);
+            border-radius: 2px;
+        }
+
+        /* ============ 发推框 ============ */
+        .compose {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .compose-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .compose-body { flex: 1; }
+        .compose-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text);
+            font-size: 19px;
+            padding: 8px 0;
+            outline: none;
+            resize: none;
+            font-family: inherit;
+            min-height: 50px;
+        }
+
+        .compose-input::placeholder { color: var(--text-secondary); }
+
+        .compose-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+            margin-top: 8px;
+        }
+
+        .compose-icons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .compose-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: none;
+            background: transparent;
+            color: var(--blue);
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s;
+        }
+
+        .compose-icon:hover { background: rgba(29, 155, 240, 0.1); }
+
+        .compose-submit {
+            background: var(--blue);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            padding: 8px 20px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .compose-submit:hover { background: var(--blue-hover); }
+        .compose-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* ============ 推文列表 ============ */
+        .feed {}
+        .tweet {
+            display: flex;
+            gap: 12px;
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .tweet:hover { background: rgba(255,255,255,0.02); }
+
+        .tweet-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .tweet-content { flex: 1; min-width: 0; }
+        .tweet-header {
+            display: flex;
+            gap: 4px;
+            align-items: baseline;
+            flex-wrap: wrap;
+        }
+        .tweet-name { font-weight: 700; font-size: 15px; }
+        .tweet-name:hover { text-decoration: underline; }
+        .tweet-handle, .tweet-time { color: var(--text-secondary); font-size: 14px; }
+
+        .tweet-text {
+            margin-top: 4px;
+            font-size: 15px;
+            line-height: 1.5;
+            word-break: break-word;
+        }
+
+        .tweet-image {
+            margin-top: 12px;
+            border-radius: var(--radius-md);
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+        }
+
+        .tweet-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 12px;
+            max-width: 400px;
+        }
+
+        .stat-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 13px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: var(--radius);
+            transition: all 0.2s;
+        }
+
+        .stat-btn:hover.comment { color: var(--blue); }
+        .stat-btn:hover.repost  { color: var(--green); }
+        .stat-btn:hover.like    { color: var(--red); }
+        .stat-btn:hover.share   { color: var(--blue); }
+
+        .stat-btn.liked { color: var(--red); }
+
+        /* ============ 右侧栏 ============ */
+        .rightbar {
+            width: 350px;
+            padding: 0 16px;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            overflow-y: auto;
+        }
+
+        .search-box {
+            position: sticky;
+            top: 4px;
+            background: var(--bg);
+            padding: 8px 0;
+            z-index: 5;
+        }
+
+        .search-input {
+            width: 100%;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 12px 16px;
+            color: var(--text);
+            font-size: 15px;
+            outline: none;
+        }
+
+        .search-input:focus { border-color: var(--blue); background: #000; }
+        .search-input::placeholder { color: var(--text-secondary); }
+
+        .right-card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .right-card-title {
+            padding: 14px 16px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .trend-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .trend-item:hover { background: var(--bg-hover); }
+        .trend-meta { font-size: 13px; color: var(--text-secondary); }
+        .trend-name { font-size: 15px; font-weight: 700; margin: 2px 0; }
+        .trend-count { font-size: 13px; color: var(--text-secondary); }
+
+        .follow-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .follow-item:hover { background: var(--bg-hover); }
+
+        .follow-info { flex: 1; min-width: 0; }
+        .follow-name { font-weight: 700; font-size: 15px; }
+        .follow-name:hover { text-decoration: underline; }
+        .follow-handle { color: var(--text-secondary); font-size: 13px; }
+
+        .follow-btn {
+            background: var(--text);
+            color: var(--bg);
+            border: none;
+            border-radius: var(--radius);
+            padding: 6px 16px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .follow-btn:hover { opacity: 0.9; }
+        .follow-btn.following {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        .follow-btn.following:hover {
+            color: var(--red);
+            border-color: var(--red);
+        }
+
+        .show-more {
+            padding: 16px;
+            color: var(--blue);
+            font-size: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .show-more:hover { background: var(--bg-hover); }
+
+        /* ============ 响应式 ============ */
+        @media (max-width: 1020px) {
+            .sidebar { width: 68px; }
+            .nav-item span { display: none; }
+            .tweet-btn { width: 48px; height: 48px; padding: 0; font-size: 24px; border-radius: 50%; }
+            .user-info { display: none; }
+            .logo { font-size: 24px; }
+        }
+
+        @media (max-width: 700px) {
+            .rightbar { display: none; }
+            .sidebar { width: 68px; }
+            .main { max-width: 100%; }
+        }
+
+        @media (max-width: 500px) {
+            .sidebar { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- ==================== 左侧导航 ==================== -->
+        <nav class="sidebar">
+            <div class="logo">黄浩洋</div>
+            <ul class="nav-list">
+                <li class="nav-item active">
+                    <span class="icon">🏠</span><span>首页</span>
+                </li>
+                <li class="nav-item">
+                    <span class="icon">🔍</span><span>探索</span>
+                </li>
+                <li class="nav-item">
+                    <span class="icon">🔔</span><span>通知</span>
+                </li>
+                <li class="nav-item">
+                    <span class="icon">✉️</span><span>私信</span>
+                </li>
+                <li class="nav-item">
+                    <span class="icon">📋</span><span>列表</span>
+                </li>
+                <li class="nav-item">
+                    <span class="icon">🔖</span><span>书签</span>
+                </li>
+                <li class="nav-item">
+                    <span class="icon">👥</span><span>社群</span>
+                </li>
+                <li class="nav-item">
+                    <span class="icon">🔵</span><span>Premium</span>
+                </li>
+                <li class="nav-item">
+                    <span class="icon">👤</span><span>个人主页</span>
+                </li>
+                <li class="nav-item">
+                    <span class="icon">⋯</span><span>更多</span>
+                </li>
+            </ul>
+            <button class="tweet-btn" onclick="focusCompose()">发 帖</button>
+            <div class="user-menu">
+                <div class="user-avatar">Y</div>
+                <div class="user-info">
+                    <div class="user-name">你的名字</div>
+                    <div class="user-handle">@yourhandle</div>
+                </div>
+                <span style="color:var(--text-secondary);font-weight:700">⋯</span>
+            </div>
+        </nav>
+
+        <!-- ==================== 主内容区 ==================== -->
+        <main class="main">
+            <div class="main-header">首页</div>
+            <div class="tabs-row">
+                <button class="main-tab active">推荐</button>
+                <button class="main-tab">关注</button>
+            </div>
+
+            <!-- 发推框 -->
+            <div class="compose">
+                <div class="compose-avatar">Y</div>
+                <div class="compose-body">
+                    <textarea class="compose-input" id="composeInput" placeholder="有什么新鲜事？" rows="2"></textarea>
+                    <div class="compose-actions">
+                        <div class="compose-icons">
+                            <button class="compose-icon">🖼️</button>
+                            <button class="compose-icon">🎬</button>
+                            <button class="compose-icon">📊</button>
+                            <button class="compose-icon">😀</button>
+                            <button class="compose-icon">📍</button>
+                        </div>
+                        <button class="compose-submit" id="composeSubmit" disabled onclick="postTweet()">发 帖</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 推文列表 -->
+            <div class="feed" id="feed"></div>
+        </main>
+
+        <!-- ==================== 右侧栏 ==================== -->
+        <aside class="rightbar">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="搜索">
+            </div>
+
+            <!-- 热门趋势 -->
+            <div class="right-card">
+                <div class="right-card-title">趋势</div>
+                <div class="trend-item">
+                    <div class="trend-meta">科技 · 热门</div>
+                    <div class="trend-name">#AI改变未来</div>
+                    <div class="trend-count">12.4 万帖子</div>
+                </div>
+                <div class="trend-item">
+                    <div class="trend-meta">体育 · 趋势</div>
+                    <div class="trend-name">世界杯2026</div>
+                    <div class="trend-count">8.2 万帖子</div>
+                </div>
+                <div class="trend-item">
+                    <div class="trend-meta">娱乐 · 热门</div>
+                    <div class="trend-name">#NewMusicFriday</div>
+                    <div class="trend-count">5.6 万帖子</div>
+                </div>
+                <div class="trend-item">
+                    <div class="trend-meta">全球 · 趋势</div>
+                    <div class="trend-name">#ClimateAction</div>
+                    <div class="trend-count">3.1 万帖子</div>
+                </div>
+                <div class="trend-item">
+                    <div class="trend-meta">加密 · 趋势</div>
+                    <div class="trend-name">#Bitcoin</div>
+                    <div class="trend-count">2.8 万帖子</div>
+                </div>
+                <div class="show-more">显示更多</div>
+            </div>
+
+            <!-- 推荐关注 -->
+            <div class="right-card">
+                <div class="right-card-title">推荐关注</div>
+                <div class="follow-item">
+                    <div class="tweet-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">N</div>
+                    <div class="follow-info">
+                        <div class="follow-name">NewsDaily</div>
+                        <div class="follow-handle">@newsdaily</div>
+                    </div>
+                    <button class="follow-btn" onclick="toggleFollow(this)">关注</button>
+                </div>
+                <div class="follow-item">
+                    <div class="tweet-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">T</div>
+                    <div class="follow-info">
+                        <div class="follow-name">TechCrunch</div>
+                        <div class="follow-handle">@techcrunch</div>
+                    </div>
+                    <button class="follow-btn" onclick="toggleFollow(this)">关注</button>
+                </div>
+                <div class="follow-item">
+                    <div class="tweet-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">E</div>
+                    <div class="follow-info">
+                        <div class="follow-name">Elon Musk</div>
+                        <div class="follow-handle">@elonmusk</div>
+                    </div>
+                    <button class="follow-btn" onclick="toggleFollow(this)">关注</button>
+                </div>
+                <div class="show-more">显示更多</div>
+            </div>
+
+            <div style="color:var(--text-secondary);font-size:12px;padding:0 16px 16px;line-height:1.6">
+                <span style="margin-right:12px">服务条款</span>
+                <span style="margin-right:12px">隐私政策</span>
+                <span style="margin-right:12px">Cookie 政策</span>
+                <span style="margin-right:12px">无障碍</span>
+                <span style="margin-right:12px">广告信息</span>
+                <span>更多…</span>
+                <div style="margin-top:4px">© 2026 X Corp.</div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // ============= 模拟推文数据 =============
+        const tweetsData = [
+            {
+                name: '前沿科技',
+                handle: '@techfrontier',
+                time: '2小时前',
+                text: '🚀 OpenAI 刚刚发布了最新的 GPT-5 模型，在多模态推理能力上取得了突破性进展。这将是 AI 发展史上的又一个里程碑！',
+                avatar: 'linear-gradient(135deg, #667eea, #764ba2)',
+                avatarChar: '前',
+                comments: 234,
+                reposts: 89,
+                likes: 1204,
+                liked: false,
+                image: ''
+            },
+            {
+                name: '设计灵感',
+                handle: '@designinspo',
+                time: '4小时前',
+                text: '极简主义设计的核心不是"少即是多"，而是"恰到好处"。每一处留白都有它的意义。分享一张今天发现的设计作品 👇',
+                avatar: 'linear-gradient(135deg, #f093fb, #f5576c)',
+                avatarChar: '设',
+                comments: 56,
+                reposts: 23,
+                likes: 432,
+                liked: false,
+                image: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="500" height="280" viewBox="0 0 500 280"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#667eea"/><stop offset="100%" style="stop-color:#764ba2"/></linearGradient></defs><rect width="500" height="280" fill="url(#g)"/><text x="250" y="130" text-anchor="middle" fill="white" font-size="24" font-weight="700" font-family="sans-serif">Minimal Design</text><text x="250" y="170" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="16" font-family="sans-serif">Less but Better</text></svg>')
+            },
+            {
+                name: '代码日报',
+                handle: '@codedaily',
+                time: '6小时前',
+                text: '🎯 推荐 5 个前端开发者必知的新特性：\n1. CSS Container Queries\n2. View Transitions API\n3. Popover API\n4. CSS Nesting\n5. Import Attributes\n\n你觉得哪个最实用？',
+                avatar: 'linear-gradient(135deg, #4facfe, #00f2fe)',
+                avatarChar: '码',
+                comments: 189,
+                reposts: 312,
+                likes: 2567,
+                liked: false,
+                image: ''
+            },
+            {
+                name: '李同学',
+                handle: '@lixue',
+                time: '8小时前',
+                text: '今天用 Rust 重写了一个 Python 脚本，性能提升了 40 倍！虽然语法严格了许多，但编译器真的像一位严格的老师，帮你避免了很多潜在的错误。强烈推荐大家尝试 🦀',
+                avatar: 'linear-gradient(135deg, #43e97b, #38f9d7)',
+                avatarChar: '李',
+                comments: 78,
+                reposts: 45,
+                likes: 890,
+                liked: false,
+                image: ''
+            },
+            {
+                name: '游戏速报',
+                handle: '@gamenews',
+                time: '10小时前',
+                text: '🎮 《黑神话：悟空》DLC 正式官宣！新增 3 个章节，全新的战斗系统，预计年底上线。玩家们，准备好再次踏上西行路了吗？',
+                avatar: 'linear-gradient(135deg, #f5576c, #ff9800)',
+                avatarChar: '游',
+                comments: 567,
+                reposts: 1023,
+                likes: 8934,
+                liked: false,
+                image: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="500" height="280" viewBox="0 0 500 280"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#f5576c"/><stop offset="100%" style="stop-color:#ff9800"/></linearGradient></defs><rect width="500" height="280" fill="url(#g)"/><text x="250" y="130" text-anchor="middle" fill="white" font-size="22" font-weight="700" font-family="sans-serif">Black Myth: Wukong</text><text x="250" y="170" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="16" font-family="sans-serif">DLC Coming Soon 🔥</text></svg>')
+            },
+        ];
+
+        const feed = document.getElementById('feed');
+
+        // ============= 渲染推文 =============
+        function formatNumber(n) {
+            if (n >= 10000) return (n / 10000).toFixed(1) + '万';
+            if (n >= 1000) return (n / 1000).toFixed(1) + '千';
+            return n.toString();
+        }
+
+        function renderTweets() {
+            feed.innerHTML = tweetsData.map((t, i) => `
+                <div class="tweet">
+                    <div class="tweet-avatar" style="background:${t.avatar}">${t.avatarChar}</div>
+                    <div class="tweet-content">
+                        <div class="tweet-header">
+                            <span class="tweet-name">${t.name}</span>
+                            <span class="tweet-handle">${t.handle}</span>
+                            <span class="tweet-time">· ${t.time}</span>
+                        </div>
+                        <div class="tweet-text">${t.text.replace(/\n/g, '<br>')}</div>
+                        ${t.image ? `<img class="tweet-image" src="${t.image}" alt="tweet image" loading="lazy">` : ''}
+                        <div class="tweet-stats">
+                            <button class="stat-btn comment" data-id="${i}" data-action="comment">💬 ${formatNumber(t.comments)}</button>
+                            <button class="stat-btn repost" data-id="${i}" data-action="repost">🔄 ${formatNumber(t.reposts)}</button>
+                            <button class="stat-btn like ${t.liked ? 'liked' : ''}" data-id="${i}" data-action="like">${t.liked ? '❤️' : '🤍'} ${formatNumber(t.likes)}</button>
+                            <button class="stat-btn share" data-id="${i}" data-action="share">🔗 ${formatNumber(Math.floor(t.likes * 0.1))}</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // 绑定统计按钮事件
+            document.querySelectorAll('.stat-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const id = parseInt(this.dataset.id);
+                    const action = this.dataset.action;
+
+                    if (action === 'like') {
+                        tweetsData[id].liked = !tweetsData[id].liked;
+                        if (tweetsData[id].liked) {
+                            tweetsData[id].likes++;
+                        } else {
+                            tweetsData[id].likes--;
+                        }
+                        renderTweets();
+                    } else if (action === 'repost') {
+                        tweetsData[id].reposts++;
+                        renderTweets();
+                    }
+                });
+            });
+
+            // 推文点击高亮
+            document.querySelectorAll('.tweet').forEach(tweet => {
+                tweet.addEventListener('click', function() {
+                    this.style.background = 'rgba(29,155,240,0.05)';
+                    setTimeout(() => { this.style.background = ''; }, 400);
+                });
+            });
+        }
+
+        // ============= 发推 =============
+        const composeInput = document.getElementById('composeInput');
+        const composeSubmit = document.getElementById('composeSubmit');
+
+        composeInput.addEventListener('input', () => {
+            composeSubmit.disabled = composeInput.value.trim().length === 0;
+        });
+
+        function focusCompose() {
+            composeInput.focus();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function postTweet() {
+            const text = composeInput.value.trim();
+            if (!text) return;
+
+            tweetsData.unshift({
+                name: '你的名字',
+                handle: '@yourhandle',
+                time: '刚刚',
+                text: text,
+                avatar: 'linear-gradient(135deg, #667eea, #764ba2)',
+                avatarChar: 'Y',
+                comments: 0,
+                reposts: 0,
+                likes: 0,
+                liked: false,
+                image: ''
+            });
+
+            composeInput.value = '';
+            composeSubmit.disabled = true;
+            renderTweets();
+
+            // 滚动到顶部查看新推文
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // 短暂的视觉反馈
+            const firstTweet = document.querySelector('.tweet');
+            if (firstTweet) {
+                firstTweet.style.background = 'rgba(29,155,240,0.1)';
+                setTimeout(() => { firstTweet.style.background = ''; }, 800);
+            }
+        }
+
+        // 支持 Ctrl+Enter 快捷键发推
+        composeInput.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                if (!composeSubmit.disabled) postTweet();
+            }
+        });
+
+        // ============= 关注按钮 =============
+        function toggleFollow(btn) {
+            if (btn.classList.contains('following')) {
+                btn.classList.remove('following');
+                btn.textContent = '关注';
+            } else {
+                btn.classList.add('following');
+                btn.textContent = '正在关注';
+            }
+        }
+
+        // ============= 主标签切换 =============
+        document.querySelectorAll('.main-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // ============= 导航项目切换 =============
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // ============= 初始渲染 =============
+        renderTweets();
+    </script>
+</body>
+</html>
