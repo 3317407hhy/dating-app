@@ -1,856 +1,170 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>首页 / 黄浩洋</title>
-    <style>
-        :root {
-            --bg: #000000;
-            --bg-secondary: #16181c;
-            --bg-hover: #1d1f23;
-            --border: #2f3336;
-            --text: #e7e9ea;
-            --text-secondary: #71767b;
-            --blue: #1d9bf0;
-            --blue-hover: #1a8cd8;
-            --green: #00ba7c;
-            --red: #f91880;
-            --radius: 9999px;
-            --radius-md: 16px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* ============ 布局 ============ */
-        .app {
-            display: flex;
-            width: 100%;
-            max-width: 1265px;
-            min-height: 100vh;
-        }
-
-        /* ============ 左侧导航 ============ */
-        .sidebar {
-            width: 275px;
-            padding: 0 12px;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            position: sticky;
-            top: 0;
-        }
-
-        .logo {
-            padding: 16px 12px;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: -1px;
-        }
-
-        .nav-list {
-            list-style: none;
-            flex: 1;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 12px 16px;
-            border-radius: var(--radius);
-            cursor: pointer;
-            transition: background 0.2s;
-            text-decoration: none;
-            color: var(--text);
-            font-size: 19px;
-            font-weight: 400;
-        }
-
-        .nav-item:hover { background: var(--bg-hover); }
-        .nav-item.active { font-weight: 700; }
-
-        .nav-item .icon {
-            font-size: 24px;
-            width: 28px;
-            text-align: center;
-        }
-
-        .tweet-btn {
-            background: var(--blue);
-            color: #fff;
-            border: none;
-            border-radius: var(--radius);
-            padding: 16px;
-            font-size: 17px;
-            font-weight: 700;
-            cursor: pointer;
-            width: 90%;
-            margin: 12px 0;
-            transition: background 0.2s;
-        }
-
-        .tweet-btn:hover { background: var(--blue-hover); }
-
-        .user-menu {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px;
-            border-radius: var(--radius);
-            cursor: pointer;
-            margin-bottom: 12px;
-            transition: background 0.2s;
-        }
-
-        .user-menu:hover { background: var(--bg-hover); }
-
-        .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 16px;
-            color: #fff;
-            flex-shrink: 0;
-        }
-
-        .user-info { flex: 1; min-width: 0; }
-        .user-name { font-weight: 700; font-size: 15px; }
-        .user-handle { color: var(--text-secondary); font-size: 14px; }
-
-        /* ============ 主内容区 ============ */
-        .main {
-            flex: 1;
-            max-width: 600px;
-            border-left: 1px solid var(--border);
-            border-right: 1px solid var(--border);
-            min-height: 100vh;
-        }
-
-        .main-header {
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border);
-            font-size: 20px;
-            font-weight: 700;
-            position: sticky;
-            top: 0;
-            background: rgba(0,0,0,0.85);
-            backdrop-filter: blur(12px);
-            z-index: 10;
-        }
-
-        .tabs-row {
-            display: flex;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .main-tab {
-            flex: 1;
-            text-align: center;
-            padding: 16px;
-            font-size: 15px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            cursor: pointer;
-            position: relative;
-            transition: background 0.2s;
-            border: none;
-            background: none;
-        }
-
-        .main-tab:hover { background: var(--bg-hover); }
-        .main-tab.active {
-            color: var(--text);
-            font-weight: 700;
-        }
-        .main-tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 56px;
-            height: 4px;
-            background: var(--blue);
-            border-radius: 2px;
-        }
-
-        /* ============ 发推框 ============ */
-        .compose {
-            display: flex;
-            gap: 12px;
-            padding: 16px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .compose-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .compose-body { flex: 1; }
-        .compose-input {
-            width: 100%;
-            background: transparent;
-            border: none;
-            color: var(--text);
-            font-size: 19px;
-            padding: 8px 0;
-            outline: none;
-            resize: none;
-            font-family: inherit;
-            min-height: 50px;
-        }
-
-        .compose-input::placeholder { color: var(--text-secondary); }
-
-        .compose-actions {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 12px;
-            border-top: 1px solid var(--border);
-            margin-top: 8px;
-        }
-
-        .compose-icons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .compose-icon {
-            width: 34px;
-            height: 34px;
-            border-radius: 50%;
-            border: none;
-            background: transparent;
-            color: var(--blue);
-            font-size: 18px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
-
-        .compose-icon:hover { background: rgba(29, 155, 240, 0.1); }
-
-        .compose-submit {
-            background: var(--blue);
-            color: #fff;
-            border: none;
-            border-radius: var(--radius);
-            padding: 8px 20px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .compose-submit:hover { background: var(--blue-hover); }
-        .compose-submit:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        /* ============ 推文列表 ============ */
-        .feed {}
-        .tweet {
-            display: flex;
-            gap: 12px;
-            padding: 16px;
-            border-bottom: 1px solid var(--border);
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .tweet:hover { background: rgba(255,255,255,0.02); }
-
-        .tweet-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: #fff;
-            font-size: 16px;
-        }
-
-        .tweet-content { flex: 1; min-width: 0; }
-        .tweet-header {
-            display: flex;
-            gap: 4px;
-            align-items: baseline;
-            flex-wrap: wrap;
-        }
-        .tweet-name { font-weight: 700; font-size: 15px; }
-        .tweet-name:hover { text-decoration: underline; }
-        .tweet-handle, .tweet-time { color: var(--text-secondary); font-size: 14px; }
-
-        .tweet-text {
-            margin-top: 4px;
-            font-size: 15px;
-            line-height: 1.5;
-            word-break: break-word;
-        }
-
-        .tweet-image {
-            margin-top: 12px;
-            border-radius: var(--radius-md);
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border: 1px solid var(--border);
-        }
-
-        .tweet-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 12px;
-            max-width: 400px;
-        }
-
-        .stat-btn {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 13px;
-            cursor: pointer;
-            padding: 4px;
-            border-radius: var(--radius);
-            transition: all 0.2s;
-        }
-
-        .stat-btn:hover.comment { color: var(--blue); }
-        .stat-btn:hover.repost  { color: var(--green); }
-        .stat-btn:hover.like    { color: var(--red); }
-        .stat-btn:hover.share   { color: var(--blue); }
-
-        .stat-btn.liked { color: var(--red); }
-
-        /* ============ 右侧栏 ============ */
-        .rightbar {
-            width: 350px;
-            padding: 0 16px;
-            height: 100vh;
-            position: sticky;
-            top: 0;
-            overflow-y: auto;
-        }
-
-        .search-box {
-            position: sticky;
-            top: 4px;
-            background: var(--bg);
-            padding: 8px 0;
-            z-index: 5;
-        }
-
-        .search-input {
-            width: 100%;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 12px 16px;
-            color: var(--text);
-            font-size: 15px;
-            outline: none;
-        }
-
-        .search-input:focus { border-color: var(--blue); background: #000; }
-        .search-input::placeholder { color: var(--text-secondary); }
-
-        .right-card {
-            background: var(--bg-secondary);
-            border-radius: var(--radius-md);
-            margin-bottom: 16px;
-            overflow: hidden;
-        }
-
-        .right-card-title {
-            padding: 14px 16px;
-            font-size: 20px;
-            font-weight: 800;
-        }
-
-        .trend-item {
-            padding: 12px 16px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .trend-item:hover { background: var(--bg-hover); }
-        .trend-meta { font-size: 13px; color: var(--text-secondary); }
-        .trend-name { font-size: 15px; font-weight: 700; margin: 2px 0; }
-        .trend-count { font-size: 13px; color: var(--text-secondary); }
-
-        .follow-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .follow-item:hover { background: var(--bg-hover); }
-
-        .follow-info { flex: 1; min-width: 0; }
-        .follow-name { font-weight: 700; font-size: 15px; }
-        .follow-name:hover { text-decoration: underline; }
-        .follow-handle { color: var(--text-secondary); font-size: 13px; }
-
-        .follow-btn {
-            background: var(--text);
-            color: var(--bg);
-            border: none;
-            border-radius: var(--radius);
-            padding: 6px 16px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: opacity 0.2s;
-        }
-
-        .follow-btn:hover { opacity: 0.9; }
-        .follow-btn.following {
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-        .follow-btn.following:hover {
-            color: var(--red);
-            border-color: var(--red);
-        }
-
-        .show-more {
-            padding: 16px;
-            color: var(--blue);
-            font-size: 15px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        .show-more:hover { background: var(--bg-hover); }
-
-        /* ============ 响应式 ============ */
-        @media (max-width: 1020px) {
-            .sidebar { width: 68px; }
-            .nav-item span { display: none; }
-            .tweet-btn { width: 48px; height: 48px; padding: 0; font-size: 24px; border-radius: 50%; }
-            .user-info { display: none; }
-            .logo { font-size: 24px; }
-        }
-
-        @media (max-width: 700px) {
-            .rightbar { display: none; }
-            .sidebar { width: 68px; }
-            .main { max-width: 100%; }
-        }
-
-        @media (max-width: 500px) {
-            .sidebar { display: none; }
-        }
-    </style>
-</head>
-<body>
-    <div class="app">
-        <!-- ==================== 左侧导航 ==================== -->
-        <nav class="sidebar">
-            <div class="logo">黄浩洋</div>
-            <ul class="nav-list">
-                <li class="nav-item active">
-                    <span class="icon">🏠</span><span>首页</span>
-                </li>
-                <li class="nav-item">
-                    <span class="icon">🔍</span><span>探索</span>
-                </li>
-                <li class="nav-item">
-                    <span class="icon">🔔</span><span>通知</span>
-                </li>
-                <li class="nav-item">
-                    <span class="icon">✉️</span><span>私信</span>
-                </li>
-                <li class="nav-item">
-                    <span class="icon">📋</span><span>列表</span>
-                </li>
-                <li class="nav-item">
-                    <span class="icon">🔖</span><span>书签</span>
-                </li>
-                <li class="nav-item">
-                    <span class="icon">👥</span><span>社群</span>
-                </li>
-                <li class="nav-item">
-                    <span class="icon">🔵</span><span>Premium</span>
-                </li>
-                <li class="nav-item">
-                    <span class="icon">👤</span><span><a class="nav-item" href="个人主页.html">个人主页</a>
-                    </span>
-                </li>
-                <li class="nav-item">
-                    <span class="icon">⋯</span><span>更多</span>
-                </li>
-            </ul>
-            <button class="tweet-btn" onclick="focusCompose()">发 帖</button>
-            <div class="user-menu">
-                <div class="user-avatar">Y</div>
-                <div class="user-info">
-                    <div class="user-name">你的名字</div>
-                    <div class="user-handle">@yourhandle</div>
-                </div>
-                <span style="color:var(--text-secondary);font-weight:700">⋯</span>
-            </div>
-        </nav>
-
-        <!-- ==================== 主内容区 ==================== -->
-        <main class="main">
-            <div class="main-header">首页</div>
-            <div class="tabs-row">
-                <button class="main-tab active">推荐</button>
-                <button class="main-tab">关注</button>
-            </div>
-
-            <!-- 发推框 -->
-            <div class="compose">
-                <div class="compose-avatar">Y</div>
-                <div class="compose-body">
-                    <textarea class="compose-input" id="composeInput" placeholder="有什么新鲜事？" rows="2"></textarea>
-                    <div class="compose-actions">
-                        <div class="compose-icons">
-                            <button class="compose-icon">🖼️</button>
-                            <button class="compose-icon">🎬</button>
-                            <button class="compose-icon">📊</button>
-                            <button class="compose-icon">😀</button>
-                            <button class="compose-icon">📍</button>
-                        </div>
-                        <button class="compose-submit" id="composeSubmit" disabled onclick="postTweet()">发 帖</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 推文列表 -->
-            <div class="feed" id="feed"></div>
-        </main>
-
-        <!-- ==================== 右侧栏 ==================== -->
-        <aside class="rightbar">
-            <div class="search-box">
-                <input type="text" class="search-input" placeholder="搜索">
-            </div>
-
-            <!-- 热门趋势 -->
-            <div class="right-card">
-                <div class="right-card-title">趋势</div>
-                <div class="trend-item">
-                    <div class="trend-meta">科技 · 热门</div>
-                    <div class="trend-name">#AI改变未来</div>
-                    <div class="trend-count">12.4 万帖子</div>
-                </div>
-                <div class="trend-item">
-                    <div class="trend-meta">体育 · 趋势</div>
-                    <div class="trend-name">世界杯2026</div>
-                    <div class="trend-count">8.2 万帖子</div>
-                </div>
-                <div class="trend-item">
-                    <div class="trend-meta">娱乐 · 热门</div>
-                    <div class="trend-name">#NewMusicFriday</div>
-                    <div class="trend-count">5.6 万帖子</div>
-                </div>
-                <div class="trend-item">
-                    <div class="trend-meta">全球 · 趋势</div>
-                    <div class="trend-name">#ClimateAction</div>
-                    <div class="trend-count">3.1 万帖子</div>
-                </div>
-                <div class="trend-item">
-                    <div class="trend-meta">加密 · 趋势</div>
-                    <div class="trend-name">#Bitcoin</div>
-                    <div class="trend-count">2.8 万帖子</div>
-                </div>
-                <div class="show-more">显示更多</div>
-            </div>
-
-            <!-- 推荐关注 -->
-            <div class="right-card">
-                <div class="right-card-title">推荐关注</div>
-                <div class="follow-item">
-                    <div class="tweet-avatar" style="background:linear-gradient(135deg,#f093fb,#f5576c)">N</div>
-                    <div class="follow-info">
-                        <div class="follow-name">NewsDaily</div>
-                        <div class="follow-handle">@newsdaily</div>
-                    </div>
-                    <button class="follow-btn" onclick="toggleFollow(this)">关注</button>
-                </div>
-                <div class="follow-item">
-                    <div class="tweet-avatar" style="background:linear-gradient(135deg,#4facfe,#00f2fe)">T</div>
-                    <div class="follow-info">
-                        <div class="follow-name">TechCrunch</div>
-                        <div class="follow-handle">@techcrunch</div>
-                    </div>
-                    <button class="follow-btn" onclick="toggleFollow(this)">关注</button>
-                </div>
-                <div class="follow-item">
-                    <div class="tweet-avatar" style="background:linear-gradient(135deg,#43e97b,#38f9d7)">E</div>
-                    <div class="follow-info">
-                        <div class="follow-name">Elon Musk</div>
-                        <div class="follow-handle">@elonmusk</div>
-                    </div>
-                    <button class="follow-btn" onclick="toggleFollow(this)">关注</button>
-                </div>
-                <div class="show-more">显示更多</div>
-            </div>
-
-            <div style="color:var(--text-secondary);font-size:12px;padding:0 16px 16px;line-height:1.6">
-                <span style="margin-right:12px">服务条款</span>
-                <span style="margin-right:12px">隐私政策</span>
-                <span style="margin-right:12px">Cookie 政策</span>
-                <span style="margin-right:12px">无障碍</span>
-                <span style="margin-right:12px">广告信息</span>
-                <span>更多…</span>
-                <div style="margin-top:4px">© 2026 X Corp.</div>
-            </div>
-        </aside>
-    </div>
-
-    <script>
-        // ============= 模拟推文数据 =============
-        const tweetsData = [
-            {
-                name: '前沿科技',
-                handle: '@techfrontier',
-                time: '2小时前',
-                text: '🚀 OpenAI 刚刚发布了最新的 GPT-5 模型，在多模态推理能力上取得了突破性进展。这将是 AI 发展史上的又一个里程碑！',
-                avatar: 'linear-gradient(135deg, #667eea, #764ba2)',
-                avatarChar: '前',
-                comments: 234,
-                reposts: 89,
-                likes: 1204,
-                liked: false,
-                image: ''
-            },
-            {
-                name: '设计灵感',
-                handle: '@designinspo',
-                time: '4小时前',
-                text: '极简主义设计的核心不是"少即是多"，而是"恰到好处"。每一处留白都有它的意义。分享一张今天发现的设计作品 👇',
-                avatar: 'linear-gradient(135deg, #f093fb, #f5576c)',
-                avatarChar: '设',
-                comments: 56,
-                reposts: 23,
-                likes: 432,
-                liked: false,
-                image: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="500" height="280" viewBox="0 0 500 280"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#667eea"/><stop offset="100%" style="stop-color:#764ba2"/></linearGradient></defs><rect width="500" height="280" fill="url(#g)"/><text x="250" y="130" text-anchor="middle" fill="white" font-size="24" font-weight="700" font-family="sans-serif">Minimal Design</text><text x="250" y="170" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="16" font-family="sans-serif">Less but Better</text></svg>')
-            },
-            {
-                name: '代码日报',
-                handle: '@codedaily',
-                time: '6小时前',
-                text: '🎯 推荐 5 个前端开发者必知的新特性：\n1. CSS Container Queries\n2. View Transitions API\n3. Popover API\n4. CSS Nesting\n5. Import Attributes\n\n你觉得哪个最实用？',
-                avatar: 'linear-gradient(135deg, #4facfe, #00f2fe)',
-                avatarChar: '码',
-                comments: 189,
-                reposts: 312,
-                likes: 2567,
-                liked: false,
-                image: ''
-            },
-            {
-                name: '李同学',
-                handle: '@lixue',
-                time: '8小时前',
-                text: '今天用 Rust 重写了一个 Python 脚本，性能提升了 40 倍！虽然语法严格了许多，但编译器真的像一位严格的老师，帮你避免了很多潜在的错误。强烈推荐大家尝试 🦀',
-                avatar: 'linear-gradient(135deg, #43e97b, #38f9d7)',
-                avatarChar: '李',
-                comments: 78,
-                reposts: 45,
-                likes: 890,
-                liked: false,
-                image: ''
-            },
-            {
-                name: '游戏速报',
-                handle: '@gamenews',
-                time: '10小时前',
-                text: '🎮 《黑神话：悟空》DLC 正式官宣！新增 3 个章节，全新的战斗系统，预计年底上线。玩家们，准备好再次踏上西行路了吗？',
-                avatar: 'linear-gradient(135deg, #f5576c, #ff9800)',
-                avatarChar: '游',
-                comments: 567,
-                reposts: 1023,
-                likes: 8934,
-                liked: false,
-                image: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="500" height="280" viewBox="0 0 500 280"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#f5576c"/><stop offset="100%" style="stop-color:#ff9800"/></linearGradient></defs><rect width="500" height="280" fill="url(#g)"/><text x="250" y="130" text-anchor="middle" fill="white" font-size="22" font-weight="700" font-family="sans-serif">Black Myth: Wukong</text><text x="250" y="170" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="16" font-family="sans-serif">DLC Coming Soon 🔥</text></svg>')
-            },
-        ];
-
-        const feed = document.getElementById('feed');
-
-        // ============= 渲染推文 =============
-        function formatNumber(n) {
-            if (n >= 10000) return (n / 10000).toFixed(1) + '万';
-            if (n >= 1000) return (n / 1000).toFixed(1) + '千';
-            return n.toString();
-        }
-
-        function renderTweets() {
-            feed.innerHTML = tweetsData.map((t, i) => `
-                <div class="tweet">
-                    <div class="tweet-avatar" style="background:${t.avatar}">${t.avatarChar}</div>
-                    <div class="tweet-content">
-                        <div class="tweet-header">
-                            <span class="tweet-name">${t.name}</span>
-                            <span class="tweet-handle">${t.handle}</span>
-                            <span class="tweet-time">· ${t.time}</span>
-                        </div>
-                        <div class="tweet-text">${t.text.replace(/\n/g, '<br>')}</div>
-                        ${t.image ? `<img class="tweet-image" src="${t.image}" alt="tweet image" loading="lazy">` : ''}
-                        <div class="tweet-stats">
-                            <button class="stat-btn comment" data-id="${i}" data-action="comment">💬 ${formatNumber(t.comments)}</button>
-                            <button class="stat-btn repost" data-id="${i}" data-action="repost">🔄 ${formatNumber(t.reposts)}</button>
-                            <button class="stat-btn like ${t.liked ? 'liked' : ''}" data-id="${i}" data-action="like">${t.liked ? '❤️' : '🤍'} ${formatNumber(t.likes)}</button>
-                            <button class="stat-btn share" data-id="${i}" data-action="share">🔗 ${formatNumber(Math.floor(t.likes * 0.1))}</button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-
-            // 绑定统计按钮事件
-            document.querySelectorAll('.stat-btn').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const id = parseInt(this.dataset.id);
-                    const action = this.dataset.action;
-
-                    if (action === 'like') {
-                        tweetsData[id].liked = !tweetsData[id].liked;
-                        if (tweetsData[id].liked) {
-                            tweetsData[id].likes++;
-                        } else {
-                            tweetsData[id].likes--;
-                        }
-                        renderTweets();
-                    } else if (action === 'repost') {
-                        tweetsData[id].reposts++;
-                        renderTweets();
-                    }
-                });
-            });
-
-            // 推文点击高亮
-            document.querySelectorAll('.tweet').forEach(tweet => {
-                tweet.addEventListener('click', function() {
-                    this.style.background = 'rgba(29,155,240,0.05)';
-                    setTimeout(() => { this.style.background = ''; }, 400);
-                });
-            });
-        }
-
-        // ============= 发推 =============
-        const composeInput = document.getElementById('composeInput');
-        const composeSubmit = document.getElementById('composeSubmit');
-
-        composeInput.addEventListener('input', () => {
-            composeSubmit.disabled = composeInput.value.trim().length === 0;
-        });
-
-        function focusCompose() {
-            composeInput.focus();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function postTweet() {
-            const text = composeInput.value.trim();
-            if (!text) return;
-
-            tweetsData.unshift({
-                name: '你的名字',
-                handle: '@yourhandle',
-                time: '刚刚',
-                text: text,
-                avatar: 'linear-gradient(135deg, #667eea, #764ba2)',
-                avatarChar: 'Y',
-                comments: 0,
-                reposts: 0,
-                likes: 0,
-                liked: false,
-                image: ''
-            });
-
-            composeInput.value = '';
-            composeSubmit.disabled = true;
-            renderTweets();
-
-            // 滚动到顶部查看新推文
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // 短暂的视觉反馈
-            const firstTweet = document.querySelector('.tweet');
-            if (firstTweet) {
-                firstTweet.style.background = 'rgba(29,155,240,0.1)';
-                setTimeout(() => { firstTweet.style.background = ''; }, 800);
-            }
-        }
-
-        // 支持 Ctrl+Enter 快捷键发推
-        composeInput.addEventListener('keydown', function(e) {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-                e.preventDefault();
-                if (!composeSubmit.disabled) postTweet();
-            }
-        });
-
-        // ============= 关注按钮 =============
-        function toggleFollow(btn) {
-            if (btn.classList.contains('following')) {
-                btn.classList.remove('following');
-                btn.textContent = '关注';
-            } else {
-                btn.classList.add('following');
-                btn.textContent = '正在关注';
-            }
-        }
-
-        // ============= 主标签切换 =============
-        document.querySelectorAll('.main-tab').forEach(tab => {
-            tab.addEventListener('click', function() {
-                document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        // ============= 导航项目切换 =============
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        // ============= 初始渲染 =============
-        renderTweets();
-    </script>
-</body>
-</html>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>EchoZshsamber · 首页</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}:root{--bg:#000000;--bg-secondary:#16181c;--bg-card:#16181c;--bg-hover:#1d1f23;--bg-elevated:#1d1f23;--bg-input:#202327;--border:#2f3336;--text:#e7e9ea;--text-secondary:#71767b;--accent:#1d9bf0;--accent-hover:#1a8cd8;--purple:#8b5cf6;--pink:#f91880;--green:#00ba7c;--red:#f4212e;--radius:9999px;--radius-md:16px;--radius-sm:12px}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;justify-content:center}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.app{display:flex;width:100%;max-width:1265px;min-height:100vh}.sidebar{width:275px;padding:0 12px;display:flex;flex-direction:column;height:100vh;position:sticky;top:0}.side-logo{padding:12px;display:flex;align-items:center;gap:10px;cursor:pointer;border-radius:9999px;width:fit-content;transition:background .2s}.side-logo:hover{background:var(--bg-hover)}.side-logo svg{width:30px;height:30px}.side-logo span{font-size:20px;font-weight:700;color:var(--text);letter-spacing:-0.5px}.nav-list{list-style:none;flex:1;margin-top:4px}.nav-item{display:flex;align-items:center;gap:16px;padding:12px;border-radius:9999px;cursor:pointer;transition:background .2s;color:var(--text);font-size:19px;font-weight:400;text-decoration:none}.nav-item:hover{background:var(--bg-hover)}.nav-item.active{font-weight:700}.nav-item .ni{font-size:26px;width:28px;text-align:center;line-height:1}.post-btn{background:var(--accent);color:#fff;border:none;border-radius:9999px;padding:15px 0;font-size:17px;font-weight:700;cursor:pointer;width:90%;margin:8px 0 16px;transition:background .2s;font-family:inherit}.post-btn:hover{background:var(--accent-hover)}.user-menu{display:flex;align-items:center;gap:10px;padding:10px;border-radius:9999px;cursor:pointer;margin-bottom:8px;transition:background .2s}.user-menu:hover{background:var(--bg-hover)}.u-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff;flex-shrink:0}.u-info{flex:1;min-width:0}.u-name{font-weight:700;font-size:15px}.u-handle{color:var(--text-secondary);font-size:14px}.main{flex:1;max-width:600px;border-left:1px solid var(--border);border-right:1px solid var(--border);min-height:100vh}.main-header{padding:14px 16px;border-bottom:1px solid var(--border);font-size:20px;font-weight:700;position:sticky;top:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);z-index:10}.tabs-row{display:flex;border-bottom:1px solid var(--border)}.main-tab{flex:1;text-align:center;padding:15px 8px;font-size:15px;font-weight:500;color:var(--text-secondary);cursor:pointer;position:relative;transition:all .2s;border:none;background:none;font-family:inherit}.main-tab:hover{background:var(--bg-hover)}.main-tab.active{color:var(--text);font-weight:700}.main-tab.active::after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:56px;height:4px;background:var(--accent);border-radius:2px}.tab-content{display:none}.tab-content.active{display:block;animation:fadeIn .2s ease-out}@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}.right-side{width:350px;padding:0 16px;display:flex;flex-direction:column;height:100vh;position:sticky;top:0}.search-bar{position:sticky;top:0;background:var(--bg);padding:6px 0 12px;z-index:5;display:flex;align-items:center;gap:12px}.search-bar-inner{background:var(--bg-input);border:1px solid transparent;border-radius:9999px;padding:10px 20px;display:flex;align-items:center;gap:12px;flex:1;transition:border .2s;color:var(--text-secondary);font-size:15px}.search-bar-inner:focus-within{border-color:var(--accent);background:transparent}.search-bar-inner input{background:none;border:none;color:var(--text);font-size:15px;outline:none;flex:1;font-family:inherit}.search-bar-inner input::placeholder{color:var(--text-secondary)}.panel-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:16px;overflow:hidden}.panel-title{font-size:20px;font-weight:800;padding:12px 16px}.panel-footer{color:var(--accent);font-size:15px;cursor:pointer;padding:16px}.panel-footer:hover{background:var(--bg-hover)}.trend-item{padding:12px 16px;cursor:pointer;transition:background .2s}.trend-item:hover{background:var(--bg-hover)}.trend-cat{font-size:13px;color:var(--text-secondary)}.trend-name{font-size:15px;font-weight:700;margin:2px 0}.trend-count{font-size:13px;color:var(--text-secondary)}.footer-links{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;color:var(--text-secondary);font-size:13px}.footer-links span{cursor:pointer}.footer-links span:hover{text-decoration:underline}.tab-pad{padding:12px}.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.match-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px 14px;text-align:center;cursor:pointer;transition:all .2s}.match-card:hover{background:var(--bg-hover)}.match-card .mc-avatar{width:52px;height:52px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff}.match-card .mc-name{font-weight:700;font-size:14px;margin:2px 0}.match-card .mc-mbti{display:inline-block;padding:2px 10px;border-radius:9999px;background:rgba(29,155,240,.1);color:var(--accent);font-size:11px;font-weight:600;margin:4px 0}.match-card .mc-interests{font-size:11px;color:var(--text-secondary);margin:4px 0;display:flex;flex-wrap:wrap;justify-content:center;gap:3px}.match-card .mc-interests span{padding:2px 8px;border-radius:9999px;background:var(--bg-input);font-size:10px}.match-card .mc-btn{display:inline-block;padding:7px 22px;border-radius:9999px;border:1px solid var(--text-secondary);background:transparent;color:var(--text);cursor:pointer;font-size:13px;font-weight:600;margin-top:6px;transition:all .2s;font-family:inherit}.match-card .mc-btn:hover{background:var(--text);color:var(--bg)}.match-filter{padding:10px 14px;display:flex;gap:8px;border-bottom:1px solid var(--border)}.mf-btn{padding:6px 16px;border-radius:9999px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);font-size:13px;cursor:pointer;transition:all .2s;font-family:inherit}.mf-btn:hover{background:var(--bg-hover)}.mf-btn.active{background:var(--text);border-color:var(--text);color:var(--bg);font-weight:600}.forum-cats{display:flex;gap:8px;padding:10px 14px;overflow-x:auto;border-bottom:1px solid var(--border)}.forum-cat{padding:6px 16px;border-radius:9999px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);font-size:13px;cursor:pointer;transition:all .2s;white-space:nowrap;font-family:inherit}.forum-cat:hover{background:var(--bg-hover)}.forum-cat.active{background:var(--text);border-color:var(--text);color:var(--bg);font-weight:700}.post-card{padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s}.post-card:hover{background:var(--bg-hover)}.post-card .pc-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}.post-card .pc-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;background:linear-gradient(135deg,#6366f1,#8b5cf6)}.post-card .pc-anon{color:var(--text-secondary);font-size:13px}.post-card .pc-tag{font-size:11px;padding:2px 8px;border-radius:9999px;background:var(--bg-input);color:var(--text-secondary);margin-left:4px}.post-card .pc-text{font-size:14px;line-height:1.5;margin:4px 0;color:var(--text)}.post-card .pc-silent{font-size:12px;color:var(--green);padding:4px 10px;border-radius:9999px;background:rgba(0,186,124,.08);display:inline-block;margin:4px 0}.post-card .pc-actions{display:flex;justify-content:space-between;margin-top:10px;color:var(--text-secondary);font-size:13px;max-width:380px}.post-card .pc-actions span{cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .2s;padding:4px}.post-card .pc-actions span:hover{color:var(--accent)}.topic-hero{padding:20px 16px;text-align:left;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(29,155,240,.03),transparent)}.topic-hero .th-date{font-size:13px;color:var(--text-secondary);margin-bottom:8px}.topic-hero .th-q{font-size:20px;font-weight:700;line-height:1.3;margin-bottom:16px}.topic-options{display:flex;flex-direction:column;gap:8px}.topic-opt{padding:14px 16px;border:1px solid var(--border);border-radius:12px;background:transparent;cursor:pointer;transition:all .2s;text-align:left;font-size:15px;font-family:inherit;color:var(--text)}.topic-opt:hover{background:var(--bg-hover)}.topic-opt.selected{border-color:var(--accent);background:rgba(29,155,240,.05)}.topic-opt .to-bar{height:4px;border-radius:2px;margin-top:8px;transition:width .8s ease;background:var(--accent)!important}.topic-opt .to-pct{font-size:12px;color:var(--text-secondary);margin-top:4px;text-align:right}.mbti-dist{display:flex;flex-wrap:wrap;gap:6px;padding:12px 16px 20px}.mbti-dist .md-item{padding:4px 10px;border-radius:9999px;background:var(--bg-input);font-size:11px;cursor:pointer;transition:all .2s}.mbti-dist .md-item:hover{background:rgba(29,155,240,.1);color:var(--accent)}.chat-helper{position:fixed;bottom:24px;right:24px;z-index:999}.ch-float{width:54px;height:54px;border-radius:50%;background:var(--accent);border:none;color:#fff;font-size:24px;cursor:pointer;box-shadow:0 2px 12px rgba(29,155,240,.3);transition:all .2s;display:flex;align-items:center;justify-content:center}.ch-float:hover{background:var(--accent-hover)}.ch-modal{position:fixed;bottom:86px;right:24px;width:380px;max-height:500px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:0 8px 40px rgba(0,0,0,.6);display:none;flex-direction:column;z-index:1000;overflow:hidden}.ch-modal.show{display:flex}.ch-header{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:700;font-size:15px;display:flex;justify-content:space-between;align-items:center}.ch-header button{background:none;border:none;color:var(--text-secondary);font-size:20px;cursor:pointer;padding:4px 8px;border-radius:50%}.ch-header button:hover{background:var(--bg-hover)}.ch-list{padding:12px;overflow-y:auto;flex:1}.ch-item{padding:14px;border:1px solid var(--border);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:all .2s;font-size:14px;line-height:1.5}.ch-item:hover{background:var(--bg-hover)}.ch-item .ch-tag{font-size:12px;color:var(--accent);font-weight:600;margin-bottom:4px}.ch-item .ch-send{display:none;margin-top:8px;padding:6px 16px;border-radius:9999px;border:none;background:var(--accent);color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}.ch-item:hover .ch-send{display:inline-block}.ch-free{font-size:11px;color:var(--text-secondary);text-align:center;padding:10px;border-top:1px solid var(--border)}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%)translateY(80px);padding:10px 24px;border-radius:9999px;background:var(--accent);color:#fff;font-size:14px;font-weight:600;opacity:0;transition:all .3s;z-index:1999;pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%)translateY(0)}.toast.error{background:var(--red)}.hidden{display:none}
+.login-gate{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 30px;text-align:center;min-height:300px;border-bottom:1px solid var(--border)}
+.login-gate h2{font-size:28px;font-weight:700;margin-bottom:8px}
+.login-gate p{font-size:15px;color:var(--text-secondary);margin-bottom:24px;line-height:1.5}
+.login-gate .lg-btn{padding:12px 32px;border-radius:9999px;border:none;background:var(--accent);color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s}
+.login-gate .lg-btn:hover{background:var(--accent-hover)}
+.login-gate .lg-btn.outline{background:transparent;border:1px solid var(--accent);color:var(--accent);margin-top:12px}
+.login-gate .lg-btn.outline:hover{background:rgba(29,155,240,.1)}
+
+</style>
+</head><body>
+<div class="app">
+<div class="sidebar">
+<div class="side-logo" onclick="switchTab('matching')" style="padding:12px">
+<svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.45" r="0.65">
+      <stop offset="0%" stop-color="#27283b"/>
+      <stop offset="100%" stop-color="#14141f"/>
+    </radialGradient>
+    <linearGradient id="zGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b9cf7"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="xGrad" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background: rounded square -->
+  <rect x="64" y="64" width="896" height="896" rx="224" ry="224" fill="url(#bg)"/>
+
+  <!-- Subtle inner ring -->
+  <rect x="64" y="64" width="896" height="896" rx="224" ry="224"
+        fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="2"/>
+
+  <!-- Letter 'z' -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+    <line x1="222" y1="378" x2="482" y2="378" stroke="url(#zGrad)"/>
+    <line x1="482" y1="378" x2="222" y2="648" stroke="url(#zGrad)"/>
+    <line x1="222" y1="648" x2="482" y2="648" stroke="url(#zGrad)"/>
+  </g>
+
+  <!-- Letter 'x' -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+    <line x1="542" y1="378" x2="802" y2="648" stroke="url(#xGrad)"/>
+    <line x1="802" y1="378" x2="542" y2="648" stroke="url(#xGrad)"/>
+  </g>
+</svg>
+
+
+</div>
+<ul class="nav-list">
+<li class="nav-item active" data-tab="matching"><span class="ni">🔍</span>探索</li>
+<li class="nav-item" data-tab="forum"><span class="ni">💬</span>社区</li>
+<li class="nav-item" data-tab="topic"><span class="ni">🔥</span>话题</li>
+<li class="nav-item" onclick="window.location.href='个人主页.html'"><span class="ni">👤</span>个人资料</li>
+
+</ul>
+<button class="post-btn" onclick="openChatHelper()">发布</button>
+<div class="user-menu" id="userMenuBottom">
+<div class="u-avatar" id="uAvatar">U</div>
+<div class="u-info"><div class="u-name" id="uName">加载中...</div><div class="u-handle" id="uHandle">@user</div></div>
+</div>
+
+</div>
+<div class="main">
+<div class="main-header"><span id="headerTitle">探索</span></div>
+<div class="login-gate" id="loginGate" style="display:none;">
+<h2>欢迎来到 EchoZshsamber</h2>
+<p>登录即可发现和你兴趣相投的二次元朋友</p>
+<button class="lg-btn" onclick="window.location.href='注册登录.html'">登录</button>
+<button class="lg-btn outline" onclick="window.location.href='注册登录.html'">创建账号</button>
+</div>
+<div class="tabs-row">
+<button class="main-tab active" data-ptab="matching">为你推荐</button>
+<button class="main-tab" data-ptab="forum">社区动态</button>
+<button class="main-tab" data-ptab="topic">今日话题</button>
+</div>
+<div id="tabMatching" class="tab-content active">
+<div class="match-filter"><button class="mf-btn active" data-mf="all">综合推荐</button><button class="mf-btn" data-mf="similar">相近类型</button><button class="mf-btn" data-mf="complement">互补类型</button></div>
+<div class="tab-pad"><div class="match-grid" id="matchGrid"></div></div></div>
+<div id="tabForum" class="tab-content">
+<div class="forum-cats" id="forumCats">
+<button class="forum-cat active" data-fc="all">全部</button>
+<button class="forum-cat" data-fc="anime">动漫</button>
+<button class="forum-cat" data-fc="game">游戏</button>
+<button class="forum-cat" data-fc="cos">Cos</button>
+<button class="forum-cat" data-fc="social">日常</button>
+<button class="forum-cat" data-fc="match">交友</button>
+</div><div id="forumPosts"></div></div>
+<div id="tabTopic" class="tab-content">
+<div class="topic-hero"><div class="th-date" id="topicDate">2026年6月8日</div><div class="th-q" id="topicQuestion"></div><div class="topic-options" id="topicOptions"></div></div>
+<div class="panel-title">MBTI 倾向</div>
+<div class="mbti-dist" id="mbtiDist"></div></div>
+</div>
+<div class="right-side">
+<div class="search-bar"><div class="search-bar-inner">🔍 <input type="text" placeholder="搜索" id="searchInput"></div></div>
+<div class="panel-card"><div class="panel-title">正在发生</div>
+<div class="trend-item"><div class="trend-cat">动漫 · 趋势</div><div class="trend-name">#孤独摇滚</div><div class="trend-count">12.4万 讨论</div></div>
+<div class="trend-item"><div class="trend-cat">游戏 · 趋势</div><div class="trend-name">#原神</div><div class="trend-count">8.7万 讨论</div></div>
+<div class="trend-item"><div class="trend-cat">MBTI · 趋势</div><div class="trend-name">#INFP日常</div><div class="trend-count">5.2万 讨论</div></div>
+<div class="trend-item"><div class="trend-cat">二次元 · 趋势</div><div class="trend-name">#新番推荐</div><div class="trend-count">3.8万 讨论</div></div>
+<div class="panel-footer">显示更多</div></div>
+<div class="panel-card"><div class="panel-title">推荐关注</div><div id="suggestUsers"></div><div class="panel-footer">显示更多</div></div>
+<div class="panel-card">
+<div class="panel-title">⚡ 快速操作</div>
+<div style="padding:0 16px 16px"><button id="quickMatchBtn" style="width:100%;padding:12px;border-radius:9999px;border:none;background:linear-gradient(135deg,var(--accent),var(--accent-hover));color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .2s" onclick="quickMatch()">✨ 立即匹配</button></div>
+</div>
+<div class="footer-links"><span>服务条款</span><span>隐私政策</span><span>Cookie 政策</span><span style="width:100%;margin-top:4px">© 2026 EchoZshsamber</span></div>
+</div></div>
+<div class="chat-helper">
+<button class="ch-float" onclick="openChatHelper()">💡</button>
+<div class="ch-modal" id="chatModal">
+<div class="ch-header"><span>话题辅助</span><button onclick="closeChatHelper()">×</button></div>
+<div class="ch-list" id="chatList"></div>
+<div class="ch-free">非会员每日免费1次 · 开通VIP无限使用</div>
+</div></div>
+<div class="toast" id="toast"></div>
+<script>var userData=JSON.parse(localStorage.getItem("zx_user")||"{}");
+function init(){
+var av=document.getElementById("uAvatar"),nm=document.getElementById("uName"),hd=document.getElementById("uHandle");
+var isLoggedIn=!!(userData.name&&userData.email);
+if(isLoggedIn){
+nm.textContent=userData.name;av.textContent=userData.avatarChar||userData.name.charAt(0);
+if(userData.handle)hd.textContent=userData.handle;
+document.getElementById("userMenuBottom").style.display="flex";
+document.getElementById("loginGate").style.display="none";
+document.getElementById("userMenuBottom").onclick=function(){window.location.href="个人主页.html"};
+renderMatches();renderForum();renderTopic();renderSuggestions();
+}else{
+nm.textContent="未登录";hd.textContent="点击登录";av.textContent="?";
+document.getElementById("userMenuBottom").onclick=function(){window.location.href="注册登录.html"};
+document.getElementById("loginGate").style.display="flex";
+document.getElementById("forumPosts").innerHTML="";
+document.getElementById("topicOptions").innerHTML="";
+document.getElementById("suggestUsers").innerHTML="";
+document.getElementById("matchGrid").innerHTML="";
+}}
+document.querySelectorAll(".nav-item[data-tab]").forEach(function(n){n.addEventListener("click",function(){document.querySelectorAll(".nav-item").forEach(function(x){x.classList.remove("active")});this.classList.add("active");switchTab(this.dataset.tab)})})
+function switchTab(tab){var icons={matching:"🔍",forum:"💬",topic:"🔥"};document.getElementById("headerIcon").textContent=icons[tab]||"🏠";var titles={matching:"匹配推荐",forum:"论坛社区",topic:"今日话题"};document.getElementById("headerTitle").textContent=titles[tab]||"首页";document.querySelectorAll(".main-tab").forEach(function(t){t.classList.toggle("active",t.dataset.ptab===tab)});document.querySelectorAll(".tab-content").forEach(function(t){t.classList.remove("active")});var el=document.getElementById("tabMatching");if(tab==="matching")el.classList.add("active");el=document.getElementById("tabForum");if(tab==="forum")el.classList.add("active");el=document.getElementById("tabTopic");if(tab==="topic")el.classList.add("active")}
+document.querySelectorAll(".main-tab").forEach(function(t){t.addEventListener("click",function(){switchTab(this.dataset.ptab)})})
+var matchUsers=[{name:"小夜",mbti:"INFP",need:"companion",interests:["动漫","音乐","绘画"],avatar:"linear-gradient(135deg,#f472b6,#ec4899)",gender:"female",age:22},{name:"星野",mbti:"INFJ",need:"partner",interests:["游戏","轻小说","V Tuber"],avatar:"linear-gradient(135deg,#818cf8,#6366f1)",gender:"female",age:24},{name:"阿空",mbti:"ENFP",need:"companion",interests:["动漫","Cosplay","影视"],avatar:"linear-gradient(135deg,#34d399,#10b981)",gender:"male",age:23},{name:"琉璃",mbti:"INTJ",need:"partner",interests:["游戏","音乐","轻小说"],avatar:"linear-gradient(135deg,#f59e0b,#d97706)",gender:"female",age:25},{name:"晓",mbti:"ISTP",need:"attraction",interests:["动漫","游戏","Cosplay"],avatar:"linear-gradient(135deg,#a78bfa,#7c3aed)",gender:"male",age:22},{name:"桃子",mbti:"ENFJ",need:"companion",interests:["绘画","音乐","影视"],avatar:"linear-gradient(135deg,#fb923c,#f97316)",gender:"female",age:21}]
+function renderMatches(filter){filter=filter||"all";var grid=document.getElementById("matchGrid");var items=matchUsers;if(filter==="similar"&&userData.mbti&&userData.mbti!=="未知"){items=matchUsers.filter(function(u){return u.mbti[0]===userData.mbti[0]})}if(filter==="complement"&&userData.mbti&&userData.mbti!=="未知"){items=matchUsers.filter(function(u){return u.mbti[0]!==userData.mbti[0]})}grid.innerHTML=items.map(function(u){var ints=u.interests.map(function(i){return"<span>"+i+"</span>"}).join(" ");return'<div class="match-card"><div class="mc-avatar" style="background:'+u.avatar+'">'+u.name.charAt(0)+'</div><div class="mc-name">'+u.name+'<span style="font-size:11px;color:var(--text-secondary)">，'+u.age+'</span></div><div class="mc-mbti">'+u.mbti+' · '+(u.need==="companion"?"🤗陪伴":u.need==="partner"?"🤝搭档":"✨吸引")+'</div><div class="mc-interests">'+ints+'</div><button class="mc-btn" onclick="showToast(\'✅ 已发送匹配请求给 '+u.name+'\')">打招呼</button></div>'}).join("")}
+document.querySelectorAll(".mf-btn").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".mf-btn").forEach(function(x){x.classList.remove("active")});this.classList.add("active");renderMatches(this.dataset.mf)})})
+var forumPosts=[{cat:"anime",text:"刚看完无职转生第二季...",tag:"动漫讨论",silent:false,comments:24,likes:56},{cat:"social",text:"今天在公司群被@了...",tag:"社恐日常",silent:true,comments:43,likes:128},{cat:"game",text:"求推荐适合社恐人玩的联机游戏！",tag:"游戏求助",silent:false,comments:67,likes:89},{cat:"match",text:"我是INFP，想找一个ENFJ或者ENFP的朋友！",tag:"交友",silent:false,comments:31,likes:72},{cat:"cos",text:"第一次去漫展出了cos...",tag:"Cosplay",silent:false,comments:18,likes:210},{cat:"anime",text:"有人看今年的四月新番吗？",tag:"新番推荐",silent:false,comments:56,likes:134},{cat:"social",text:"聊了三个月的网友提出要见面...",tag:"社恐日常",silent:true,comments:89,likes:203}]
+function renderForum(cat){cat=cat||"all";var el=document.getElementById("forumPosts");var items=cat==="all"?forumPosts:forumPosts.filter(function(p){return p.cat===cat});el.innerHTML=items.map(function(p){var sil=p.silent?'<div class="pc-silent">🌿 只想倾诉，不需要建议</div>':"";return'<div class="post-card"><div class="pc-header"><div class="pc-avatar" style="background:linear-gradient(135deg,var(--accent),var(--purple))">?</div><span class="pc-anon">匿名用户</span><span class="pc-tag">#'+p.tag+'</span></div><div class="pc-text">'+p.text+'</div>'+sil+'<div class="pc-actions"><span>💬 '+p.comments+'</span><span>❤️ '+p.likes+'</span><span onclick="showToast(\'✅ 匹配请求已发送！\')">🤝 申请匹配</span></div></div>'}).join("")}
+document.querySelectorAll(".forum-cat").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".forum-cat").forEach(function(x){x.classList.remove("active")});this.classList.add("active");renderForum(this.dataset.fc)})})
+var topicQ="你会因为喜欢的声优坏坊而放弃作品吗？";var topicOpts=[{t:"会，无法直视了",pct:28},{t:"不会，作品和声优分开看",pct:45},{t:"看情况，看坏坊程度",pct:20},{t:"从来不在乎声优",pct:7}];var mbtiDist=["INTJ 12%","INTP 8%","ENTJ 5%","ENTP 6%","INFJ 15%","INFP 22%","ENFJ 4%","ENFP 10%","ISTJ 3%","ISFJ 5%","ESTJ 2%","ESFJ 3%","ISTP 2%","ISFP 1%","ESTP 1%","ESFP 1%"];var topicVoted=false;function renderTopic(){document.getElementById("topicDate").textContent="2026年6月8日";document.getElementById("topicQuestion").textContent=topicQ;document.getElementById("topicOptions").innerHTML=topicOpts.map(function(o,i){return'<div class="topic-opt" data-idx="'+i+'">'+o.t+'<div class="to-bar" style="width:0;background:linear-gradient(90deg,var(--accent),var(--purple))"></div><div class="to-pct" style="display:none">'+o.pct+'%</div></div>'}).join("");document.querySelectorAll(".topic-opt").forEach(function(el){el.addEventListener("click",function(){if(topicVoted)return;topicVoted=true;document.getElementById("topicQuestion").textContent="📊 投票结果";document.querySelectorAll(".topic-opt").forEach(function(o,j){var opt=topicOpts[j];o.classList.add("selected");o.querySelector(".to-bar").style.width=opt.pct+"%";o.querySelector(".to-pct").style.display="block";o.querySelector(".to-pct").textContent=opt.pct+"% ("+Math.floor(opt.pct*10)+"人)"});showToast("✅ 已投票！")})});document.getElementById("mbtiDist").innerHTML=mbtiDist.map(function(m){return'<span class="md-item">'+m+'</span>'}).join("")}
+var chatTopics=[{tag:"共同爱好",text:"你觉得《孤独摇滚》第几集是最高潮？"},{tag:"性格探索",text:"作为INFP，你有没有过突然不想回消息的时候？"},{tag:"轻松日常",text:"今天有没有什么让你觉得还挺开心的小事？"},{tag:"假设问题",text:"如果可以进入一部动漫的世界，你选哪个？"},{tag:"番剧推荐",text:"你最近在看什么番？"},{tag:"游戏话题",text:"打完一周目后觉得好空虚..."}]
+function openChatHelper(){var modal=document.getElementById("chatModal");modal.classList.toggle("show");if(modal.classList.contains("show")){document.getElementById("chatList").innerHTML=chatTopics.map(function(t){return'<div class="ch-item"><div class="ch-tag">#'+t.tag+'</div>'+t.text+'<button class="ch-send" onclick="showToast(\'✅ 已复制话题，快去聊天吧！\')">📋 一键发送</button></div>'}).join("")}}
+function closeChatHelper(){document.getElementById("chatModal").classList.remove("show")}
+function renderSuggestions(){var el=document.getElementById("suggestUsers");var users=[{name:"小樱",handle:"@sakura_chan",mbti:"ENFP"},{name:"阿杰",handle:"@jie_otaku",mbti:"INTJ"},{name:"Momo",handle:"@momo_paint",mbti:"INFP"}];el.innerHTML=users.map(function(u){return'<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)"><div class="u-avatar" style="width:36px;height:36px;font-size:13px">'+u.name.charAt(0)+'</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">'+u.name+'</div><div style="font-size:11px;color:var(--text-secondary)">'+u.handle+' · '+u.mbti+'</div></div><button style="padding:4px 14px;border-radius:var(--radius);border:1px solid var(--accent);background:transparent;color:var(--accent);font-size:11px;font-weight:600;cursor:pointer" onclick="showToast(\'✅ 已关注 '+u.name+'\')">关注</button></div>'}).join("")}
+function showToast(msg,type){var t=document.getElementById("toast");t.textContent=msg;t.className="toast"+(type==="error"?" error":"");t.classList.add("show");clearTimeout(t._timer);t._timer=setTimeout(function(){t.classList.remove("show")},2800)}
+document.getElementById("searchInput").addEventListener("keydown",function(e){if(e.key==="Enter"&&this.value.trim())showToast("🔍 搜索: "+this.value.trim())})
+function quickMatch(){
+if(!userData.name||!userData.email){window.location.href="注册登录.html";return}
+switchTab("matching");
+document.querySelectorAll(".mf-btn").forEach(function(b){b.classList.remove("active")});
+document.querySelector(".mf-btn[data-mf=\"all\"]").classList.add("active");
+renderMatches("all");
+showToast("✨ 已为你刷新匹配推荐");
+setTimeout(function(){window.scrollTo({top:0,behavior:"smooth"})},200);
+}
+init();</script>
+</body></html>

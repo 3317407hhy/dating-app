@@ -1,869 +1,128 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>注册 / 登录 · 黄浩洋</title>
-    <style>
-        :root {
-            --bg: #000000;
-            --bg-secondary: #16181c;
-            --bg-hover: #1d1f23;
-            --bg-input: #1e1e1e;
-            --border: #2f3336;
-            --text: #e7e9ea;
-            --text-secondary: #71767b;
-            --blue: #1d9bf0;
-            --blue-hover: #1a8cd8;
-            --red: #f91880;
-            --white: #ffffff;
-            --radius: 9999px;
-            --radius-md: 16px;
-            --radius-sm: 8px;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* ============ 背景装饰 ============ */
-        .bg-decoration {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .bg-circle {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.03;
-        }
-        .bg-circle:nth-child(1) {
-            width: 600px; height: 600px;
-            background: var(--blue);
-            top: -200px; left: -200px;
-        }
-        .bg-circle:nth-child(2) {
-            width: 400px; height: 400px;
-            background: var(--blue);
-            bottom: -100px; right: -100px;
-        }
-        .bg-circle:nth-child(3) {
-            width: 300px; height: 300px;
-            background: #764ba2;
-            top: 50%; left: 60%;
-            transform: translate(-50%, -50%);
-        }
-
-        /* ============ 主容器 ============ */
-        .container {
-            position: relative;
-            z-index: 1;
-            width: 100%;
-            max-width: 440px;
-            padding: 20px;
-        }
-
-        /* ============ Logo ============ */
-        .logo-area {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
-        .logo-icon {
-            width: 48px;
-            height: 48px;
-            margin: 0 auto 12px;
-            background: var(--text);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--bg);
-            letter-spacing: -2px;
-        }
-
-        .logo-text {
-            font-size: 26px;
-            font-weight: 700;
-            letter-spacing: -1px;
-        }
-
-        /* ============ 卡片 ============ */
-        .auth-card {
-            background: var(--bg-secondary);
-            border-radius: 20px;
-            padding: 32px 28px;
-            border: 1px solid var(--border);
-        }
-
-        .card-title {
-            font-size: 26px;
-            font-weight: 700;
-            margin-bottom: 6px;
-        }
-
-        .card-subtitle {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 28px;
-        }
-
-        /* ============ 表单 ============ */
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
-        }
-
-        .input-wrapper {
-            position: relative;
-        }
-
-        .form-input {
-            width: 100%;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            padding: 14px 16px;
-            color: var(--text);
-            font-size: 16px;
-            outline: none;
-            font-family: inherit;
-            transition: border-color 0.2s, box-shadow 0.2s;
-        }
-
-        .form-input:focus {
-            border-color: var(--blue);
-            box-shadow: 0 0 0 2px rgba(29, 155, 240, 0.2);
-        }
-
-        .form-input::placeholder {
-            color: var(--text-secondary);
-        }
-
-        .form-input.error {
-            border-color: var(--red);
-        }
-        .form-input.error:focus {
-            box-shadow: 0 0 0 2px rgba(249, 24, 128, 0.2);
-        }
-
-        .input-icon {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 18px;
-            color: var(--text-secondary);
-            pointer-events: none;
-        }
-
-        .error-msg {
-            color: var(--red);
-            font-size: 12px;
-            margin-top: 4px;
-            display: none;
-        }
-        .error-msg.show { display: block; }
-
-        /* ============ 提交按钮 ============ */
-        .submit-btn {
-            width: 100%;
-            padding: 14px;
-            background: var(--text);
-            color: var(--bg);
-            border: none;
-            border-radius: var(--radius);
-            font-size: 16px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: opacity 0.2s, transform 0.15s;
-            margin-top: 6px;
-        }
-
-        .submit-btn:hover {
-            opacity: 0.88;
-        }
-        .submit-btn:active {
-            transform: scale(0.97);
-        }
-        .submit-btn:disabled {
-            opacity: 0.4;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* ============ 分隔线 ============ */
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 20px 0;
-            gap: 12px;
-        }
-
-        .divider-line {
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-
-        .divider-text {
-            color: var(--text-secondary);
-            font-size: 13px;
-            white-space: nowrap;
-        }
-
-        /* ============ OAuth 按钮 ============ */
-        .oauth-btn {
-            width: 100%;
-            padding: 12px 16px;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            color: var(--text);
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: background 0.2s, border-color 0.2s;
-            margin-bottom: 10px;
-            font-family: inherit;
-        }
-
-        .oauth-btn:hover {
-            background: var(--bg-hover);
-            border-color: var(--text-secondary);
-        }
-
-        .oauth-icon {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-        }
-
-        /* ============ 切换链接 ============ */
-        .switch-text {
-            text-align: center;
-            margin-top: 24px;
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .switch-link {
-            color: var(--blue);
-            cursor: pointer;
-            font-weight: 500;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .switch-link:hover {
-            color: var(--blue-hover);
-            text-decoration: underline;
-        }
-
-        /* ============ 登录面板 ============ */
-        .auth-panel {
-            display: none;
-        }
-        .auth-panel.active {
-            display: block;
-            animation: fadeSlideIn 0.35s ease;
-        }
-
-        @keyframes fadeSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ============ 密码强度 ============ */
-        .password-strength {
-            display: flex;
-            gap: 4px;
-            margin-top: 6px;
-        }
-
-        .strength-bar {
-            flex: 1;
-            height: 4px;
-            background: var(--border);
-            border-radius: 2px;
-            transition: background 0.3s;
-        }
-
-        .strength-bar.weak { background: var(--red); }
-        .strength-bar.medium { background: #ff9800; }
-        .strength-bar.strong { background: #00ba7c; }
-
-        .strength-text {
-            font-size: 11px;
-            color: var(--text-secondary);
-            margin-top: 2px;
-        }
-
-        /* ============ 同意条款 ============ */
-        .terms-text {
-            font-size: 12px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-
-        .terms-text a {
-            color: var(--blue);
-            text-decoration: none;
-        }
-        .terms-text a:hover {
-            text-decoration: underline;
-        }
-
-        /* ============ Toast ============ */
-        .toast {
-            position: fixed;
-            top: 24px;
-            left: 50%;
-            transform: translateX(-50%) translateY(-120px);
-            background: var(--blue);
-            color: #fff;
-            padding: 12px 24px;
-            border-radius: var(--radius);
-            font-size: 14px;
-            font-weight: 600;
-            z-index: 100;
-            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            white-space: nowrap;
-            pointer-events: none;
-        }
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-        }
-        .toast.error-toast {
-            background: var(--red);
-        }
-
-        /* ============ 页脚 ============ */
-        .footer-links {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 11px;
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-        .footer-links span {
-            margin: 0 6px;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .footer-links span:hover {
-            color: var(--text);
-        }
-
-        /* ============ 响应式 ============ */
-        @media (max-width: 480px) {
-            .container {
-                padding: 16px;
-            }
-            .auth-card {
-                padding: 24px 18px;
-                border-radius: 16px;
-            }
-            .card-title {
-                font-size: 22px;
-            }
-        }
-
-        /* ============ 加载动画 ============ */
-        .spinner {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border: 2px solid transparent;
-            border-top-color: currentColor;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* ============ 忘记密码链接 ============ */
-        .forgot-link {
-            display: block;
-            text-align: right;
-            font-size: 13px;
-            color: var(--blue);
-            cursor: pointer;
-            text-decoration: none;
-            margin-top: -8px;
-            margin-bottom: 12px;
-        }
-        .forgot-link:hover {
-            text-decoration: underline;
-        }
-
-    </style>
-</head>
-<body>
-
-    <!-- 背景装饰 -->
-    <div class="bg-decoration">
-        <div class="bg-circle"></div>
-        <div class="bg-circle"></div>
-        <div class="bg-circle"></div>
-    </div>
-
-    <!-- Toast 通知 -->
-    <div class="toast" id="toast"></div>
-
-    <!-- 主容器 -->
-    <div class="container">
-        <!-- Logo -->
-        <div class="logo-area">
-            <div class="logo-icon">X</div>
-            <div class="logo-text">黄浩洋</div>
-        </div>
-
-        <!-- ==================== 注册面板 ==================== -->
-        <div class="auth-card">
-            <div class="auth-panel active" id="registerPanel">
-                <div class="card-title">加入我们</div>
-                <div class="card-subtitle">创建一个账号，开始你的社交之旅。</div>
-
-                <!-- OAuth 按钮 -->
-                <button class="oauth-btn" onclick="handleOAuth('Google')">
-                    <svg class="oauth-icon" viewBox="0 0 24 24" fill="none">
-                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
-                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                    </svg>
-                    通过 Google 账号注册
-                </button>
-
-                <button class="oauth-btn" onclick="handleOAuth('Apple')">
-                    <svg class="oauth-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-                    </svg>
-                    通过 Apple 账号注册
-                </button>
-
-                <div class="divider">
-                    <span class="divider-line"></span>
-                    <span class="divider-text">或</span>
-                    <span class="divider-line"></span>
-                </div>
-
-                <!-- 注册表单 -->
-                <form id="registerForm" onsubmit="handleRegister(event)" novalidate>
-                    <div class="form-group">
-                        <label class="form-label" for="regName">姓名</label>
-                        <input type="text" class="form-input" id="regName" placeholder="输入你的姓名" required autocomplete="name">
-                        <div class="error-msg" id="regNameError">请输入姓名</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="regEmail">邮箱或手机号</label>
-                        <input type="text" class="form-input" id="regEmail" placeholder="输入邮箱或手机号" required autocomplete="email">
-                        <div class="error-msg" id="regEmailError">请输入有效的邮箱或手机号</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="regPassword">密码</label>
-                        <div class="input-wrapper">
-                            <input type="password" class="form-input" id="regPassword" placeholder="创建密码（至少 8 位）" required autocomplete="new-password" minlength="8">
-                            <span class="input-icon" id="toggleRegPwd" style="pointer-events:auto;cursor:pointer" onclick="togglePassword('regPassword', 'toggleRegPwd')">👁️</span>
-                        </div>
-                        <div class="password-strength" id="pwdStrength">
-                            <div class="strength-bar"></div>
-                            <div class="strength-bar"></div>
-                            <div class="strength-bar"></div>
-                            <div class="strength-bar"></div>
-                        </div>
-                        <div class="strength-text" id="strengthText"></div>
-                        <div class="error-msg" id="regPasswordError">密码长度至少为 8 位</div>
-                    </div>
-
-                    <p class="terms-text">
-                        注册即表示你同意我们的 <a href="#">服务条款</a> 和 <a href="#">隐私政策</a>，包括 <a href="#">Cookie 使用</a>。
-                    </p>
-
-                    <button type="submit" class="submit-btn" id="registerSubmit">注册</button>
-                </form>
-
-                <p class="switch-text">
-                    已有账号？<span class="switch-link" onclick="switchPanel('login')">去登录</span>
-                </p>
-            </div>
-
-            <!-- ==================== 登录面板 ==================== -->
-            <div class="auth-panel" id="loginPanel">
-                <div class="card-title">欢迎回来</div>
-                <div class="card-subtitle">登录你的账号，保持连接。</div>
-
-                <!-- OAuth 按钮 -->
-                <button class="oauth-btn" onclick="handleOAuth('Google')">
-                    <svg class="oauth-icon" viewBox="0 0 24 24" fill="none">
-                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
-                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                    </svg>
-                    通过 Google 账号登录
-                </button>
-
-                <button class="oauth-btn" onclick="handleOAuth('Apple')">
-                    <svg class="oauth-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-                    </svg>
-                    通过 Apple 账号登录
-                </button>
-
-                <div class="divider">
-                    <span class="divider-line"></span>
-                    <span class="divider-text">或</span>
-                    <span class="divider-line"></span>
-                </div>
-
-                <!-- 登录表单 -->
-                <form id="loginForm" onsubmit="handleLogin(event)" novalidate>
-                    <div class="form-group">
-                        <label class="form-label" for="loginEmail">邮箱或手机号</label>
-                        <input type="text" class="form-input" id="loginEmail" placeholder="输入邮箱或手机号" required autocomplete="email">
-                        <div class="error-msg" id="loginEmailError">请输入邮箱或手机号</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="loginPassword">密码</label>
-                        <div class="input-wrapper">
-                            <input type="password" class="form-input" id="loginPassword" placeholder="输入密码" required autocomplete="current-password">
-                            <span class="input-icon" id="toggleLoginPwd" style="pointer-events:auto;cursor:pointer" onclick="togglePassword('loginPassword', 'toggleLoginPwd')">👁️</span>
-                        </div>
-                        <div class="error-msg" id="loginPasswordError">请输入密码</div>
-                    </div>
-
-                    <span class="forgot-link" onclick="showToast('重置密码链接已发送到你的注册邮箱（演示功能）')">忘记密码？</span>
-
-                    <button type="submit" class="submit-btn" id="loginSubmit">登录</button>
-                </form>
-
-                <p class="switch-text">
-                    还没有账号？<span class="switch-link" onclick="switchPanel('register')">去注册</span>
-                </p>
-            </div>
-        </div>
-
-        <!-- 页脚 -->
-        <div class="footer-links">
-            <span>关于</span>
-            <span>帮助中心</span>
-            <span>服务条款</span>
-            <span>隐私政策</span>
-            <span>Cookie 政策</span>
-            <span>无障碍</span>
-            <span>广告信息</span>
-            <span>博客</span>
-            <span>状态</span>
-            <span>职业</span>
-            <span>品牌资源</span>
-            <span>广告</span>
-            <span>营销</span>
-            <span>商业</span>
-            <span>开发者</span>
-            <span>目录</span>
-            <span>设置</span>
-            <div style="margin-top:4px">© 2026 黄浩洋</div>
-        </div>
-    </div>
-
-    <script>
-        // ============= 面板切换 =============
-        function switchPanel(panel) {
-            const registerPanel = document.getElementById('registerPanel');
-            const loginPanel = document.getElementById('loginPanel');
-
-            if (panel === 'login') {
-                registerPanel.classList.remove('active');
-                loginPanel.classList.add('active');
-            } else {
-                loginPanel.classList.remove('active');
-                registerPanel.classList.add('active');
-            }
-        }
-
-        // ============= 密码可见性切换 =============
-        function togglePassword(inputId, toggleId) {
-            const input = document.getElementById(inputId);
-            const toggle = document.getElementById(toggleId);
-            if (input.type === 'password') {
-                input.type = 'text';
-                toggle.textContent = '🙈';
-            } else {
-                input.type = 'password';
-                toggle.textContent = '👁️';
-            }
-        }
-
-        // ============= 密码强度检测 =============
-        const regPasswordInput = document.getElementById('regPassword');
-        const strengthBars = document.querySelectorAll('#pwdStrength .strength-bar');
-        const strengthText = document.getElementById('strengthText');
-
-        regPasswordInput.addEventListener('input', function() {
-            const val = this.value;
-            const bars = strengthBars;
-            const text = strengthText;
-
-            // 重置
-            bars.forEach(b => { b.className = 'strength-bar'; });
-            text.textContent = '';
-
-            if (val.length === 0) return;
-
-            let score = 0;
-            if (val.length >= 8) score++;
-            if (val.length >= 12) score++;
-            if (/[a-z]/.test(val) && /[A-Z]/.test(val)) score++;
-            if (/\d/.test(val)) score++;
-            if (/[^a-zA-Z0-9]/.test(val)) score++;
-
-            let level;
-            if (score <= 2) {
-                level = 'weak';
-                text.textContent = '密码强度：弱';
-                text.style.color = 'var(--red)';
-            } else if (score <= 4) {
-                level = 'medium';
-                text.textContent = '密码强度：中等';
-                text.style.color = '#ff9800';
-            } else {
-                level = 'strong';
-                text.textContent = '密码强度：强';
-                text.style.color = '#00ba7c';
-            }
-
-            const activeCount = level === 'weak' ? 1 : level === 'medium' ? 3 : 4;
-            bars.forEach((b, i) => {
-                if (i < activeCount) {
-                    b.classList.add(level);
-                }
-            });
-        });
-
-        // ============= 表单验证 =============
-        function clearErrors(formId) {
-            const form = document.getElementById(formId);
-            form.querySelectorAll('.form-input').forEach(input => input.classList.remove('error'));
-            form.querySelectorAll('.error-msg').forEach(msg => msg.classList.remove('show'));
-        }
-
-        function showFieldError(inputId, errorId) {
-            document.getElementById(inputId).classList.add('error');
-            document.getElementById(errorId).classList.add('show');
-        }
-
-        function isValidEmailOrPhone(val) {
-            // 判断是否为邮箱或手机号（中国大陆手机号或通用格式）
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const phoneRegex = /^\+?\d{7,15}$/;
-            return emailRegex.test(val) || phoneRegex.test(val);
-        }
-
-        // ============= 注册处理 =============
-        function handleRegister(e) {
-            e.preventDefault();
-            clearErrors('registerForm');
-
-            const name = document.getElementById('regName').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
-            const password = document.getElementById('regPassword').value;
-
-            let hasError = false;
-
-            if (!name) {
-                showFieldError('regName', 'regNameError');
-                hasError = true;
-            }
-
-            if (!email || !isValidEmailOrPhone(email)) {
-                showFieldError('regEmail', 'regEmailError');
-                hasError = true;
-            }
-
-            if (password.length < 8) {
-                showFieldError('regPassword', 'regPasswordError');
-                hasError = true;
-            }
-
-            if (hasError) return;
-
-            // 模拟注册
-            const btn = document.getElementById('registerSubmit');
-            const originalText = btn.textContent;
-            btn.disabled = true;
-            btn.innerHTML = '<span class="spinner"></span> 注册中…';
-
-            setTimeout(() => {
-                btn.disabled = false;
-                btn.textContent = originalText;
-
-                // 保存到 localStorage（模拟）
-                const userData = {
-                    name: name,
-                    email: email,
-                    handle: '@' + (name.replace(/\s/g, '').toLowerCase() || 'user') + Math.random().toString(36).slice(2, 6),
-                    registeredAt: new Date().toISOString()
-                };
-                localStorage.setItem('sb_user', JSON.stringify(userData));
-
-                showToast('✅ 注册成功！正在跳转…');
-                setTimeout(() => {
-                    // 跳转到主页
-                    window.location.href = '主页.html';
-                }, 1200);
-            }, 1500);
-        }
-
-        // ============= 登录处理 =============
-        function handleLogin(e) {
-            e.preventDefault();
-            clearErrors('loginForm');
-
-            const email = document.getElementById('loginEmail').value.trim();
-            const password = document.getElementById('loginPassword').value;
-
-            let hasError = false;
-
-            if (!email || !isValidEmailOrPhone(email)) {
-                showFieldError('loginEmail', 'loginEmailError');
-                hasError = true;
-            }
-
-            if (!password) {
-                showFieldError('loginPassword', 'loginPasswordError');
-                hasError = true;
-            }
-
-            if (hasError) return;
-
-            // 模拟登录
-            const btn = document.getElementById('loginSubmit');
-            const originalText = btn.textContent;
-            btn.disabled = true;
-            btn.innerHTML = '<span class="spinner"></span> 登录中…';
-
-            // 检查是否有已注册用户
-            const savedUser = localStorage.getItem('sb_user');
-
-            setTimeout(() => {
-                btn.disabled = false;
-                btn.textContent = originalText;
-
-                if (savedUser) {
-                    const user = JSON.parse(savedUser);
-                    if (user.email === email) {
-                        user.lastLogin = new Date().toISOString();
-                        localStorage.setItem('sb_user', JSON.stringify(user));
-                        showToast('✅ 登录成功！正在跳转…');
-                        setTimeout(() => {
-                            window.location.href = '主页.html';
-                        }, 1000);
-                    } else {
-                        showToast('⚠️ 账号不存在，请先注册', 'error');
-                    }
-                } else {
-                    // 没有已注册用户时，模拟登录成功（演示用）
-                    const userData = {
-                        name: '用户',
-                        email: email,
-                        handle: '@user_' + Math.random().toString(36).slice(2, 6),
-                        lastLogin: new Date().toISOString()
-                    };
-                    localStorage.setItem('sb_user', JSON.stringify(userData));
-                    showToast('✅ 登录成功！正在跳转…');
-                    setTimeout(() => {
-                        window.location.href = '主页.html';
-                    }, 1000);
-                }
-            }, 1500);
-        }
-
-        // ============= OAuth 处理 =============
-        function handleOAuth(provider) {
-            showToast('🔐 正在跳转到 ' + provider + ' 授权页面…（演示功能）');
-        }
-
-        // ============= Toast 通知 =============
-        function showToast(message, type) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = 'toast';
-            if (type === 'error') {
-                toast.classList.add('error-toast');
-            }
-            toast.classList.add('show');
-
-            clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2800);
-        }
-
-        // ============= 键盘快捷键 =============
-        document.addEventListener('keydown', function(e) {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-                e.preventDefault();
-                const activePanel = document.querySelector('.auth-panel.active');
-                if (activePanel) {
-                    const form = activePanel.querySelector('form');
-                    if (form) {
-                        form.dispatchEvent(new Event('submit', { cancelable: true }));
-                    }
-                }
-            }
-        });
-
-        // ============= 实时清除错误提示 =============
-        document.querySelectorAll('.form-input').forEach(input => {
-            input.addEventListener('input', function() {
-                this.classList.remove('error');
-                const errorMsg = this.parentElement.parentElement.querySelector('.error-msg');
-                if (errorMsg) errorMsg.classList.remove('show');
-            });
-        });
-    </script>
-
-</body>
-</html>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>EchoZshsamber · 二次元社恐友好匹配</title><style>*{margin:0;padding:0;box-sizing:border-box}:root{--bg:#000000;--bg-secondary:#16181c;--bg-card:#16181c;--bg-hover:#1d1f23;--bg-elevated:#1d1f23;--bg-input:#202327;--border:#2f3336;--text:#e7e9ea;--text-secondary:#71767b;--accent:#1d9bf0;--accent-hover:#1a8cd8;--purple:#8b5cf6;--pink:#f91880;--green:#00ba7c;--red:#f4212e;--radius:9999px;--radius-md:16px;--radius-sm:12px}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;justify-content:center;align-items:center;overflow-x:hidden}.bg-particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}.particle{position:absolute;width:4px;height:4px;background:var(--accent);border-radius:50%;opacity:.15;animation:floatUp linear infinite}@keyframes floatUp{0%{transform:translateY(100vh)scale(0);opacity:0}10%{opacity:.15}90%{opacity:.15}100%{transform:translateY(-10vh)scale(1);opacity:0}}.container{position:relative;z-index:1;width:100%;max-width:440px;padding:20px;animation:fadeIn .4s ease-out}@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}.logo-area{text-align:center;margin-bottom:28px}.logo-svg{width:52px;height:52px;margin:0 auto 10px;display:block}.logo-title{font-size:28px;font-weight:700;color:var(--text);letter-spacing:-1px}.logo-sub{color:var(--text-secondary);font-size:13px;margin-top:4px}.auth-card{background:var(--bg);border-radius:16px;padding:0}.auth-tabs{display:flex;margin-bottom:24px;background:var(--bg-secondary);border-radius:9999px;padding:3px}.auth-tab{flex:1;padding:10px;text-align:center;border:none;background:transparent;color:var(--text-secondary);font-size:15px;font-weight:600;cursor:pointer;border-radius:9999px;transition:all .2s;font-family:inherit}.auth-tab.active{background:var(--text);color:var(--bg)}.card-title{font-size:24px;font-weight:700;margin-bottom:4px}.card-subtitle{color:var(--text-secondary);font-size:14px;margin-bottom:20px}.form-group{margin-bottom:20px}.form-label{display:block;font-size:13px;font-weight:500;color:var(--text-secondary);margin-bottom:6px}.form-input{width:100%;background:transparent;border:1px solid var(--border);border-radius:4px;padding:16px 12px;color:var(--text);font-size:17px;outline:none;font-family:inherit;transition:border .2s}.form-input:focus{border-color:var(--accent);border-width:2px;padding:15px 11px}.form-input::placeholder{color:var(--text-secondary)}.form-input.error{border-color:var(--red)}.btn-primary{width:100%;padding:15px;border:none;border-radius:9999px;background:var(--text);color:var(--bg);font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit}.btn-primary:hover{opacity:.9}.btn-primary:disabled{opacity:.5;cursor:not-allowed}.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px}@keyframes spin{to{transform:rotate(360deg)}}.error-msg{color:var(--red);font-size:13px;margin-top:4px;display:none}.error-msg.show{display:block}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%)translateY(80px);padding:10px 24px;border-radius:9999px;background:var(--accent);color:#fff;font-size:14px;font-weight:600;opacity:0;transition:all .3s;z-index:1999;pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%)translateY(0)}.toast.error{background:var(--red)}.step-indicators{display:flex;justify-content:center;gap:8px;margin-bottom:20px}.step-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s}.step-dot.active{background:var(--accent);width:24px;border-radius:4px}.step-dot.done{background:var(--green)}.onboarding-step{display:none}.onboarding-step.active{display:block;animation:fadeIn .3s ease-out}.mbti-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:12px 0}.mbti-option{padding:10px 8px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--text-secondary);cursor:pointer;text-align:center;font-size:12px;transition:all .2s;font-family:inherit}.mbti-option:hover{background:var(--bg-hover)}.mbti-option.selected{border-color:var(--accent);color:var(--accent);font-weight:600;background:rgba(29,155,240,.05)}.mbti-option .mbti-code{font-size:15px;font-weight:700;display:block;margin-bottom:1px}.mbti-option .mbti-label{font-size:10px;opacity:.7}.need-options{display:flex;flex-direction:column;gap:8px;margin:12px 0}.need-option{padding:14px 16px;border:1px solid var(--border);border-radius:12px;background:transparent;cursor:pointer;transition:all .2s}.need-option:hover{background:var(--bg-hover)}.need-option.selected{border-color:var(--accent);background:rgba(29,155,240,.04)}.need-option .n-icon{font-size:24px;margin-bottom:4px}.need-option .n-title{font-weight:600;font-size:14px;color:var(--text)}.need-option .n-desc{font-size:12px;color:var(--text-secondary);margin-top:2px}.btn-secondary{width:100%;padding:12px;border:1px solid var(--border);border-radius:9999px;background:transparent;color:var(--text-secondary);font-size:14px;cursor:pointer;transition:all .2s;font-family:inherit;margin-top:8px}.btn-secondary:hover{background:var(--bg-hover);color:var(--text)}.interest-tags{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.interest-tag{padding:8px 16px;border:1px solid var(--border);border-radius:9999px;background:transparent;color:var(--text-secondary);font-size:13px;cursor:pointer;transition:all .2s;font-family:inherit}.interest-tag:hover{background:var(--bg-hover)}.interest-tag.selected{border-color:var(--accent);background:rgba(29,155,240,.08);color:var(--accent)}.auth-panel{display:block}.auth-panel.hidden{display:none}</style></head><body>
+<div class="bg-particles" id="bgParticles"></div>
+<div class="container"><div class="logo-area"><div class="logo-svg"><svg width="52" height="52" style="display:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.45" r="0.65">
+      <stop offset="0%" stop-color="#27283b"/>
+      <stop offset="100%" stop-color="#14141f"/>
+    </radialGradient>
+    <linearGradient id="zGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b9cf7"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="xGrad" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background: rounded square -->
+  <rect x="64" y="64" width="896" height="896" rx="224" ry="224" fill="url(#bg)"/>
+
+  <!-- Subtle inner ring -->
+  <rect x="64" y="64" width="896" height="896" rx="224" ry="224"
+        fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="2"/>
+
+  <!-- Letter 'z' -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+    <line x1="222" y1="378" x2="482" y2="378" stroke="url(#zGrad)"/>
+    <line x1="482" y1="378" x2="222" y2="648" stroke="url(#zGrad)"/>
+    <line x1="222" y1="648" x2="482" y2="648" stroke="url(#zGrad)"/>
+  </g>
+
+  <!-- Letter 'x' -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+    <line x1="542" y1="378" x2="802" y2="648" stroke="url(#xGrad)"/>
+    <line x1="802" y1="378" x2="542" y2="648" stroke="url(#xGrad)"/>
+  </g>
+</svg>
+
+</div>
+<div class="logo-title">EchoZshsamber</div><div class="logo-sub">二次元 · 低压力 · 精准匹配</div></div>
+<div class="auth-card"><div class="auth-tabs"><button class="auth-tab active" data-tab="login">登录</button><button class="auth-tab" data-tab="register">注册</button></div>
+<div class="auth-panel" id="loginPanel">
+<div class="card-title">欢迎回来</div><div class="card-subtitle">登录你的 EchoZ 账号</div>
+<form id="loginForm" onsubmit="return handleLogin(event)">
+<div class="form-group"><label class="form-label">邮箱 / 手机号</label><input class="form-input" id="loginEmail" type="text" placeholder="请输入邮箱或手机号"><div class="error-msg" id="loginEmailError">请输入有效的邮箱或手机号</div></div>
+<div class="form-group"><label class="form-label">密码</label><input class="form-input" id="loginPassword" type="password" placeholder="请输入密码"><div class="error-msg" id="loginPasswordError">请输入密码</div></div>
+<button class="btn-primary" id="loginSubmit" type="submit">登录</button>
+</form>
+
+
+<button class="btn-secondary" onclick="switchAuthTab('register')">还没有账号？立即注册</button>
+</div>
+<div class="auth-panel hidden" id="registerPanel">
+<div class="onboarding-step active" data-step="1">
+<div class="step-indicators"><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+<div class="card-title">创建账号</div><div class="card-subtitle">填写基本信息开始你的 EchoZ 之旅</div>
+<div class="form-group"><label class="form-label">昵称</label><input class="form-input" id="regName" type="text" placeholder="你希望别人怎么称呼你？"></div>
+<div class="form-group"><label class="form-label">邮箱</label><input class="form-input" id="regEmail" type="email" placeholder="zx@example.com"></div>
+<div class="form-group"><label class="form-label">密码</label><input class="form-input" id="regPassword" type="password" placeholder="至少6位密码"></div>
+<div class="form-group"><label class="form-label">性别</label><div style="display:flex;gap:8px"><button type="button" class="mbti-option" style="flex:1" data-gender="male">♂ 男生</button><button type="button" class="mbti-option" style="flex:1" data-gender="female">♀ 女生</button><button type="button" class="mbti-option" style="flex:1" data-gender="other">⚧ 其他</button></div></div>
+<button type="button" class="btn-primary" onclick="nextStep(2)" style="margin-top:8px">下一步</button>
+</div>
+<div class="onboarding-step" data-step="2">
+<div class="step-indicators"><div class="step-dot done"></div><div class="step-dot active"></div><div class="step-dot"></div></div>
+<div class="card-title">你的 MBTI 类型</div><div class="card-subtitle">用于精准匹配，没测过可以跳过</div>
+<div class="mbti-grid" id="mbtiGrid">
+<button type="button" class="mbti-option" data-mbti="INTJ"><span class="mbti-code">INTJ</span><span class="mbti-label">建筑师</span></button>
+<button type="button" class="mbti-option" data-mbti="INTP"><span class="mbti-code">INTP</span><span class="mbti-label">逻辑学家</span></button>
+<button type="button" class="mbti-option" data-mbti="ENTJ"><span class="mbti-code">ENTJ</span><span class="mbti-label">指挥官</span></button>
+<button type="button" class="mbti-option" data-mbti="ENTP"><span class="mbti-code">ENTP</span><span class="mbti-label">辩论家</span></button>
+<button type="button" class="mbti-option" data-mbti="INFJ"><span class="mbti-code">INFJ</span><span class="mbti-label">提倡者</span></button>
+<button type="button" class="mbti-option" data-mbti="INFP"><span class="mbti-code">INFP</span><span class="mbti-label">调停者</span></button>
+<button type="button" class="mbti-option" data-mbti="ENFJ"><span class="mbti-code">ENFJ</span><span class="mbti-label">主人公</span></button>
+<button type="button" class="mbti-option" data-mbti="ENFP"><span class="mbti-code">ENFP</span><span class="mbti-label">竞选者</span></button>
+<button type="button" class="mbti-option" data-mbti="ISTJ"><span class="mbti-code">ISTJ</span><span class="mbti-label">物流师</span></button>
+<button type="button" class="mbti-option" data-mbti="ISFJ"><span class="mbti-code">ISFJ</span><span class="mbti-label">守卫者</span></button>
+<button type="button" class="mbti-option" data-mbti="ESTJ"><span class="mbti-code">ESTJ</span><span class="mbti-label">总经理</span></button>
+<button type="button" class="mbti-option" data-mbti="ESFJ"><span class="mbti-code">ESFJ</span><span class="mbti-label">执政官</span></button>
+<button type="button" class="mbti-option" data-mbti="ISTP"><span class="mbti-code">ISTP</span><span class="mbti-label">鉴赏家</span></button>
+<button type="button" class="mbti-option" data-mbti="ISFP"><span class="mbti-code">ISFP</span><span class="mbti-label">探险家</span></button>
+<button type="button" class="mbti-option" data-mbti="ESTP"><span class="mbti-code">ESTP</span><span class="mbti-label">企业家</span></button>
+<button type="button" class="mbti-option" data-mbti="ESFP"><span class="mbti-code">ESFP</span><span class="mbti-label">表演者</span></button>
+</div>
+<button type="button" class="btn-secondary" onclick="setMbtiUnknown()">我不知道我的 MBTI</button>
+<div style="margin-top:20px"><div class="form-label" style="margin-bottom:8px">你的兴趣领域（可多选）</div>
+<div class="interest-tags">
+<button type="button" class="interest-tag" data-interest="anime">动漫</button>
+<button type="button" class="interest-tag" data-interest="game">游戏</button>
+<button type="button" class="interest-tag" data-interest="cos">Cosplay</button>
+<button type="button" class="interest-tag" data-interest="music">音乐</button>
+<button type="button" class="interest-tag" data-interest="art">绘画</button>
+<button type="button" class="interest-tag" data-interest="novel">轻小说</button>
+<button type="button" class="interest-tag" data-interest="vtuber">V Tuber</button>
+<button type="button" class="interest-tag" data-interest="film">影视</button>
+</div></div>
+<div style="display:flex;gap:8px;margin-top:20px"><button type="button" class="btn-secondary" onclick="prevStep(1)" style="flex:0 0 auto;padding:12px 20px">← 上一步</button><button type="button" class="btn-primary" onclick="nextStep(3)" style="flex:1">下一步</button></div>
+</div>
+<div class="onboarding-step" data-step="3">
+<div class="step-indicators"><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot active"></div></div>
+<div class="card-title">你的恋爱需求</div><div class="card-subtitle">选择你想要的相处方式</div>
+<div class="need-options">
+<div class="need-option" data-need="companion"><div class="n-icon">🤗</div><div class="n-title">陪伴型</div><div class="n-desc">需要有人每天在，渴望日常陪伴和分享</div></div>
+<div class="need-option" data-need="partner"><div class="n-icon">🤝</div><div class="n-title">搭档型</div><div class="n-desc">希望一起成长、互相帮助，共同进步</div></div>
+<div class="need-option" data-need="attraction"><div class="n-icon">✨</div><div class="n-title">吸引型</div><div class="n-desc">外表对我很重要，希望第一眼就心动</div></div>
+</div>
+<div style="display:flex;gap:8px;margin-top:20px"><button type="button" class="btn-secondary" onclick="prevStep(2)" style="flex:0 0 auto;padding:12px 20px">← 上一步</button><button type="button" class="btn-primary" id="registerSubmit" onclick="handleRegister()">完成注册</button></div>
+</div></div></div></div>
+<div class="toast" id="toast"></div>
+<script>(function(){var c=document.getElementById("bgParticles");for(var i=0;i<30;i++){var p=document.createElement("div");p.className="particle";p.style.left=Math.random()*100+"%";p.style.animationDuration=(12+Math.random()*20)+"s";p.style.animationDelay=Math.random()*15+"s";p.style.width=p.style.height=(2+Math.random()*4)+"px";c.appendChild(p)}})();
+function switchAuthTab(t){document.querySelectorAll(".auth-tab").forEach(function(e){e.classList.toggle("active",e.dataset.tab===t)});document.getElementById("loginPanel").classList.toggle("hidden",t!=="login");document.getElementById("registerPanel").classList.toggle("hidden",t!=="register")}
+document.querySelectorAll(".auth-tab").forEach(function(t){t.addEventListener("click",function(){switchAuthTab(t.dataset.tab)})});
+var currentStep=1,regData={gender:"",mbti:"",mbtiUnknown:false,interests:[],need:""};
+function nextStep(n){if(currentStep===1){var a=document.getElementById("regName").value.trim(),b=document.getElementById("regEmail").value.trim(),c=document.getElementById("regPassword").value;if(!a){showToast("请输入昵称","error");return}if(!b||!b.includes("@")){showToast("请输入有效邮箱","error");return}if(c.length<6){showToast("密码至少6位","error");return}if(!regData.gender){showToast("请选择性别","error");return}regData.name=a;regData.email=b;regData.password=c}if(currentStep===2&&!regData.mbti&&!regData.mbtiUnknown){showToast("请选择MBTI类型或跳过","error");return}goToStep(n)}
+function prevStep(n){goToStep(n)}
+function goToStep(n){currentStep=n;document.querySelectorAll(".onboarding-step").forEach(function(s){s.classList.toggle("active",parseInt(s.dataset.step)===n)})}
+document.querySelectorAll(".mbti-option").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".mbti-option").forEach(function(x){x.classList.remove("selected")});this.classList.add("selected");regData.mbti=this.dataset.mbti;regData.mbtiUnknown=false})});
+function setMbtiUnknown(){document.querySelectorAll(".mbti-option").forEach(function(b){b.classList.remove("selected")});regData.mbti="";regData.mbtiUnknown=true;showToast("已跳过MBTI，之后可以在个人资料中设置")}
+document.querySelectorAll("[data-gender]").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll("[data-gender]").forEach(function(x){x.classList.remove("selected")});this.classList.add("selected");regData.gender=this.dataset.gender})});
+document.querySelectorAll(".interest-tag").forEach(function(t){t.addEventListener("click",function(){this.classList.toggle("selected");var v=this.dataset.interest,i=regData.interests.indexOf(v);i!==-1?regData.interests.splice(i,1):regData.interests.push(v)})});
+document.querySelectorAll(".need-option").forEach(function(o){o.addEventListener("click",function(){document.querySelectorAll(".need-option").forEach(function(x){x.classList.remove("selected")});this.classList.add("selected");regData.need=this.dataset.need})});
+function handleRegister(){if(!regData.need){showToast("请选择你的恋爱需求类型","error");return}var btn=document.getElementById("registerSubmit");btn.disabled=true;btn.innerHTML="<span class=\"spinner\"></span> 注册中…";var ud={name:regData.name,email:regData.email,password:regData.password,gender:regData.gender,mbti:regData.mbti||"未知",mbtiUnknown:regData.mbtiUnknown,interests:regData.interests,need:regData.need,handle:"@"+regData.name.replace(/\s/g,"").toLowerCase()+Math.random().toString(36).slice(2,5),avatarChar:regData.name.charAt(0),registeredAt:new Date().toISOString()};localStorage.setItem("zx_user",JSON.stringify(ud));setTimeout(function(){btn.disabled=false;btn.textContent="完成注册";showToast("\u2705 注册成功！正在跳转…");setTimeout(function(){window.location.href="\u4e3b\u9875.html"},1200)},1500)}
+function handleLogin(e){e.preventDefault();var em=document.getElementById("loginEmail").value.trim(),pw=document.getElementById("loginPassword").value,err=false;if(!em||!em.includes("@")){document.getElementById("loginEmail").classList.add("error");document.getElementById("loginEmailError").classList.add("show");err=true}if(!pw){document.getElementById("loginPassword").classList.add("error");document.getElementById("loginPasswordError").classList.add("show");err=true}if(err)return;var btn=document.getElementById("loginSubmit");btn.disabled=true;btn.innerHTML="<span class=\"spinner\"></span> 登录中…";setTimeout(function(){var s=localStorage.getItem("zx_user");if(s){var u=JSON.parse(s);if(u.email===em){u.lastLogin=new Date().toISOString();localStorage.setItem("zx_user",JSON.stringify(u));showToast("\u2705 登录成功！");setTimeout(function(){window.location.href="\u4e3b\u9875.html"},1000)}else{btn.disabled=false;btn.textContent="登录";showToast("\u26a0\ufe0f 账号不存在，请先注册","error")}}else{var nu={name:em.split("@")[0],email:em,password:pw,handle:"@user_"+Math.random().toString(36).slice(2,6),mbti:"未知",interests:[],need:"",avatarChar:em.charAt(0).toUpperCase()};localStorage.setItem("zx_user",JSON.stringify(nu));showToast("\u2705 登录成功！");setTimeout(function(){window.location.href="\u4e3b\u9875.html"},1000)}},1500)}
+
+function showToast(m,t){var o=document.getElementById("toast");o.textContent=m;o.className="toast"+(t==="error"?" error":"");o.classList.add("show");clearTimeout(o._timer);o._timer=setTimeout(function(){o.classList.remove("show")},2800)}
+</script></body></html>
