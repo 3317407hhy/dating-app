@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>EchoZshsamber · 个人资料</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}:root{--bg:#000000;--bg-secondary:#16181c;--bg-card:#16181c;--bg-hover:#1d1f23;--bg-elevated:#1d1f23;--bg-input:#202327;--border:#2f3336;--text:#e7e9ea;--text-secondary:#71767b;--accent:#1d9bf0;--accent-hover:#1a8cd8;--purple:#8b5cf6;--pink:#f91880;--green:#00ba7c;--red:#f4212e;--radius:9999px;--radius-md:16px;--radius-sm:12px}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;justify-content:center}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.app{display:flex;width:100%;max-width:1265px;min-height:100vh}.sidebar{width:275px;padding:0 12px;display:flex;flex-direction:column;height:100vh;position:sticky;top:0}.side-logo{padding:12px;display:flex;align-items:center;gap:10px;cursor:pointer;border-radius:9999px;width:fit-content;transition:background .2s}.side-logo:hover{background:var(--bg-hover)}.side-logo svg{width:30px;height:30px}.side-logo span{font-size:20px;font-weight:700;color:var(--text);letter-spacing:-0.5px}.nav-list{list-style:none;flex:1;margin-top:4px}.nav-item{display:flex;align-items:center;gap:16px;padding:12px;border-radius:9999px;cursor:pointer;transition:background .2s;color:var(--text);font-size:19px;font-weight:400;text-decoration:none}.nav-item:hover{background:var(--bg-hover)}.nav-item.active{font-weight:700}.nav-item .ni{font-size:26px;width:28px;text-align:center;line-height:1}.post-btn{background:var(--accent);color:#fff;border:none;border-radius:9999px;padding:15px 0;font-size:17px;font-weight:700;cursor:pointer;width:90%;margin:8px 0 16px;transition:background .2s;font-family:inherit}.post-btn:hover{background:var(--accent-hover)}.user-menu{display:flex;align-items:center;gap:10px;padding:10px;border-radius:9999px;cursor:pointer;margin-bottom:8px;transition:background .2s}.user-menu:hover{background:var(--bg-hover)}.u-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff;flex-shrink:0}.u-info{flex:1;min-width:0}.u-name{font-weight:700;font-size:15px}.u-handle{color:var(--text-secondary);font-size:14px}.main{flex:1;max-width:600px;border-left:1px solid var(--border);border-right:1px solid var(--border);min-height:100vh}.main-header{padding:14px 16px;border-bottom:1px solid var(--border);font-size:20px;font-weight:700;position:sticky;top:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);z-index:10}.tabs-row{display:flex;border-bottom:1px solid var(--border)}.main-tab{flex:1;text-align:center;padding:15px 8px;font-size:15px;font-weight:500;color:var(--text-secondary);cursor:pointer;position:relative;transition:all .2s;border:none;background:none;font-family:inherit}.main-tab:hover{background:var(--bg-hover)}.main-tab.active{color:var(--text);font-weight:700}.main-tab.active::after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:56px;height:4px;background:var(--accent);border-radius:2px}.tab-content{display:none}.tab-content.active{display:block;animation:fadeIn .2s ease-out}@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}.right-side{width:350px;padding:0 16px;display:flex;flex-direction:column;height:100vh;position:sticky;top:0}.search-bar{position:sticky;top:0;background:var(--bg);padding:6px 0 12px;z-index:5;display:flex;align-items:center;gap:12px}.search-bar-inner{background:var(--bg-input);border:1px solid transparent;border-radius:9999px;padding:10px 20px;display:flex;align-items:center;gap:12px;flex:1;transition:border .2s;color:var(--text-secondary);font-size:15px}.search-bar-inner:focus-within{border-color:var(--accent);background:transparent}.search-bar-inner input{background:none;border:none;color:var(--text);font-size:15px;outline:none;flex:1;font-family:inherit}.search-bar-inner input::placeholder{color:var(--text-secondary)}.panel-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:16px;overflow:hidden}.panel-title{font-size:20px;font-weight:800;padding:12px 16px}.panel-footer{color:var(--accent);font-size:15px;cursor:pointer;padding:16px}.panel-footer:hover{background:var(--bg-hover)}.trend-item{padding:12px 16px;cursor:pointer;transition:background .2s}.trend-item:hover{background:var(--bg-hover)}.trend-cat{font-size:13px;color:var(--text-secondary)}.trend-name{font-size:15px;font-weight:700;margin:2px 0}.trend-count{font-size:13px;color:var(--text-secondary)}.footer-links{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;color:var(--text-secondary);font-size:13px}.footer-links span{cursor:pointer}.footer-links span:hover{text-decoration:underline}.tab-pad{padding:12px}.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.match-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);padding:16px 14px;text-align:center;cursor:pointer;transition:all .2s}.match-card:hover{background:var(--bg-hover)}.match-card .mc-avatar{width:52px;height:52px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff}.match-card .mc-name{font-weight:700;font-size:14px;margin:2px 0}.match-card .mc-mbti{display:inline-block;padding:2px 10px;border-radius:9999px;background:rgba(29,155,240,.1);color:var(--accent);font-size:11px;font-weight:600;margin:4px 0}.match-card .mc-interests{font-size:11px;color:var(--text-secondary);margin:4px 0;display:flex;flex-wrap:wrap;justify-content:center;gap:3px}.match-card .mc-interests span{padding:2px 8px;border-radius:9999px;background:var(--bg-input);font-size:10px}.match-card .mc-btn{display:inline-block;padding:7px 22px;border-radius:9999px;border:1px solid var(--text-secondary);background:transparent;color:var(--text);cursor:pointer;font-size:13px;font-weight:600;margin-top:6px;transition:all .2s;font-family:inherit}.match-card .mc-btn:hover{background:var(--text);color:var(--bg)}.match-filter{padding:10px 14px;display:flex;gap:8px;border-bottom:1px solid var(--border)}.mf-btn{padding:6px 16px;border-radius:9999px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);font-size:13px;cursor:pointer;transition:all .2s;font-family:inherit}.mf-btn:hover{background:var(--bg-hover)}.mf-btn.active{background:var(--text);border-color:var(--text);color:var(--bg);font-weight:600}.forum-cats{display:flex;gap:8px;padding:10px 14px;overflow-x:auto;border-bottom:1px solid var(--border)}.forum-cat{padding:6px 16px;border-radius:9999px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);font-size:13px;cursor:pointer;transition:all .2s;white-space:nowrap;font-family:inherit}.forum-cat:hover{background:var(--bg-hover)}.forum-cat.active{background:var(--text);border-color:var(--text);color:var(--bg);font-weight:700}.post-card{padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s}.post-card:hover{background:var(--bg-hover)}.post-card .pc-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}.post-card .pc-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;background:linear-gradient(135deg,#6366f1,#8b5cf6)}.post-card .pc-anon{color:var(--text-secondary);font-size:13px}.post-card .pc-tag{font-size:11px;padding:2px 8px;border-radius:9999px;background:var(--bg-input);color:var(--text-secondary);margin-left:4px}.post-card .pc-text{font-size:14px;line-height:1.5;margin:4px 0;color:var(--text)}.post-card .pc-silent{font-size:12px;color:var(--green);padding:4px 10px;border-radius:9999px;background:rgba(0,186,124,.08);display:inline-block;margin:4px 0}.post-card .pc-actions{display:flex;justify-content:space-between;margin-top:10px;color:var(--text-secondary);font-size:13px;max-width:380px}.post-card .pc-actions span{cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .2s;padding:4px}.post-card .pc-actions span:hover{color:var(--accent)}.topic-hero{padding:20px 16px;text-align:left;border-bottom:1px solid var(--border);background:linear-gradient(180deg,rgba(29,155,240,.03),transparent)}.topic-hero .th-date{font-size:13px;color:var(--text-secondary);margin-bottom:8px}.topic-hero .th-q{font-size:20px;font-weight:700;line-height:1.3;margin-bottom:16px}.topic-options{display:flex;flex-direction:column;gap:8px}.topic-opt{padding:14px 16px;border:1px solid var(--border);border-radius:12px;background:transparent;cursor:pointer;transition:all .2s;text-align:left;font-size:15px;font-family:inherit;color:var(--text)}.topic-opt:hover{background:var(--bg-hover)}.topic-opt.selected{border-color:var(--accent);background:rgba(29,155,240,.05)}.topic-opt .to-bar{height:4px;border-radius:2px;margin-top:8px;transition:width .8s ease;background:var(--accent)!important}.topic-opt .to-pct{font-size:12px;color:var(--text-secondary);margin-top:4px;text-align:right}.mbti-dist{display:flex;flex-wrap:wrap;gap:6px;padding:12px 16px 20px}.mbti-dist .md-item{padding:4px 10px;border-radius:9999px;background:var(--bg-input);font-size:11px;cursor:pointer;transition:all .2s}.mbti-dist .md-item:hover{background:rgba(29,155,240,.1);color:var(--accent)}.chat-helper{position:fixed;bottom:24px;right:24px;z-index:999}.ch-float{width:54px;height:54px;border-radius:50%;background:var(--accent);border:none;color:#fff;font-size:24px;cursor:pointer;box-shadow:0 2px 12px rgba(29,155,240,.3);transition:all .2s;display:flex;align-items:center;justify-content:center}.ch-float:hover{background:var(--accent-hover)}.ch-modal{position:fixed;bottom:86px;right:24px;width:380px;max-height:500px;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:0 8px 40px rgba(0,0,0,.6);display:none;flex-direction:column;z-index:1000;overflow:hidden}.ch-modal.show{display:flex}.ch-header{padding:14px 16px;border-bottom:1px solid var(--border);font-weight:700;font-size:15px;display:flex;justify-content:space-between;align-items:center}.ch-header button{background:none;border:none;color:var(--text-secondary);font-size:20px;cursor:pointer;padding:4px 8px;border-radius:50%}.ch-header button:hover{background:var(--bg-hover)}.ch-list{padding:12px;overflow-y:auto;flex:1}.ch-item{padding:14px;border:1px solid var(--border);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:all .2s;font-size:14px;line-height:1.5}.ch-item:hover{background:var(--bg-hover)}.ch-item .ch-tag{font-size:12px;color:var(--accent);font-weight:600;margin-bottom:4px}.ch-item .ch-send{display:none;margin-top:8px;padding:6px 16px;border-radius:9999px;border:none;background:var(--accent);color:#fff;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}.ch-item:hover .ch-send{display:inline-block}.ch-free{font-size:11px;color:var(--text-secondary);text-align:center;padding:10px;border-top:1px solid var(--border)}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%)translateY(80px);padding:10px 24px;border-radius:9999px;background:var(--accent);color:#fff;font-size:14px;font-weight:600;opacity:0;transition:all .3s;z-index:1999;pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%)translateY(0)}.toast.error{background:var(--red)}.hidden{display:none}
+.profile-header{position:relative;margin-bottom:20px}
+.profile-cover{height:200px;background:#333}
+.profile-avatar-wrap{position:absolute;bottom:-52px;left:16px;border:4px solid var(--bg);border-radius:50%}
+.profile-avatar{width:110px;height:110px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:42px;font-weight:700;color:#fff;background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+.profile-info{padding:60px 16px 16px}
+.profile-info .pi-name{font-size:20px;font-weight:800}
+.profile-info .pi-handle{font-size:15px;color:var(--text-secondary)}
+.profile-info .pi-bio{font-size:15px;margin:12px 0;line-height:1.5}
+.profile-info .pi-meta{display:flex;gap:20px;margin:12px 0;font-size:14px;color:var(--text-secondary)}.pi-meta span{cursor:pointer}.pi-meta span:hover{color:var(--accent)}
+.section-title{font-size:15px;font-weight:800;margin:16px 16px 8px;padding-top:12px;border-top:1px solid var(--border)}
+.mbti-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:9999px;background:rgba(29,155,240,.08);margin:4px 16px;border:1px solid rgba(29,155,240,.15)}
+.mbti-badge .mb-code{font-size:18px;font-weight:800;color:var(--accent)}
+.mbti-badge .mb-label{font-size:13px;color:var(--text-secondary)}
+.need-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:9999px;margin:4px 16px;font-size:13px;font-weight:500}
+.need-badge.companion{background:rgba(249,24,128,.08);border:1px solid rgba(249,24,128,.15);color:var(--pink)}
+.need-badge.partner{background:rgba(29,155,240,.08);border:1px solid rgba(29,155,240,.15);color:var(--accent)}
+.need-badge.attraction{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.15);color:var(--purple)}
+.interest-grid{display:flex;flex-wrap:wrap;gap:8px;padding:0 16px;margin:8px 0}
+.interest-grid span{padding:6px 14px;border-radius:9999px;background:var(--bg-input);font-size:13px;color:var(--text-secondary)}
+.vip-card{background:linear-gradient(135deg,rgba(29,155,240,.06),rgba(139,92,246,.06));border:1px solid rgba(29,155,240,.1);border-radius:16px;padding:20px;margin:8px 16px}
+.vip-card .vc-title{font-size:15px;font-weight:700;color:var(--accent);margin-bottom:8px}
+.vip-card .vc-desc{font-size:13px;color:var(--text-secondary);line-height:1.8}
+.vip-card .vc-price{display:inline-block;padding:10px 24px;border-radius:9999px;background:var(--accent);color:#fff;font-weight:700;font-size:15px;margin-top:12px;cursor:pointer;border:none;font-family:inherit;transition:all .2s}
+.vip-card .vc-price:hover{background:var(--accent-hover)}
+.info-item{display:flex;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border);font-size:15px}
+.info-item .ii-label{color:var(--text-secondary)}
+.info-item .ii-value{color:var(--text)}
+.nearby-section{padding:16px;margin:8px 16px 16px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:16px}
+.nearby-section .ns-title{font-size:15px;font-weight:700;margin-bottom:8px}
+.nearby-section .ns-desc{font-size:13px;color:var(--text-secondary);line-height:1.5;margin-bottom:12px}
+.nearby-section .ns-badge{display:inline-block;padding:4px 12px;border-radius:9999px;background:rgba(0,186,124,.08);color:var(--green);font-size:12px;font-weight:600}
+.profile-completeness{margin:0 16px 16px;padding:16px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md)}.profile-completeness .pc-bar-wrap{display:flex;align-items:center;gap:12px}.profile-completeness .pc-bar-bg{flex:1;height:8px;background:var(--bg-input);border-radius:4px;overflow:hidden}.profile-completeness .pc-bar-fill{height:100%;border-radius:4px;transition:width .6s ease}.profile-completeness .pc-pct{font-size:14px;font-weight:700;white-space:nowrap}.profile-completeness .pc-tip{font-size:12px;color:var(--text-secondary);margin-top:6px}.profile-completeness .pc-tip strong{color:var(--accent);font-weight:600}.profile-actions{display:flex;gap:8px;padding:8px 16px 0}
+.profile-actions button{flex:1;padding:8px 0;border-radius:9999px;border:1px solid var(--border);background:transparent;color:var(--text);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit}
+.profile-actions button.primary{background:var(--text);color:var(--bg);border:none}
+.profile-actions button:hover{background:var(--bg-hover)}
+.profile-actions button.primary:hover{opacity:.9}
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(91,112,131,.4);z-index:1998;display:none;justify-content:center;align-items:flex-start;padding-top:5vh}.modal-overlay.show{display:flex}.modal-box{background:var(--bg);border-radius:16px;width:100%;max-width:600px;max-height:85vh;overflow-y:auto}.modal-header{display:flex;align-items:center;padding:4px 8px;border-bottom:1px solid var(--border)}.modal-header button{background:none;border:none;color:var(--text);font-size:20px;cursor:pointer;padding:8px 12px;border-radius:50%;transition:background .2s}.modal-header button:hover{background:var(--bg-hover)}.modal-header .mh-title{font-size:20px;font-weight:700;margin-left:8px}.modal-header .mh-save{padding:6px 16px;border-radius:9999px;border:none;background:var(--text);color:var(--bg);font-size:14px;font-weight:700;cursor:pointer;margin-left:auto;font-family:inherit}.modal-header .mh-save:disabled{opacity:.5;cursor:not-allowed}.modal-body{padding:16px}.edit-field{padding:14px 16px;border-bottom:1px solid var(--border)}.edit-field .ef-label{font-size:13px;color:var(--text-secondary);margin-bottom:4px}.edit-field input,.edit-field textarea,.edit-field select{width:100%;background:transparent;border:none;color:var(--text);font-size:17px;outline:none;font-family:inherit;resize:none;padding:4px 0}.edit-field textarea{min-height:60px}.edit-field select{font-size:16px;padding:8px 0;cursor:pointer}.edit-field select option{background:var(--bg);color:var(--text)}.ef-mbti-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:8px}.ef-mbti-grid button{padding:8px 6px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--text-secondary);cursor:pointer;font-size:12px;font-family:inherit;transition:all .2s}.ef-mbti-grid button:hover{background:var(--bg-hover)}.ef-mbti-grid button.sel{border-color:var(--accent);color:var(--accent);background:rgba(29,155,240,.06)}.ef-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.ef-tags button{padding:6px 14px;border:1px solid var(--border);border-radius:9999px;background:transparent;color:var(--text-secondary);cursor:pointer;font-size:13px;font-family:inherit;transition:all .2s}.ef-tags button:hover{background:var(--bg-hover)}.ef-tags button.sel{border-color:var(--accent);color:var(--accent);background:rgba(29,155,240,.06)}
+/* ===== User List Item ===== */
+.user-list-item{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s}.user-list-item:hover{background:var(--bg-hover)}.user-list-item .uli-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:700;color:#fff;flex-shrink:0}.user-list-item .uli-info{flex:1;min-width:0}.user-list-item .uli-name{font-size:15px;font-weight:700;color:var(--text)}.user-list-item .uli-handle{font-size:13px;color:var(--text-secondary)}.user-list-empty{text-align:center;padding:40px 16px;color:var(--text-secondary);font-size:14px}.user-list-empty .ule-icon{font-size:40px;margin-bottom:12px}
+/* ===== Confirm Modal ===== */
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(91,112,131,0.4);z-index:9998;display:none;align-items:center;justify-content:center;animation:modalFadeIn .2s ease-out}
+.modal-overlay.show{display:flex}
+.modal-box{background:var(--bg);border-radius:16px;width:360px;max-width:90vw;padding:24px;box-shadow:0 0 15px rgba(255,255,255,.05);animation:modalSlideIn .2s ease-out;border:1px solid var(--border)}
+.modal-title{font-size:20px;font-weight:700;margin-bottom:8px}
+.modal-desc{font-size:15px;color:var(--text-secondary);line-height:1.5;margin-bottom:24px}
+.modal-actions{display:flex;flex-direction:column;gap:8px}
+.modal-btn{width:100%;padding:12px 0;border-radius:9999px;font-size:15px;font-weight:700;cursor:pointer;border:none;font-family:inherit;transition:opacity .2s}
+.modal-btn.danger{background:#f4212e;color:#fff}
+.modal-btn.danger:hover{opacity:.85}
+.modal-btn.cancel{background:transparent;border:1px solid var(--border);color:var(--text)}
+.modal-btn.cancel:hover{background:var(--bg-hover)}
+@keyframes modalFadeIn{from{opacity:0}to{opacity:1}}
+@keyframes modalSlideIn{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}</style>
+</head><body>
+<div class="app">
+<div class="sidebar">
+<div class="side-logo" onclick="window.location.href='主页.html'"><svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.45" r="0.65">
+      <stop offset="0%" stop-color="#27283b"/>
+      <stop offset="100%" stop-color="#14141f"/>
+    </radialGradient>
+    <linearGradient id="zGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b9cf7"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="xGrad" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background: rounded square -->
+  <rect x="64" y="64" width="896" height="896" rx="224" ry="224" fill="url(#bg)"/>
+
+  <!-- Subtle inner ring -->
+  <rect x="64" y="64" width="896" height="896" rx="224" ry="224"
+        fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="2"/>
+
+  <!-- Letter 'z' -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+    <line x1="222" y1="378" x2="482" y2="378" stroke="url(#zGrad)"/>
+    <line x1="482" y1="378" x2="222" y2="648" stroke="url(#zGrad)"/>
+    <line x1="222" y1="648" x2="482" y2="648" stroke="url(#zGrad)"/>
+  </g>
+
+  <!-- Letter 'x' -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+    <line x1="542" y1="378" x2="802" y2="648" stroke="url(#xGrad)"/>
+    <line x1="802" y1="378" x2="542" y2="648" stroke="url(#xGrad)"/>
+  </g>
+</svg>
+
+</div>
+<ul class="nav-list">
+<li class="nav-item" onclick="window.location.href='主页.html'"><span class="ni">🔍</span>探索</li>
+<li class="nav-item" onclick="window.location.href='主页.html'"><span class="ni">💬</span>社区</li>
+<li class="nav-item" onclick="window.location.href='主页.html'"><span class="ni">🔥</span>话题</li>
+<li class="nav-item active"><span class="ni">👤</span>个人资料</li>
+
+</ul></div>
+<div class="main">
+<div class="main-header">个人资料</div>
+<div class="profile-header"><div class="profile-cover"></div><div class="profile-avatar-wrap"><div class="profile-avatar" id="pAvatar">U</div></div></div>
+<div class="profile-info"><div class="pi-name" id="pName">加载中...</div><div class="pi-handle" id="pHandle">@user</div>
+<div class="pi-bio">这是一个微社恐的二次元宅，喜欢动漫和游戏。希望能找到聊得来的朋友</div>
+<div class="pi-meta"><span id="pFollowingCount"># 0 关注</span><span id="pVisitedCount"># 已访问</span><span id="pFansCount"># 0 粉丝</span></div></div>
+<div class="profile-actions"><button class="primary" onclick="showToast('已保存')">编辑个人资料</button><button onclick="document.getElementById('confirmModal').classList.add('show')" style="border-color:#f4212e;color:#f4212e">退出登录</button></div>
+<div class="section-title">资料完整度</div>
+<div class="profile-completeness" id="completenessBox" style="display:none">
+<div class="pc-bar-wrap"><div class="pc-bar-bg"><div class="pc-bar-fill" id="completenessBar" style="width:0%"></div></div><span class="pc-pct" id="completenessPct">0%</span></div>
+<div class="pc-tip" id="completenessTip">完善资料至 <strong>80% 以上</strong>，有利于更精准为您匹配喜欢的类型</div>
+</div>
+<div class="section-title">MBTI 类型</div><div id="pMbti"></div>
+<div class="section-title">恋爱需求</div><div id="pNeed"></div>
+<div class="section-title">兴趣爱好</div><div class="interest-grid" id="pInterests"></div>
+<div class="section-title">个人信息</div>
+<div class="info-item"><span class="ii-label">年龄</span><span class="ii-value" id="pAge">-</span></div>
+<div class="info-item"><span class="ii-label">身高 (cm)</span><span class="ii-value" id="pHeight">-</span></div>
+<div class="info-item"><span class="ii-label">邮箱</span><span class="ii-value" id="pEmail">-</span></div>
+<div class="info-item"><span class="ii-label">性别</span><span class="ii-value" id="pGender">-</span></div>
+<div class="info-item"><span class="ii-label">注册时间</span><span class="ii-value" id="pRegistered">-</span></div>
+<div class="section-title">VIP 会员</div>
+<div class="vip-card"><div class="vc-title">开通 VIP 享受更多功能</div>
+<div class="vc-desc">· 爱好详细档案：填写最喜欢的番剧和游戏，精准匹配共同爱好<br>· 聊天话题辅助：无限次使用、自动生成话题<br>· 附近会面推荐：发现身边的同好<br>· 第三方平台展示：Steam/Bangumi/网易云<br>· 相处预测报告：深度分析你的恋爱模式</div>
+<div><button class="vc-price" onclick="showToast('开通VIP成功！')">开通 VIP · ¥30/月</button></div></div>
+<div class="section-title">附近会面推荐</div>
+<div class="nearby-section"><div class="ns-title">附近的兴趣相投的人</div>
+<div class="ns-desc">当前本地用户达到一定规模后开启此功能。建议同城用户达500人以上时启用。</div>
+<div><span class="ns-badge"># 暂未开启</span><span style="font-size:12px;color:var(--text-secondary);margin-left:8px">同城用户: 0人</span></div></div>
+</div>
+<div class="right-side">
+<div class="panel-card"><div class="panel-title">VIP 会员</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.6;padding:0 16px 16px">开通VIP享受无限话题辅助、爱好详细档案、附近会面等功能。</div><div class="panel-footer">立即开通</div></div>
+<div class="panel-card"><div class="panel-title">关于</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.6;padding:0 16px 16px">此处为测试版本，所有数据存储在浏览器本地。</div></div>
+<div class="footer-links"><span>服务条款</span><span>隐私政策</span><span style="width:100%;margin-top:4px">© 2026 EchoZshsamber</span></div>
+</div></div>
+<div class="modal-overlay" id="listModal" onclick="if(event.target===this)this.classList.remove('show')">
+<div class="modal-box" style="max-width:500px" onclick="event.stopPropagation()">
+<div class="modal-header">
+<button onclick="document.getElementById('listModal').classList.remove('show')">✕</button>
+<span class="mh-title" id="listModalTitle">列表</span>
+</div>
+<div class="modal-body" id="listModalBody" style="max-height:400px;overflow-y:auto;padding:0">
+</div></div></div>
+<div class="modal-overlay" id="editModal">
+<div class="modal-box">
+<div class="modal-header">
+<button onclick="closeEdit()">✕</button>
+<span class="mh-title">编辑个人资料</span>
+<button class="mh-save" onclick="saveProfile()">保存</button>
+</div>
+<div class="modal-body">
+<div class="edit-field"><div class="ef-label">昵称</div><input id="editName" maxlength="50"></div>
+<div class="edit-field"><div class="ef-label">个人简介</div><textarea id="editBio" maxlength="160" placeholder="介绍一下你自己吧..."></textarea></div>
+<div class="edit-field"><div class="ef-label">MBTI 类型</div><div class="ef-mbti-grid" id="editMbtiGrid"></div></div>
+<div class="edit-field"><div class="ef-label">恋爱需求</div><select id="editNeed"><option value="">未设置</option><option value="companion">陪伴型</option><option value="partner">搭档型</option><option value="attraction">吸引型</option></select></div>
+<div class="edit-field"><div class="ef-label">兴趣领域（多选）</div><div class="ef-tags" id="editInterests"></div></div>
+<div class="edit-field"><div class="ef-label">性别</div><select id="editGender"><option value="">未设置</option><option value="male">男</option><option value="female">女</option><option value="other">其他</option></select></div>
+<div class="edit-field"><div class="ef-label">年龄</div><select id="editAge"><option value="">未设置</option><option value="18">18岁以下</option><option value="18-22">18-22岁</option><option value="23-27">23-27岁</option><option value="28-32">28-32岁</option><option value="33-40">33-40岁</option><option value="40+">40岁以上</option></select></div>
+<div class="edit-field"><div class="ef-label">身高 (cm)</div><select id="editHeight"><option value="">未设置</option><option value="150以下">150以下</option><option value="150-155">150-155</option><option value="156-160">156-160</option><option value="161-165">161-165</option><option value="166-170">166-170</option><option value="171-175">171-175</option><option value="176-180">176-180</option><option value="181-185">181-185</option><option value="186-190">186-190</option><option value="190以上">190以上</option></select></div>
+</div></div></div>
+<div class="toast" id="toast"></div>
+<div class="modal-overlay" id="confirmModal" onclick="if(event.target===this)this.classList.remove('show')">
+<div class="modal-box" onclick="event.stopPropagation()">
+<div class="modal-title">退出 EchoZshsamber？</div>
+<div class="modal-desc">退出登录后，你需要重新登录才能查看你的个人资料和匹配信息。</div>
+<div class="modal-actions">
+<button class="modal-btn danger" onclick="localStorage.removeItem('zx_user');window.location.href='注册登录.html'">退出</button>
+<button class="modal-btn cancel" onclick="document.getElementById('confirmModal').classList.remove('show')">取消</button>
+</div>
+</div>
+</div>
+<script>
+
+
+
+
+
+function showToast(m){var t=document.getElementById("toast");if(!t)return;t.textContent=m;t.className="toast";t.classList.add("show");clearTimeout(t._timer);t._timer=setTimeout(function(){t.classList.remove("show")},2800)}
+
+var u=JSON.parse(localStorage.getItem("zx_user")||"{}");
+
+var avatarColors=["linear-gradient(135deg,#6366f1,#8b5cf6)","linear-gradient(135deg,#f91880,#fc2)","linear-gradient(135deg,#1d9bf0,#00ba7c)","linear-gradient(135deg,#ff7b00,#f91880)","linear-gradient(135deg,#00ba7c,#1d9bf0)"];
+function makeNameAvatarHtml(name,handle,avatarChar){
+  var c=avatarChar||(name?name.charAt(0):"?");
+  var idx=name?Math.abs(name.charCodeAt(0)||0)%avatarColors.length:0;
+  var h=handle||(name?"@"+name:"");
+  return '<div class="user-list-item"><div class="uli-avatar" style="background:'+avatarColors[idx]+'">'+c+'</div><div class="uli-info"><div class="uli-name">'+(name||"未知用户")+'</div><div class="uli-handle">'+h+'</div></div></div>';
+}
+function openListModal(title,html){document.getElementById("listModalTitle").textContent=title;document.getElementById("listModalBody").innerHTML=html;document.getElementById("listModal").classList.add("show")}
+
+// Not logged in check
+var notLoggedIn=!u.name||!u.email;
+if(notLoggedIn){
+document.getElementById("pAvatar").textContent="?";
+document.getElementById("pName").textContent="未登录";
+document.getElementById("pHandle").textContent="点击登录";
+document.getElementById("pFollowingCount").textContent="# 0 关注";
+document.getElementById("pVisitedCount").textContent="# 已访问";
+document.getElementById("pFansCount").textContent="# 0 粉丝";
+document.getElementById("pAge").textContent="-";
+document.getElementById("pHeight").textContent="-";
+document.getElementById("pEmail").textContent="-";
+document.getElementById("pGender").textContent="-";
+document.getElementById("pRegistered").textContent="-";
+document.getElementById("pMbti").innerHTML='<div class="vip-card" style="text-align:center"><div class="vc-title">请先登录</div><div class="vc-desc">登录后查看你的个人资料和匹配信息</div><button class="vc-price" onclick="window.location.href=\'注册登录.html\'">前往登录</button></div>';
+document.getElementById("pInterests").innerHTML='<div style="color:var(--text-secondary);padding:8px 16px;font-size:13px">登录后显示</div>';
+document.getElementById("pNeed").innerHTML='<div style="color:var(--text-secondary);padding:8px 16px;font-size:13px">登录后显示</div>';
+document.getElementById("completenessBox").style.display="none";
+}else{
+// Render profile
+document.getElementById("pAvatar").textContent=u.avatarChar||u.name.charAt(0);
+document.getElementById("pName").textContent=u.name;
+document.getElementById("pHandle").textContent=u.handle||"@"+u.name;
+
+// Following
+var followingList=u.following||[];
+document.getElementById("pFollowingCount").textContent="# "+followingList.length+" 关注";
+document.getElementById("pFollowingCount").onclick=function(){
+  if(followingList.length===0){
+    openListModal("我的关注 (0)",'<div class="user-list-empty"><div class="ule-icon">🔍</div><div>还没有关注任何人</div><div style="font-size:12px;margin-top:6px">去主页探索感兴趣的人吧</div></div>');
+  }else{
+    openListModal("我的关注 ("+followingList.length+")",followingList.map(function(f){return makeNameAvatarHtml(f.name,f.handle,f.avatarChar)}).join(""));
+  }
+};
+
+// Visited users
+var visitedList=u.visitedUsers||[];
+document.getElementById("pVisitedCount").textContent="# "+visitedList.length+" 已访问";
+document.getElementById("pVisitedCount").onclick=function(){
+  if(visitedList.length===0){
+    openListModal("最近访问 (0)",'<div class="user-list-empty"><div class="ule-icon">👀</div><div>还没有访问过其他用户</div></div>');
+  }else{
+    openListModal("最近访问 ("+visitedList.length+")",visitedList.map(function(f){return makeNameAvatarHtml(f.name,f.handle,f.avatarChar)}).join(""));
+  }
+};
+
+// Fans
+var fansList=u.fans||[];
+document.getElementById("pFansCount").textContent="# "+fansList.length+" 粉丝";
+document.getElementById("pFansCount").onclick=function(){
+  if(fansList.length===0){
+    openListModal("我的粉丝 (0)",'<div class="user-list-empty"><div class="ule-icon">💔</div><div>还没有粉丝</div><div style="font-size:12px;margin-top:6px">完善资料吸引更多人关注你吧</div></div>');
+  }else{
+    openListModal("我的粉丝 ("+fansList.length+")",fansList.map(function(f){return makeNameAvatarHtml(f.name,f.handle,f.avatarChar)}).join(""));
+  }
+};
+
+document.getElementById("pAge").textContent=u.age||"未设置";
+document.getElementById("pHeight").textContent=u.height||"未设置";
+document.getElementById("pEmail").textContent=u.email||"未设置";
+var g={male:"男",female:"女",other:"其他"};
+document.getElementById("pGender").textContent=g[u.gender]||"未设置";
+document.getElementById("pRegistered").textContent=u.registeredAt?new Date(u.registeredAt).toLocaleDateString():"未知";
+
+// MBTI
+var lb={INTJ:"建筑师",INTP:"逻辑学家",ENTJ:"指挥官",ENTP:"辩论家",INFJ:"提倡者",INFP:"调停者",ENFJ:"主人公",ENFP:"竞选者",ISTJ:"物流师",ISFJ:"守卫者",ESTJ:"总经理",ESFJ:"执政官",ISTP:"鉴赏家",ISFP:"探险家",ESTP:"企业家",ESFP:"表演者"};
+if(u.mbti&&u.mbti!=="未知"){
+  document.getElementById("pMbti").innerHTML='<div class="mbti-badge"><span class="mb-code">'+u.mbti+'</span><span class="mb-label">'+(lb[u.mbti]||"")+'</span></div>';
+}else{
+  document.getElementById("pMbti").innerHTML='<div class="mbti-badge" style="opacity:.5"><span class="mb-code">??</span><span class="mb-label">未测试</span></div>';
+}
+
+// Need
+var nl={companion:{l:"陪伴型",i:"🤗"},partner:{l:"搭档型",i:"🤝"},attraction:{l:"吸引型",i:"✨"}};
+if(u.need){
+  document.getElementById("pNeed").innerHTML='<div class="need-badge '+u.need+'">'+nl[u.need].i+' '+nl[u.need].l+'</div>';
+}else{
+  document.getElementById("pNeed").innerHTML='<div style="color:var(--text-secondary);font-size:13px;padding:8px 16px">未设置</div>';
+}
+
+// Interests
+if(u.interests&&u.interests.length>0){
+  var il={anime:"动漫",game:"游戏",cos:"Cosplay",music:"音乐",art:"绘画",novel:"轻小说",vtuber:"V Tuber",film:"影视"};
+  document.getElementById("pInterests").innerHTML=u.interests.map(function(i){return"<span>"+(il[i]||i)+"</span>"}).join("");
+}else{
+  document.getElementById("pInterests").innerHTML='<div style="color:var(--text-secondary);font-size:13px;padding:8px 16px">暂无</div>';
+}
+
+// ===== COMPLETENESS CALCULATION =====
+var total=8,completed=0;
+if(u.name&&u.name.trim())completed++;
+if(u.bio&&u.bio.trim())completed++;
+if(u.mbti&&u.mbti!=="未知")completed++;
+if(u.need)completed++;
+if(u.interests&&u.interests.length>0)completed++;
+if(u.gender)completed++;
+if(u.age)completed++;
+if(u.height)completed++;
+var pct=Math.round(completed/total*100);
+var bar=document.getElementById("completenessBar");
+var pctEl=document.getElementById("completenessPct");
+var tipEl=document.getElementById("completenessTip");
+document.getElementById("completenessBox").style.display="block";
+bar.style.width=pct+"%";
+if(pct<30){bar.style.background="var(--red)"}
+else if(pct<60){bar.style.background="var(--pink)"}
+else if(pct<80){bar.style.background="var(--accent)"}
+else{bar.style.background="var(--green)"}
+pctEl.textContent=pct+"%";
+if(pct<80){
+  tipEl.innerHTML='完善资料至 <strong>80% 以上</strong>，有利于更精准为您匹配喜欢的类型（当前'+(8-completed)+'项未填写）';
+}else{
+  tipEl.innerHTML='✅ 资料已完善，系统将为您精准匹配';
+}
+}
+
+// ===== EDIT MODAL =====
+function openEdit(){
+if(notLoggedIn){showToast("请先登录");window.location.href="注册登录.html";return}
+var m=document.getElementById("editModal");
+m.classList.add("show");
+
+// Populate fields
+document.getElementById("editName").value=(u.name||"").substring(0,50);
+document.getElementById("editBio").value=(u.bio||"").substring(0,160);
+document.getElementById("editNeed").value=u.need||"";
+document.getElementById("editGender").value=u.gender||"";
+document.getElementById("editAge").value=u.age||"";
+document.getElementById("editHeight").value=u.height||"";
+
+// MBTI grid
+var mbtis=["INTJ","INTP","ENTJ","ENTP","INFJ","INFP","ENFJ","ENFP","ISTJ","ISFJ","ESTJ","ESFJ","ISTP","ISFP","ESTP","ESFP"];
+var mbtiGrid=document.getElementById("editMbtiGrid");
+mbtiGrid.innerHTML=mbtis.map(function(m){return'<button class="'+(m===u.mbti?"sel":"")+'" onclick="selectMbti(this,\''+m+'\')">'+m+'</button>'}).join("");
+
+// Interest tags
+var interests=["anime","game","cos","music","art","novel","vtuber","film"];
+var il={anime:"动漫",game:"游戏",cos:"Cosplay",music:"音乐",art:"绘画",novel:"轻小说",vtuber:"V Tuber",film:"影视"};
+var intDiv=document.getElementById("editInterests");
+var selInts=u.interests||[];
+intDiv.innerHTML=interests.map(function(i){return'<button class="'+(selInts.indexOf(i)!==-1?"sel":"")+'" data-int="'+i+'" onclick="this.classList.toggle(\'sel\')">'+il[i]+'</button>'}).join("");
+}
+
+function selectMbti(btn,type){
+document.querySelectorAll("#editMbtiGrid button").forEach(function(b){b.classList.remove("sel")});
+btn.classList.add("sel");
+}
+
+function closeEdit(){document.getElementById("editModal").classList.remove("show")}
+
+function saveProfile(){
+u.name=document.getElementById("editName").value.trim()||u.name;
+u.bio=document.getElementById("editBio").value.trim();
+u.need=document.getElementById("editNeed").value;
+u.gender=document.getElementById("editGender").value;
+u.age=document.getElementById("editAge").value;
+u.height=document.getElementById("editHeight").value;
+
+// Get selected MBTI
+var selMbti=document.querySelector("#editMbtiGrid button.sel");
+if(selMbti){u.mbti=selMbti.textContent}
+
+// Get selected interests
+u.interests=[];
+document.querySelectorAll("#editInterests button.sel").forEach(function(b){u.interests.push(b.dataset.int)});
+
+localStorage.setItem("zx_user",JSON.stringify(u));
+closeEdit();
+showToast("✅ 资料已保存");
+
+// Refresh the profile display
+setTimeout(function(){window.location.reload()},500);
+}
+
+// Close modal on overlay click
+var em=document.getElementById("editModal");if(em)em.addEventListener("click",function(e){if(e.target===this)closeEdit()});
+
+// Bind edit button
+document.querySelectorAll(".profile-actions button.primary").forEach(function(b){b.onclick=openEdit});
+
+
+
+// Confirm logout modal
+
+
+
+</script>
+</body></html>

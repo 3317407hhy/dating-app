@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>EchoZshsamber · 二次元社恐友好匹配</title><style>*{margin:0;padding:0;box-sizing:border-box}:root{--bg:#000000;--bg-secondary:#16181c;--bg-card:#16181c;--bg-hover:#1d1f23;--bg-elevated:#1d1f23;--bg-input:#202327;--border:#2f3336;--text:#e7e9ea;--text-secondary:#71767b;--accent:#1d9bf0;--accent-hover:#1a8cd8;--purple:#8b5cf6;--pink:#f91880;--green:#00ba7c;--red:#f4212e;--radius:9999px;--radius-md:16px;--radius-sm:12px}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;justify-content:center;align-items:center;overflow-x:hidden}.bg-particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}.particle{position:absolute;width:4px;height:4px;background:var(--accent);border-radius:50%;opacity:.15;animation:floatUp linear infinite}@keyframes floatUp{0%{transform:translateY(100vh)scale(0);opacity:0}10%{opacity:.15}90%{opacity:.15}100%{transform:translateY(-10vh)scale(1);opacity:0}}.container{position:relative;z-index:1;width:100%;max-width:440px;padding:20px;animation:fadeIn .4s ease-out}@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}.logo-area{text-align:center;margin-bottom:28px}.logo-svg{width:52px;height:52px;margin:0 auto 10px;display:block}.logo-title{font-size:28px;font-weight:700;color:var(--text);letter-spacing:-1px}.logo-sub{color:var(--text-secondary);font-size:13px;margin-top:4px}.auth-card{background:var(--bg);border-radius:16px;padding:0}.auth-tabs{display:flex;margin-bottom:24px;background:var(--bg-secondary);border-radius:9999px;padding:3px}.auth-tab{flex:1;padding:10px;text-align:center;border:none;background:transparent;color:var(--text-secondary);font-size:15px;font-weight:600;cursor:pointer;border-radius:9999px;transition:all .2s;font-family:inherit}.auth-tab.active{background:var(--text);color:var(--bg)}.card-title{font-size:24px;font-weight:700;margin-bottom:4px}.card-subtitle{color:var(--text-secondary);font-size:14px;margin-bottom:20px}.form-group{margin-bottom:20px}.form-label{display:block;font-size:13px;font-weight:500;color:var(--text-secondary);margin-bottom:6px}.form-input{width:100%;background:transparent;border:1px solid var(--border);border-radius:4px;padding:16px 12px;color:var(--text);font-size:17px;outline:none;font-family:inherit;transition:border .2s}.form-input:focus{border-color:var(--accent);border-width:2px;padding:15px 11px}.form-input::placeholder{color:var(--text-secondary)}.form-input.error{border-color:var(--red)}.btn-primary{width:100%;padding:15px;border:none;border-radius:9999px;background:var(--text);color:var(--bg);font-size:15px;font-weight:700;cursor:pointer;transition:all .2s;font-family:inherit}.btn-primary:hover{opacity:.9}.btn-primary:disabled{opacity:.5;cursor:not-allowed}.spinner{display:inline-block;width:18px;height:18px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px}@keyframes spin{to{transform:rotate(360deg)}}.error-msg{color:var(--red);font-size:13px;margin-top:4px;display:none}.error-msg.show{display:block}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%)translateY(80px);padding:10px 24px;border-radius:9999px;background:var(--accent);color:#fff;font-size:14px;font-weight:600;opacity:0;transition:all .3s;z-index:1999;pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%)translateY(0)}.toast.error{background:var(--red)}.step-indicators{display:flex;justify-content:center;gap:8px;margin-bottom:20px}.step-dot{width:8px;height:8px;border-radius:50%;background:var(--border);transition:all .3s}.step-dot.active{background:var(--accent);width:24px;border-radius:4px}.step-dot.done{background:var(--green)}.onboarding-step{display:none}.onboarding-step.active{display:block;animation:fadeIn .3s ease-out}.mbti-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:12px 0}.mbti-option{padding:10px 8px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--text-secondary);cursor:pointer;text-align:center;font-size:12px;transition:all .2s;font-family:inherit}.mbti-option:hover{background:var(--bg-hover)}.mbti-option.selected{border-color:var(--accent);color:var(--accent);font-weight:600;background:rgba(29,155,240,.05)}.mbti-option .mbti-code{font-size:15px;font-weight:700;display:block;margin-bottom:1px}.mbti-option .mbti-label{font-size:10px;opacity:.7}.need-options{display:flex;flex-direction:column;gap:8px;margin:12px 0}.need-option{padding:14px 16px;border:1px solid var(--border);border-radius:12px;background:transparent;cursor:pointer;transition:all .2s}.need-option:hover{background:var(--bg-hover)}.need-option.selected{border-color:var(--accent);background:rgba(29,155,240,.04)}.need-option .n-icon{font-size:24px;margin-bottom:4px}.need-option .n-title{font-weight:600;font-size:14px;color:var(--text)}.need-option .n-desc{font-size:12px;color:var(--text-secondary);margin-top:2px}.btn-secondary{width:100%;padding:12px;border:1px solid var(--border);border-radius:9999px;background:transparent;color:var(--text-secondary);font-size:14px;cursor:pointer;transition:all .2s;font-family:inherit;margin-top:8px}.btn-secondary:hover{background:var(--bg-hover);color:var(--text)}.btn-secondary.selected{border-color:var(--accent);color:var(--accent);font-weight:600;background:rgba(29,155,240,.05)}.interest-tags{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.interest-tag{padding:8px 16px;border:1px solid var(--border);border-radius:9999px;background:transparent;color:var(--text-secondary);font-size:13px;cursor:pointer;transition:all .2s;font-family:inherit}.interest-tag:hover{background:var(--bg-hover)}.interest-tag.selected{border-color:var(--accent);background:rgba(29,155,240,.08);color:var(--accent)}.auth-panel{display:block}.auth-panel.hidden{display:none}</style></head><body>
+<div class="bg-particles" id="bgParticles"></div>
+<div class="container"><div class="logo-area"><div class="logo-svg"><svg width="52" height="52" style="display:block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.45" r="0.65">
+      <stop offset="0%" stop-color="#27283b"/>
+      <stop offset="100%" stop-color="#14141f"/>
+    </radialGradient>
+    <linearGradient id="zGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b9cf7"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="xGrad" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background: rounded square -->
+  <rect x="64" y="64" width="896" height="896" rx="224" ry="224" fill="url(#bg)"/>
+
+  <!-- Subtle inner ring -->
+  <rect x="64" y="64" width="896" height="896" rx="224" ry="224"
+        fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="2"/>
+
+  <!-- Letter 'z' -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+    <line x1="222" y1="378" x2="482" y2="378" stroke="url(#zGrad)"/>
+    <line x1="482" y1="378" x2="222" y2="648" stroke="url(#zGrad)"/>
+    <line x1="222" y1="648" x2="482" y2="648" stroke="url(#zGrad)"/>
+  </g>
+
+  <!-- Letter 'x' -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+    <line x1="542" y1="378" x2="802" y2="648" stroke="url(#xGrad)"/>
+    <line x1="802" y1="378" x2="542" y2="648" stroke="url(#xGrad)"/>
+  </g>
+</svg>
+
+</div>
+<div class="logo-title">EchoZshsamber</div><div class="logo-sub">二次元 · 低压力 · 精准匹配</div></div>
+<div class="auth-card"><div class="auth-tabs"><button class="auth-tab active" data-tab="login">登录</button><button class="auth-tab" data-tab="register">注册</button></div>
+<div class="auth-panel" id="loginPanel">
+<div class="card-title">欢迎回来</div><div class="card-subtitle">登录你的 EchoZ 账号</div>
+<form id="loginForm" onsubmit="return handleLogin(event)">
+<div class="form-group"><label class="form-label">邮箱 / 手机号</label><input class="form-input" id="loginEmail" type="text" placeholder="请输入邮箱或手机号"><div class="error-msg" id="loginEmailError">请输入有效的邮箱或手机号</div></div>
+<div class="form-group"><label class="form-label">密码</label><input class="form-input" id="loginPassword" type="password" placeholder="请输入密码"><div class="error-msg" id="loginPasswordError">请输入密码</div></div>
+<button class="btn-primary" id="loginSubmit" type="submit">登录</button>
+</form>
+
+
+<button class="btn-secondary" onclick="switchAuthTab('register')">还没有账号？立即注册</button>
+</div>
+<div class="auth-panel hidden" id="registerPanel">
+<div class="onboarding-step active" data-step="1">
+<div class="step-indicators"><div class="step-dot active"></div><div class="step-dot"></div><div class="step-dot"></div></div>
+<div class="card-title">创建账号</div><div class="card-subtitle">填写基本信息开始你的 EchoZ 之旅</div>
+<div class="form-group"><label class="form-label">昵称</label><input class="form-input" id="regName" type="text" placeholder="你希望别人怎么称呼你？"></div>
+<div class="form-group"><label class="form-label">邮箱</label><input class="form-input" id="regEmail" type="email" placeholder="zx@example.com"></div>
+<div class="form-group"><label class="form-label">邮箱验证码</label><div style="display:flex;gap:8px"><input class="form-input" id="regVerifyCode" type="text" placeholder="请输入验证码" style="flex:1"><button type="button" id="sendCodeBtn" onclick="sendVerifyCode()" style="padding:16px 14px;border:1px solid var(--border);border-radius:4px;background:transparent;color:var(--accent);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit;transition:all .2s">发送验证码</button></div></div>
+<div class="form-group"><label class="form-label">密码</label><input class="form-input" id="regPassword" type="password" placeholder="至少6位密码"></div>
+<div class="form-group"><label class="form-label">性别</label><div style="display:flex;gap:8px"><button type="button" class="mbti-option" style="flex:1" data-gender="male">♂ 男生</button><button type="button" class="mbti-option" style="flex:1" data-gender="female">♀ 女生</button></div></div>
+<button type="button" class="btn-primary" onclick="nextStep(2)" style="margin-top:8px">下一步</button>
+</div>
+<div class="onboarding-step" data-step="2">
+<div class="step-indicators"><div class="step-dot done"></div><div class="step-dot active"></div><div class="step-dot"></div></div>
+<div class="card-title">你的 MBTI 类型</div><div class="card-subtitle">用于精准匹配，没测过可以跳过</div>
+<div class="mbti-grid" id="mbtiGrid">
+<button type="button" class="mbti-option" data-mbti="INTJ"><span class="mbti-code">INTJ</span><span class="mbti-label">建筑师</span></button>
+<button type="button" class="mbti-option" data-mbti="INTP"><span class="mbti-code">INTP</span><span class="mbti-label">逻辑学家</span></button>
+<button type="button" class="mbti-option" data-mbti="ENTJ"><span class="mbti-code">ENTJ</span><span class="mbti-label">指挥官</span></button>
+<button type="button" class="mbti-option" data-mbti="ENTP"><span class="mbti-code">ENTP</span><span class="mbti-label">辩论家</span></button>
+<button type="button" class="mbti-option" data-mbti="INFJ"><span class="mbti-code">INFJ</span><span class="mbti-label">提倡者</span></button>
+<button type="button" class="mbti-option" data-mbti="INFP"><span class="mbti-code">INFP</span><span class="mbti-label">调停者</span></button>
+<button type="button" class="mbti-option" data-mbti="ENFJ"><span class="mbti-code">ENFJ</span><span class="mbti-label">主人公</span></button>
+<button type="button" class="mbti-option" data-mbti="ENFP"><span class="mbti-code">ENFP</span><span class="mbti-label">竞选者</span></button>
+<button type="button" class="mbti-option" data-mbti="ISTJ"><span class="mbti-code">ISTJ</span><span class="mbti-label">物流师</span></button>
+<button type="button" class="mbti-option" data-mbti="ISFJ"><span class="mbti-code">ISFJ</span><span class="mbti-label">守卫者</span></button>
+<button type="button" class="mbti-option" data-mbti="ESTJ"><span class="mbti-code">ESTJ</span><span class="mbti-label">总经理</span></button>
+<button type="button" class="mbti-option" data-mbti="ESFJ"><span class="mbti-code">ESFJ</span><span class="mbti-label">执政官</span></button>
+<button type="button" class="mbti-option" data-mbti="ISTP"><span class="mbti-code">ISTP</span><span class="mbti-label">鉴赏家</span></button>
+<button type="button" class="mbti-option" data-mbti="ISFP"><span class="mbti-code">ISFP</span><span class="mbti-label">探险家</span></button>
+<button type="button" class="mbti-option" data-mbti="ESTP"><span class="mbti-code">ESTP</span><span class="mbti-label">企业家</span></button>
+<button type="button" class="mbti-option" data-mbti="ESFP"><span class="mbti-code">ESFP</span><span class="mbti-label">表演者</span></button>
+</div>
+<button type="button" class="btn-secondary" id="mbtiSkipBtn" onclick="setMbtiUnknown()">我不知道我的 MBTI</button>
+<div style="margin-top:20px"><div class="form-label" style="margin-bottom:8px">你的兴趣领域（可多选）</div>
+<div class="interest-tags">
+<button type="button" class="interest-tag" data-interest="anime">动漫</button>
+<button type="button" class="interest-tag" data-interest="game">游戏</button>
+<button type="button" class="interest-tag" data-interest="cos">Cosplay</button>
+<button type="button" class="interest-tag" data-interest="music">音乐</button>
+<button type="button" class="interest-tag" data-interest="art">绘画</button>
+<button type="button" class="interest-tag" data-interest="novel">轻小说</button>
+<button type="button" class="interest-tag" data-interest="vtuber">V Tuber</button>
+<button type="button" class="interest-tag" data-interest="film">影视</button>
+</div></div>
+<div style="display:flex;gap:8px;margin-top:20px"><button type="button" class="btn-secondary" onclick="prevStep(1)" style="flex:1">← 上一步</button><button type="button" class="btn-primary" onclick="nextStep(3)" style="flex:1">下一步 →</button></div>
+</div>
+<div class="onboarding-step" data-step="3">
+<div class="step-indicators"><div class="step-dot done"></div><div class="step-dot done"></div><div class="step-dot active"></div></div>
+<div class="card-title">你的恋爱需求</div><div class="card-subtitle">选择你想要的相处方式</div>
+<div class="need-options">
+<div class="need-option" data-need="companion"><div class="n-icon">🤗</div><div class="n-title">陪伴型</div><div class="n-desc">需要有人每天在，渴望日常陪伴和分享</div></div>
+<div class="need-option" data-need="partner"><div class="n-icon">🤝</div><div class="n-title">搭档型</div><div class="n-desc">希望一起成长、互相帮助，共同进步</div></div>
+<div class="need-option" data-need="attraction"><div class="n-icon">✨</div><div class="n-title">吸引型</div><div class="n-desc">外表对我很重要，希望第一眼就心动</div></div>
+</div>
+<div style="display:flex;gap:8px;margin-top:20px"><button type="button" class="btn-secondary" onclick="prevStep(2)" style="flex:1">← 上一步</button><button type="button" class="btn-primary" id="registerSubmit" onclick="handleRegister()" style="flex:1">完成注册</button></div>
+</div></div></div></div>
+<div class="toast" id="toast"></div>
+<script>(function(){var c=document.getElementById("bgParticles");for(var i=0;i<30;i++){var p=document.createElement("div");p.className="particle";p.style.left=Math.random()*100+"%";p.style.animationDuration=(12+Math.random()*20)+"s";p.style.animationDelay=Math.random()*15+"s";p.style.width=p.style.height=(2+Math.random()*4)+"px";c.appendChild(p)}})();
+function switchAuthTab(t){document.querySelectorAll(".auth-tab").forEach(function(e){e.classList.toggle("active",e.dataset.tab===t)});document.getElementById("loginPanel").classList.toggle("hidden",t!=="login");document.getElementById("registerPanel").classList.toggle("hidden",t!=="register")}
+document.querySelectorAll(".auth-tab").forEach(function(t){t.addEventListener("click",function(){switchAuthTab(t.dataset.tab)})});
+var currentStep=1,regData={gender:"",mbti:"",mbtiUnknown:false,interests:[],need:""},verifyCode="",verifyTimer=null,verifyCountdown=0;
+var badWords=["傻逼","煞笔","傻b","傻B","艹你妈","草你妈","操你妈","去你妈","去死","废物","废材","废柴","蠢猪","猪狗","狗屎","狗屁","放屁","扯淡","滚蛋","混蛋","王八蛋","笨蛋","蠢货","蠢蛋","智障","脑残","弱智","白痴","低能","二百五","二货","二逼","垃圾","辣鸡","腊鸡","菜鸡","菜逼","贱人","婊子","妓女","鸡巴","几把","基巴","吉尔","吊毛","叼毛","屌","叼","肏","操","操你","草你","艹你","日你","干你","淦你","草泥马","法克","fuck","shit","bitch","cnm","nmsl","sb","2b","nc","md","tmd","tnnd","妈的","麻痹","妈逼","妈b","草泥马","尼玛","泥玛","你妈","马勒","死妈","死全家","全家死光","全家火葬场","杂种","狗娘养","畜生","禽兽","狗带","不要脸","恶心","无耻","下贱","淫","淫荡","荡妇","骚货","骚逼","骚鸡","骚浪","性器官","生殖器","阴茎","阴道","阳具","睾丸","阴部","阴囊","阴唇","处女膜","龟头","鸡鸡","jj","小jj","小弟弟","阴蒂","阴di","yindi","豆豆","小豆豆","小豆dou","精液","精子","射精","she精","shejing","射jing","做爱","啪啪啪","上床","约炮","炮友","约p","约P","yp","一夜情","一夜","买个春","买个chun","买春","卖春","自慰","自wei","ziwei","手淫","手yin","shouyin","打飞机","打feiji","dafeiji","打手枪","打shouqiang","撸管","撸guan","luguan","打炮","打pao","打手冲","手冲","shouchong","打胶","射胶","自渎","打灰机","打huiji","磨豆腐","磨豆付","自慰棒","自慰bang","自wei棒","跳蛋","跳dan","tiaodan","按摩棒","震动棒","震动bang","揉阴","揉yin","扣逼","抠逼","抠b","抠B","自摸","揉胸","揉xiong","摸胸","摸xiong","情趣内衣","情趣neiyi","口交","口活","深喉","乳交","肛交","gangjiao","毒龙","冰火","颜射","胸推","性奴","性玩具","情趣用品","春药","催情药","迷药","迷奸","迷奸药","强奸","qiangjian","轮奸","奸淫","猥亵","猥琐","调教","幼女","萝莉","正太","援交","卖淫","嫖娼","裸聊","色情","情色","情欲","欲望","黄色","黄片","H文","H漫","H图","本子","里番","AV","av","A片","成人","三级片","伦理片","小电影","毛片","黄网","色图"];
+function containsBadWord(str){var lower=str.toLowerCase();for(var i=0;i<badWords.length;i++){if(lower.indexOf(badWords[i].toLowerCase())!==-1){return true}}return false}
+function sendVerifyCode(){var email=document.getElementById("regEmail").value.trim();if(!email||!email.includes("@")){showToast("请先输入有效邮箱","error");return}if(verifyCountdown>0){showToast("请"+verifyCountdown+"秒后再试","error");return}verifyCode=Math.floor(100000+Math.random()*900000).toString();showToast("验证码已发送到 "+email+"（测试环境验证码："+verifyCode+"）");verifyCountdown=60;var btn=document.getElementById("sendCodeBtn");btn.disabled=true;btn.textContent="重新发送("+verifyCountdown+")";verifyTimer=setInterval(function(){verifyCountdown--;if(verifyCountdown<=0){clearInterval(verifyTimer);btn.disabled=false;btn.textContent="发送验证码"}else{btn.textContent="重新发送("+verifyCountdown+")"}},1000)}
+function nextStep(n){if(currentStep===1){var a=document.getElementById("regName").value.trim(),b=document.getElementById("regEmail").value.trim(),c=document.getElementById("regPassword").value,d=document.getElementById("regVerifyCode").value.trim();if(!a){showToast("请输入昵称","error");return}if(containsBadWord(a)){showToast("昵称包含不当内容，请重新输入","error");return}if(!b||!b.includes("@")){showToast("请输入有效邮箱","error");return}if(c.length<6){showToast("密码至少6位","error");return}if(!regData.gender){showToast("请选择性别","error");return}if(!verifyCode){showToast("请先获取邮箱验证码","error");return}if(d!==verifyCode){showToast("验证码错误，请重新输入","error");return}regData.name=a;regData.email=b;regData.password=c}if(currentStep===2&&!regData.mbti&&!regData.mbtiUnknown){showToast("请选择MBTI类型或跳过","error");return}goToStep(n)}
+function prevStep(n){goToStep(n)}
+function goToStep(n){currentStep=n;document.querySelectorAll(".onboarding-step").forEach(function(s){s.classList.toggle("active",parseInt(s.dataset.step)===n)})}
+document.querySelectorAll(".mbti-option").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".mbti-option").forEach(function(x){x.classList.remove("selected")});this.classList.add("selected");regData.mbti=this.dataset.mbti;regData.mbtiUnknown=false;document.getElementById("mbtiSkipBtn").classList.remove("selected")})});
+function setMbtiUnknown(){document.querySelectorAll(".mbti-option").forEach(function(b){b.classList.remove("selected")});regData.mbti="";regData.mbtiUnknown=true;document.getElementById("mbtiSkipBtn").classList.add("selected");showToast("已跳过MBTI，之后可以在个人资料中设置")}
+document.querySelectorAll("[data-gender]").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll("[data-gender]").forEach(function(x){x.classList.remove("selected")});this.classList.add("selected");regData.gender=this.dataset.gender})});
+document.querySelectorAll(".interest-tag").forEach(function(t){t.addEventListener("click",function(){this.classList.toggle("selected");var v=this.dataset.interest,i=regData.interests.indexOf(v);i!==-1?regData.interests.splice(i,1):regData.interests.push(v)})});
+document.querySelectorAll(".need-option").forEach(function(o){o.addEventListener("click",function(){document.querySelectorAll(".need-option").forEach(function(x){x.classList.remove("selected")});this.classList.add("selected");regData.need=this.dataset.need})});
+function handleRegister(){if(!regData.need){showToast("请选择你的恋爱需求类型","error");return}var btn=document.getElementById("registerSubmit");btn.disabled=true;btn.innerHTML="<span class=\"spinner\"></span> 注册中…";var ud={name:regData.name,email:regData.email,password:regData.password,gender:regData.gender,mbti:regData.mbti||"未知",mbtiUnknown:regData.mbtiUnknown,interests:regData.interests,need:regData.need,handle:"@"+regData.name.replace(/\s/g,"").toLowerCase()+Math.random().toString(36).slice(2,5),avatarChar:regData.name.charAt(0),registeredAt:new Date().toISOString()};localStorage.setItem("zx_user",JSON.stringify(ud));setTimeout(function(){btn.disabled=false;btn.textContent="完成注册";showToast("\u2705 注册成功！正在跳转…");setTimeout(function(){window.location.href="\u4e3b\u9875.html"},1200)},1500)}
+function handleLogin(e){e.preventDefault();var em=document.getElementById("loginEmail").value.trim(),pw=document.getElementById("loginPassword").value,err=false;if(!em||!em.includes("@")){document.getElementById("loginEmail").classList.add("error");document.getElementById("loginEmailError").classList.add("show");err=true}if(!pw){document.getElementById("loginPassword").classList.add("error");document.getElementById("loginPasswordError").classList.add("show");err=true}if(err)return;var btn=document.getElementById("loginSubmit");btn.disabled=true;btn.innerHTML="<span class=\"spinner\"></span> 登录中…";setTimeout(function(){var s=localStorage.getItem("zx_user");if(s){var u=JSON.parse(s);if(u.email===em){u.lastLogin=new Date().toISOString();localStorage.setItem("zx_user",JSON.stringify(u));showToast("\u2705 登录成功！");setTimeout(function(){window.location.href="\u4e3b\u9875.html"},1000)}else{btn.disabled=false;btn.textContent="登录";showToast("\u26a0\ufe0f 账号不存在，请先注册","error")}}else{var nu={name:em.split("@")[0],email:em,password:pw,handle:"@user_"+Math.random().toString(36).slice(2,6),mbti:"未知",interests:[],need:"",avatarChar:em.charAt(0).toUpperCase()};localStorage.setItem("zx_user",JSON.stringify(nu));showToast("\u2705 登录成功！");setTimeout(function(){window.location.href="\u4e3b\u9875.html"},1000)}},1500)}
+
+function showToast(m,t){var o=document.getElementById("toast");o.textContent=m;o.className="toast"+(t==="error"?" error":"");o.classList.add("show");clearTimeout(o._timer);o._timer=setTimeout(function(){o.classList.remove("show")},2800)}
+</script></body></html>
