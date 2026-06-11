@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EchoZshsamber - 聊天窗口</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        :root{
+            --bg:#000000;
+            --bg-secondary:#16181c;
+            --bg-card:#16181c;
+            --bg-hover:#1d1f23;
+            --bg-elevated:#1d1f23;
+            --bg-input:#202327;
+            --border:#2f3336;
+            --text:#e7e9ea;
+            --text-secondary:#71767b;
+            --accent:#1d9bf0;
+            --accent-hover:#1a8cd8;
+            --purple:#8b5cf6;
+            --pink:#f91880;
+            --green:#00ba7c;
+            --red:#f4212e;
+            --radius:9999px;
+            --radius-md:16px;
+            --radius-sm:12px;
+        }
+        body{
+            font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+            background:var(--bg);
+            color:var(--text);
+            height:100vh;
+            overflow:hidden;
+        }
+        .app{
+            display:flex;
+            width:100%;
+            height:100vh;
+        }
+        /* 左侧侧边栏 */
+        .sidebar{
+            width:275px;
+            padding:0 12px;
+            display:flex;
+            flex-direction:column;
+            height:100vh;
+            position:sticky;
+            top:0;
+            border-right:1px solid var(--border);
+        }
+        .side-logo{
+            padding:12px;
+            display:flex;
+            align-items:center;
+            gap:10px;
+            cursor:pointer;
+            border-radius:var(--radius);
+            width:fit-content;
+            transition:background .2s;
+            margin:10px 0;
+        }
+        .side-logo:hover{background:var(--bg-hover)}
+        .side-logo svg{width:30px;height:30px}
+        .side-logo span{
+            font-size:20px;
+            font-weight:700;
+            color:var(--text);
+            letter-spacing:-0.5px;
+        }
+        .nav-list{list-style:none;flex:1;margin-top:4px}
+        .nav-item{
+            display:flex;
+            align-items:center;
+            gap:16px;
+            padding:12px;
+            border-radius:var(--radius);
+            cursor:pointer;
+            transition:background .2s;
+            color:var(--text);
+            font-size:19px;
+            font-weight:400;
+            text-decoration:none;
+            margin:4px 0;
+        }
+        .nav-item:hover{background:var(--bg-hover)}
+        .nav-item.active{font-weight:700;background:var(--bg-hover)}
+        .nav-item .ni{font-size:26px;width:28px;text-align:center;line-height:1}
+        .user-menu{
+            display:flex;
+            align-items:center;
+            gap:10px;
+            padding:10px;
+            border-radius:var(--radius);
+            cursor:pointer;
+            margin:8px 0;
+            transition:background .2s;
+        }
+        .user-menu:hover{background:var(--bg-hover)}
+        .u-avatar{
+            width:40px;height:40px;border-radius:50%;
+            background:linear-gradient(135deg,#6366f1,#8b5cf6);
+            display:flex;align-items:center;justify-content:center;
+            font-weight:700;font-size:16px;color:#fff;flex-shrink:0;
+        }
+        .u-info{flex:1;min-width:0}
+        .u-name{font-weight:700;font-size:15px}
+        .u-handle{color:var(--text-secondary);font-size:14px}
+
+        /* 会话列表栏 */
+        .session-wrap{
+            width:320px;
+            border-right:1px solid var(--border);
+            display:flex;
+            flex-direction:column;
+        }
+        .session-header{
+            padding:16px;
+            border-bottom:1px solid var(--border);
+            font-size:20px;
+            font-weight:700;
+        }
+        .session-search{
+            padding:12px 16px;
+        }
+        .search-input{
+            width:100%;
+            background:var(--bg-input);
+            border:1px solid transparent;
+            border-radius:var(--radius);
+            padding:10px 16px;
+            color:var(--text);
+            font-size:15px;
+            outline:none;
+            transition:border .2s;
+        }
+        .search-input:focus{border-color:var(--accent)}
+        .search-input::placeholder{color:var(--text-secondary)}
+        .session-list{
+            flex:1;
+            overflow-y:auto;
+        }
+        .session-item{
+            display:flex;
+            align-items:center;
+            gap:12px;
+            padding:12px 16px;
+            cursor:pointer;
+            transition:background .2s;
+            border-bottom:1px solid var(--border);
+            position:relative;
+        }
+        .session-item:hover{background:var(--bg-hover)}
+        .session-item.active{background:var(--bg-hover)}
+        .session-avatar{
+            width:48px;height:48px;border-radius:50%;
+            flex-shrink:0;
+            display:flex;align-items:center;justify-content:center;
+            font-size:18px;font-weight:700;color:#fff;
+        }
+        .online-dot{
+            position:absolute;
+            left:52px;
+            bottom:14px;
+            width:10px;
+            height:10px;
+            border-radius:50%;
+            background:var(--green);
+            border:2px solid var(--bg);
+        }
+        .session-info{
+            flex:1;min-width:0;
+        }
+        .session-top{
+            display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;
+        }
+        .session-name{
+            font-size:16px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+        }
+        .session-time{font-size:12px;color:var(--text-secondary)}
+        .session-desc{
+            font-size:14px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+        }
+        .unread-badge{
+            min-width:20px;height:20px;padding:0 6px;border-radius:var(--radius);
+            background:var(--red);color:#fff;font-size:12px;
+            display:flex;align-items:center;justify-content:center;
+        }
+
+        /* 主聊天区域 */
+        .chat-main{
+            flex:1;
+            display:flex;
+            flex-direction:column;
+            height:100vh;
+        }
+        /* 聊天头部 */
+        .chat-top{
+            padding:14px 20px;
+            border-bottom:1px solid var(--border);
+            display:flex;
+            align-items:center;
+            gap:12px;
+            position:sticky;
+            top:0;
+            background:var(--bg);
+            z-index:10;
+        }
+        .chat-top-avatar{
+            width:42px;height:42px;border-radius:50%;
+            display:flex;align-items:center;justify-content:center;
+            font-size:16px;font-weight:700;color:#fff;
+        }
+        .chat-top-info{flex:1}
+        .chat-top-name{font-size:17px;font-weight:700}
+        .chat-top-status{font-size:13px;color:var(--green)}
+        /* 消息内容区 */
+        .chat-content{
+            flex:1;
+            padding:20px;
+            overflow-y:auto;
+        }
+        .time-line{
+            text-align:center;
+            margin:16px 0;
+            font-size:12px;
+            color:var(--text-secondary);
+        }
+        /* 对方消息 */
+        .msg-left{
+            display:flex;
+            gap:10px;
+            margin-bottom:16px;
+        }
+        .msg-avatar{
+            width:36px;height:36px;border-radius:50%;
+            flex-shrink:0;
+            display:flex;align-items:center;justify-content:center;
+            font-size:14px;font-weight:700;color:#fff;
+        }
+        .msg-bubble-left{
+            max-width:65%;
+            background:var(--bg-secondary);
+            padding:10px 14px;
+            border-radius:var(--radius-md);
+            border-top-left-radius:4px;
+        }
+        /* 自己消息 */
+        .msg-right{
+            display:flex;
+            gap:10px;
+            margin-bottom:16px;
+            flex-direction:row-reverse;
+        }
+        .msg-bubble-right{
+            max-width:65%;
+            background:var(--accent);
+            color:#fff;
+            padding:10px 14px;
+            border-radius:var(--radius-md);
+            border-top-right-radius:4px;
+        }
+        .msg-text{font-size:15px;line-height:1.5}
+        .msg-time{
+            font-size:11px;
+            color:var(--text-secondary);
+            margin-top:4px;
+            text-align:right;
+        }
+        /* 底部输入框 */
+        .chat-input-wrap{
+            padding:16px;
+            border-top:1px solid var(--border);
+        }
+        .input-box{
+            display:flex;
+            gap:10px;
+            align-items:flex-end;
+        }
+        .input-text{
+            flex:1;
+            background:var(--bg-input);
+            border:1px solid var(--border);
+            border-radius:var(--radius-md);
+            padding:12px 16px;
+            color:var(--text);
+            font-size:15px;
+            outline:none;
+            resize:none;
+            min-height:48px;
+            max-height:120px;
+            font-family:inherit;
+        }
+        .input-text:focus{border-color:var(--accent)}
+        .send-btn{
+            width:48px;
+            height:48px;
+            border-radius:50%;
+            background:var(--accent);
+            border:none;
+            color:#fff;
+            font-size:18px;
+            cursor:pointer;
+            transition:background .2s;
+            flex-shrink:0;
+        }
+        .send-btn:hover{background:var(--accent-hover)}
+    </style>
+</head>
+<body>
+    <div class="app">
+        <!-- 全局侧边导航 -->
+        <div class="sidebar">
+            <div class="side-logo" onclick="location.href='首页.html'">
+                <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                    <defs>
+                        <radialGradient id="bg" cx="0.5" cy="0.45" r="0.65">
+                            <stop offset="0%" stop-color="#27283b"/>
+                            <stop offset="100%" stop-color="#14141f"/>
+                        </radialGradient>
+                        <linearGradient id="zGrad" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0%" stop-color="#8b9cf7"/>
+                            <stop offset="100%" stop-color="#6366f1"/>
+                        </linearGradient>
+                        <linearGradient id="xGrad" x1="1" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="#a78bfa"/>
+                            <stop offset="100%" stop-color="#7c3aed"/>
+                        </linearGradient>
+                    </defs>
+                    <rect x="64" y="64" width="896" height="896" rx="224" ry="224" fill="url(#bg)"/>
+                    <rect x="64" y="64" width="896" height="896" rx="224" ry="224" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="2"/>
+                    <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+                        <line x1="222" y1="378" x2="482" y2="378" stroke="url(#zGrad)"/>
+                        <line x1="482" y1="378" x2="222" y2="648" stroke="url(#zGrad)"/>
+                        <line x1="222" y1="648" x2="482" y2="648" stroke="url(#zGrad)"/>
+                    </g>
+                    <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+                        <line x1="542" y1="378" x2="802" y2="648" stroke="url(#xGrad)"/>
+                        <line x1="802" y1="378" x2="542" y2="648" stroke="url(#xGrad)"/>
+                    </g>
+                </svg>
+            </div>
+            <ul class="nav-list">
+                <li class="nav-item" onclick="location.href='首页.html'">
+                    <span class="ni">🏠</span> 匹配广场
+                </li>
+                <li class="nav-item active">
+                    <span class="ni">💬</span> 消息聊天
+                </li>
+                <li class="nav-item" onclick="location.href='个人中心.html'">
+                    <span class="ni">👤</span> 个人资料
+                </li>
+            </ul>
+            <div class="user-menu">
+                <div class="u-avatar">U</div>
+                <div class="u-info">
+                    <div class="u-name">我的昵称</div>
+                    <div class="u-handle">@user_xxx</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 左侧会话列表 -->
+        <div class="session-wrap">
+            <div class="session-header">会话列表</div>
+            <div class="session-search">
+                <input type="text" class="search-input" placeholder="搜索联系人">
+            </div>
+            <div class="session-list">
+                <div class="session-item active">
+                    <div class="session-avatar" style="background:linear-gradient(135deg,#f472b6,#ec4899)">A</div>
+                    <div class="online-dot"></div>
+                    <div class="session-info">
+                        <div class="session-top">
+                            <div class="session-name">hhy</div>
+                            <div class="session-time">10:20</div>
+                        </div>
+                        <div class="session-desc">3</div>
+                    </div>
+                </div>
+                <div class="session-item">
+                    <div class="session-avatar" style="background:linear-gradient(135deg,#818cf8,#6366f1)">B</div>
+                    <div class="session-info">
+                        <div class="session-top">
+                            <div class="session-name">yxr</div>
+                            <div class="session-time">昨天</div>
+                        </div>
+                        <div class="session-desc">jj变小了</div>
+                    </div>
+                </div>
+                <div class="session-item">
+                    <div class="session-avatar" style="background:linear-gradient(135deg,#34d399,#10b981)">C</div>
+                    <div class="online-dot"></div>
+                    <div class="session-info">
+                        <div class="session-top">
+                            <div class="session-name">学弟</div>
+                            <div class="session-time"></div>
+                        </div>
+                        <div class="session-desc"></div>
+                    </div>
+                    <div class="unread-badge">1</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧聊天主窗口 -->
+        <div class="chat-main">
+            <!-- 聊天头部 -->
+            <div class="chat-top">
+                <div class="chat-top-avatar" style="background:linear-gradient(135deg,#f472b6,#ec4899)">A</div>
+                <div class="chat-top-info">
+                    <div class="chat-top-name">hhy</div>
+                    <div class="chat-top-status">在线</div>
+                </div>
+            </div>
+
+            <!-- 聊天消息区 -->
+            <div class="chat-content">
+                <div class="time-line">今天 10:00</div>
+
+                <!-- 对方消息 -->
+                <div class="msg-left">
+                    <div class="msg-avatar" style="background:linear-gradient(135deg,#f472b6,#ec4899)">A</div>
+                    <div class="msg-bubble-left">
+                        <div class="msg-text">1</div>
+                        <div class="msg-time">10:02</div>
+                    </div>
+                </div>
+
+                <!-- 自己消息 -->
+                <div class="msg-right">
+                    <div class="msg-avatar" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">我</div>
+                    <div class="msg-bubble-right">
+                        <div class="msg-text">2</div>
+                        <div class="msg-time">10:05</div>
+                    </div>
+                </div>
+
+                <!-- 对方消息 -->
+                <div class="msg-left">
+                    <div class="msg-avatar" style="background:linear-gradient(135deg,#f472b6,#ec4899)">A</div>
+                    <div class="msg-bubble-left">
+                        <div class="msg-text">3</div>
+                        <div class="msg-time">10:20</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部输入区域 -->
+            <div class="chat-input-wrap">
+                <div class="input-box">
+                    <textarea class="input-text" placeholder="输入消息，按回车发送..."></textarea>
+                    <button class="send-btn">➤</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 简单发送消息基础交互（可后续对接后端）
+        const textarea = document.querySelector('.input-text');
+        const sendBtn = document.querySelector('.send-btn');
+        const chatContent = document.querySelector('.chat-content');
+
+        function sendMsg(){
+            let val = textarea.value.trim();
+            if(!val) return;
+            // 拼接自己的消息DOM
+            let html = `
+            <div class="msg-right">
+                <div class="msg-avatar" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">我</div>
+                <div class="msg-bubble-right">
+                    <div class="msg-text">${val}</div>
+                    <div class="msg-time">${new Date().getHours()}:${String(new Date().getMinutes()).padStart(2,'0')}</div>
+                </div>
+            </div>
+            `;
+            chatContent.insertAdjacentHTML('beforeend', html);
+            textarea.value = '';
+            // 滚动到底部
+            chatContent.scrollTop = chatContent.scrollHeight;
+        }
+
+        sendBtn.addEventListener('click', sendMsg);
+        textarea.addEventListener('keydown', function(e){
+            if(e.key === 'Enter' && !e.shiftKey){
+                e.preventDefault();
+                sendMsg();
+            }
+        })
+    </script>
+</body>
+</html>
