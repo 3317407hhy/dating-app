@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>EchoZshsamber · 发布</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}:root{--bg:#000000;--bg-secondary:#16181c;--bg-card:#16181c;--bg-hover:#1d1f23;--bg-elevated:#1d1f23;--bg-input:#202327;--border:#2f3336;--text:#e7e9ea;--text-secondary:#71767b;--accent:#1d9bf0;--accent-hover:#1a8cd8;--purple:#8b5cf6;--pink:#f91880;--green:#00ba7c;--red:#f4212e;--radius:9999px;--radius-md:16px;--radius-sm:12px}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;justify-content:center}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.app{display:flex;width:100%;max-width:1265px;min-height:100vh}.sidebar{width:275px;padding:0 12px;display:flex;flex-direction:column;height:100vh;position:sticky;top:0}.side-logo{padding:12px;display:flex;align-items:center;gap:10px;cursor:pointer;border-radius:9999px;width:fit-content;transition:background .2s}.side-logo:hover{background:var(--bg-hover)}.side-logo svg{width:30px;height:30px}.side-logo span{font-size:20px;font-weight:700;color:var(--text);letter-spacing:-0.5px}.nav-list{list-style:none;flex:1;margin-top:4px}.nav-item{display:flex;align-items:center;gap:16px;padding:12px;border-radius:9999px;cursor:pointer;transition:background .2s;color:var(--text);font-size:19px;font-weight:400;text-decoration:none}.nav-item:hover{background:var(--bg-hover)}.nav-item.active{font-weight:700}.nav-item .ni{font-size:26px;width:28px;text-align:center;line-height:1}.post-btn{background:var(--accent);color:#fff;border:none;border-radius:9999px;padding:15px 0;font-size:17px;font-weight:700;cursor:pointer;width:90%;margin:8px 0 16px;transition:background .2s;font-family:inherit}.post-btn:hover{background:var(--accent-hover)}.user-menu{display:flex;align-items:center;gap:10px;padding:10px;border-radius:9999px;cursor:pointer;margin-bottom:8px;transition:background .2s}.user-menu:hover{background:var(--bg-hover)}.u-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff;flex-shrink:0}.u-info{flex:1;min-width:0}.u-name{font-weight:700;font-size:15px}.u-handle{color:var(--text-secondary);font-size:14px}.main{flex:1;max-width:600px;border-left:1px solid var(--border);border-right:1px solid var(--border);min-height:100vh}.main-header{padding:14px 16px;border-bottom:1px solid var(--border);font-size:20px;font-weight:700;position:sticky;top:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);z-index:10;display:flex;align-items:center;gap:12px}.main-header .back-btn{background:none;border:none;color:var(--text);font-size:20px;cursor:pointer;padding:4px 8px;border-radius:50%;transition:background .2s;font-family:inherit}.main-header .back-btn:hover{background:var(--bg-hover)}.main-header .publish-btn{margin-left:auto;padding:8px 20px;border-radius:9999px;border:none;background:var(--accent);color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .2s}.main-header .publish-btn:hover{background:var(--accent-hover)}.right-side{width:350px;padding:0 16px;display:flex;flex-direction:column;height:100vh;position:sticky;top:0}.panel-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:16px;overflow:hidden}.panel-title{font-size:20px;font-weight:800;padding:12px 16px}.footer-links{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;color:var(--text-secondary);font-size:13px}.footer-links span{cursor:pointer}.footer-links span:hover{text-decoration:underline}.edit-field{padding:14px 16px;border-bottom:1px solid var(--border)}.edit-field .ef-label{font-size:13px;color:var(--text-secondary);margin-bottom:4px}.edit-field textarea{width:100%;background:transparent;border:none;color:var(--text);font-size:17px;outline:none;font-family:inherit;resize:none;padding:4px 0;min-height:120px}.edit-field textarea::placeholder{color:var(--text-secondary)}.edit-field select{width:100%;background:transparent;border:none;color:var(--text);font-size:16px;outline:none;font-family:inherit;padding:8px 0;cursor:pointer}.edit-field select option{background:var(--bg);color:var(--text)}.tag-btn{display:inline-block;padding:8px 18px;border-radius:9999px;border:1px solid var(--border);background:transparent;color:var(--text-secondary);font-size:13px;cursor:pointer;font-family:inherit;transition:all .2s;user-select:none}.tag-btn:hover{background:var(--bg-hover)}.tag-btn.sel{border-color:var(--accent);color:var(--accent);background:rgba(29,155,240,.08)}.file-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:9999px;border:1px solid var(--border);background:transparent;color:var(--text);font-size:14px;cursor:pointer;font-family:inherit;transition:background .2s}.file-btn:hover{background:var(--bg-hover)}.file-name{font-size:13px;color:var(--text-secondary);margin-top:6px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%)translateY(80px);padding:10px 24px;border-radius:9999px;background:var(--accent);color:#fff;font-size:14px;font-weight:600;opacity:0;transition:all .3s;z-index:1999;pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%)translateY(0)}.toast.error{background:var(--red)}.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(91,112,131,.4);z-index:1998;display:none;justify-content:center;align-items:flex-start;padding-top:5vh}.modal-overlay.show{display:flex}.modal-box{background:var(--bg);border-radius:16px;width:100%;max-width:600px;max-height:85vh;overflow-y:auto}.modal-title{font-size:20px;font-weight:700;margin-bottom:8px}.modal-desc{font-size:15px;color:var(--text-secondary);line-height:1.5;margin-bottom:24px}.modal-actions{display:flex;flex-direction:column;gap:8px}.modal-btn{width:100%;padding:12px 0;border-radius:9999px;font-size:15px;font-weight:700;cursor:pointer;border:none;font-family:inherit;transition:opacity .2s}.modal-btn.cancel{background:transparent;border:1px solid var(--border);color:var(--text)}.modal-btn.cancel:hover{background:var(--bg-hover)}.modal-box{background:var(--bg);border-radius:16px;width:360px;max-width:90vw;padding:24px;box-shadow:0 0 15px rgba(255,255,255,.05);animation:modalSlideIn .2s ease-out;border:1px solid var(--border)}@keyframes modalSlideIn{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}</style>
+</head><body>
+<div class="app">
+<div class="sidebar">
+<div class="side-logo" onclick="window.location.href='主页.html'"><svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.45" r="0.65">
+      <stop offset="0%" stop-color="#27283b"/>
+      <stop offset="100%" stop-color="#14141f"/>
+    </radialGradient>
+    <linearGradient id="zGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b9cf7"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="xGrad" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect x="64" y="64" width="896" height="896" rx="224" ry="224" fill="url(#bg)"/>
+  <rect x="64" y="64" width="896" height="896" rx="224" ry="224" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="2"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+    <line x1="222" y1="378" x2="482" y2="378" stroke="url(#zGrad)"/>
+    <line x1="482" y1="378" x2="222" y2="648" stroke="url(#zGrad)"/>
+    <line x1="222" y1="648" x2="482" y2="648" stroke="url(#zGrad)"/>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+    <line x1="542" y1="378" x2="802" y2="648" stroke="url(#xGrad)"/>
+    <line x1="802" y1="378" x2="542" y2="648" stroke="url(#xGrad)"/>
+  </g>
+</svg></div>
+<ul class="nav-list">
+<li class="nav-item" onclick="window.location.href='主页.html'"><span class="ni">🔍</span>探索</li>
+<li class="nav-item" onclick="window.location.href='主页.html'"><span class="ni">💬</span>社区</li>
+<li class="nav-item" onclick="window.location.href='主页.html'"><span class="ni">🔥</span>话题</li>
+<li class="nav-item" onclick="showToast('💬 消息功能开发中')"><span class="ni">💌</span>消息</li>
+</ul></div>
+<div class="main">
+<div class="main-header">
+<button class="back-btn" onclick="window.location.href='主页.html'">←</button>
+<span>发布动态</span>
+</div>
+<div class="edit-field"><div class="ef-label">内容</div><textarea id="postText" maxlength="500" placeholder="分享你的想法..."></textarea></div>
+<div class="edit-field"><div class="ef-label">配图/视频（可选）</div>
+<div style="padding:8px 0">
+<button class="file-btn" onclick="document.getElementById('postFile').click()">📷 选择文件</button>
+<div class="file-name" id="postFileName">未选择文件</div>
+</div>
+<input type="file" id="postFile" accept="image/*,video/*" style="display:none" onchange="document.getElementById('postFileName').textContent=this.files.length>0?this.files[0].name:'未选择文件'">
+</div>
+<div class="edit-field"><div class="ef-label">标签（可多选）</div>
+<div style="display:flex;flex-wrap:wrap;gap:8px;padding:8px 0" id="tagList">
+<button class="tag-btn" data-tag="social" onclick="this.classList.toggle('sel')">日常闲聊</button>
+<button class="tag-btn" data-tag="anime" onclick="this.classList.toggle('sel')">动漫</button>
+<button class="tag-btn" data-tag="game" onclick="this.classList.toggle('sel')">游戏</button>
+<button class="tag-btn" data-tag="cos" onclick="this.classList.toggle('sel')">Cosplay</button>
+<button class="tag-btn" data-tag="match" onclick="this.classList.toggle('sel')">交友</button>
+</div>
+<div style="display:flex;align-items:center;gap:10px;padding:6px 0">
+<label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:14px;color:var(--text);user-select:none">
+<input type="checkbox" id="anonymousToggle" checked style="width:16px;height:16px;cursor:pointer;accent-color:var(--accent)">
+👤 匿名发布
+</label>
+</div>
+</div>
+<div style="text-align:right;padding:16px">
+<button class="post-btn" onclick="submitPost()" style="display:inline-block;width:auto;margin:0;padding:12px 32px;font-size:16px">发布</button>
+</div>
+</div>
+<div class="right-side">
+<div class="panel-card"><div class="panel-title">发布提示</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.8;padding:0 16px 16px">· 请遵守社区规范<br>· 请勿发布违规内容<br>· 违反规定的内容将被拦截</div></div>
+<div class="footer-links"><span>服务条款</span><span>隐私政策</span><span style="width:100%;margin-top:4px">© 2026 EchoZshsamber</span></div>
+</div></div>
+<div class="toast" id="toast"></div>
+<script>
+function showToast(m,t){var e=document.getElementById("toast");if(!e)return;e.textContent=m;e.className="toast"+(t==="error"?" error":"");e.classList.add("show");clearTimeout(e._timer);e._timer=setTimeout(function(){e.classList.remove("show")},2800)}
+
+function submitPost(){
+  var t=document.getElementById("postText").value.trim();
+  if(!t){showToast("请输入内容");return}
+  // Get selected tags
+  var selTags=document.querySelectorAll(".tag-btn.sel");
+  var cats=[];
+  selTags.forEach(function(b){cats.push(b.dataset.tag)});
+  if(cats.length===0){showToast("请至少选择一个标签");return}
+  // Check anonymous toggle
+  var isAnonymous=document.getElementById("anonymousToggle").checked;
+  // Store post
+  var pendingPosts=JSON.parse(localStorage.getItem("zx_pendingPosts")||"[]");
+  pendingPosts.push({cats:cats,text:t,tag:"日常",silent:false,comments:0,likes:0,time:Date.now(),anonymous:isAnonymous});
+  localStorage.setItem("zx_pendingPosts",JSON.stringify(pendingPosts));
+  showToast("✅ 发布成功！");
+  setTimeout(function(){window.location.href="主页.html"},800);
+}
+</script>
+</body></html>

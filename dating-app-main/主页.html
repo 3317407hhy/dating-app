@@ -58,10 +58,9 @@
 <li class="nav-item active" data-tab="matching"><span class="ni">🔍</span>探索</li>
 <li class="nav-item" data-tab="forum"><span class="ni">💬</span>社区</li>
 <li class="nav-item" data-tab="topic"><span class="ni">🔥</span>话题</li>
-<li class="nav-item" onclick="window.location.href='个人主页.html'"><span class="ni">👤</span>个人资料</li>
-
+<li class="nav-item" onclick="showToast('💬 消息功能开发中')"><span class="ni">💌</span>消息</li>
 </ul>
-<button class="post-btn" onclick="openChatHelper()">发布</button>
+<button class="post-btn" onclick="window.location.href='发布.html'">发布</button>
 <div class="user-menu" id="userMenuBottom">
 <div class="u-avatar" id="uAvatar">U</div>
 <div class="u-info"><div class="u-name" id="uName">加载中...</div><div class="u-handle" id="uHandle">@user</div></div>
@@ -99,7 +98,7 @@
 <div class="mbti-dist" id="mbtiDist"></div></div>
 </div>
 <div class="right-side">
-<div class="search-bar"><div class="search-bar-inner">🔍 <input type="text" placeholder="搜索" id="searchInput"></div></div>
+<div class="search-bar"><div class="search-bar-inner"><input type="text" placeholder="搜索" id="searchInput"><span style="cursor:pointer;font-size:16px;color:var(--text-secondary);display:flex;align-items:center" onclick="doSearch()" title="搜索">🔍</span></div></div>
 <div class="panel-card"><div class="panel-title">正在发生</div>
 <div class="trend-item"><div class="trend-cat">动漫 · 趋势</div><div class="trend-name">#孤独摇滚</div><div class="trend-count">12.4万 讨论</div></div>
 <div class="trend-item"><div class="trend-cat">游戏 · 趋势</div><div class="trend-name">#原神</div><div class="trend-count">8.7万 讨论</div></div>
@@ -152,11 +151,12 @@ function renderForum(cat){cat=cat||"all";var el=document.getElementById("forumPo
 document.querySelectorAll(".forum-cat").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll(".forum-cat").forEach(function(x){x.classList.remove("active")});this.classList.add("active");renderForum(this.dataset.fc)})})
 var topicQ="你会因为喜欢的声优坏坊而放弃作品吗？";var topicOpts=[{t:"会，无法直视了",pct:28},{t:"不会，作品和声优分开看",pct:45},{t:"看情况，看坏坊程度",pct:20},{t:"从来不在乎声优",pct:7}];var mbtiDist=["INTJ 12%","INTP 8%","ENTJ 5%","ENTP 6%","INFJ 15%","INFP 22%","ENFJ 4%","ENFP 10%","ISTJ 3%","ISFJ 5%","ESTJ 2%","ESFJ 3%","ISTP 2%","ISFP 1%","ESTP 1%","ESFP 1%"];var topicVoted=false;function renderTopic(){document.getElementById("topicDate").textContent="2026年6月8日";document.getElementById("topicQuestion").textContent=topicQ;document.getElementById("topicOptions").innerHTML=topicOpts.map(function(o,i){return'<div class="topic-opt" data-idx="'+i+'">'+o.t+'<div class="to-bar" style="width:0;background:linear-gradient(90deg,var(--accent),var(--purple))"></div><div class="to-pct" style="display:none">'+o.pct+'%</div></div>'}).join("");document.querySelectorAll(".topic-opt").forEach(function(el){el.addEventListener("click",function(){if(topicVoted)return;topicVoted=true;document.getElementById("topicQuestion").textContent="📊 投票结果";document.querySelectorAll(".topic-opt").forEach(function(o,j){var opt=topicOpts[j];o.classList.add("selected");o.querySelector(".to-bar").style.width=opt.pct+"%";o.querySelector(".to-pct").style.display="block";o.querySelector(".to-pct").textContent=opt.pct+"% ("+Math.floor(opt.pct*10)+"人)"});showToast("✅ 已投票！")})});document.getElementById("mbtiDist").innerHTML=mbtiDist.map(function(m){return'<span class="md-item">'+m+'</span>'}).join("")}
 var chatTopics=[{tag:"共同爱好",text:"你觉得《孤独摇滚》第几集是最高潮？"},{tag:"性格探索",text:"作为INFP，你有没有过突然不想回消息的时候？"},{tag:"轻松日常",text:"今天有没有什么让你觉得还挺开心的小事？"},{tag:"假设问题",text:"如果可以进入一部动漫的世界，你选哪个？"},{tag:"番剧推荐",text:"你最近在看什么番？"},{tag:"游戏话题",text:"打完一周目后觉得好空虚..."}]
-function openChatHelper(){var modal=document.getElementById("chatModal");modal.classList.toggle("show");if(modal.classList.contains("show")){document.getElementById("chatList").innerHTML=chatTopics.map(function(t){return'<div class="ch-item"><div class="ch-tag">#'+t.tag+'</div>'+t.text+'<button class="ch-send" onclick="showToast(\'✅ 已复制话题，快去聊天吧！\')">📋 一键发送</button></div>'}).join("")}}
+function openChatHelper(){var modal=document.getElementById("chatModal");modal.classList.toggle("show");if(modal.classList.contains("show")){document.getElementById("chatList").innerHTML=chatTopics.map(function(t){return'<div class="ch-item"><div class="ch-tag">#'+t.tag+'</div>'+t.text+'<button class="ch-send" onclick="showToast(\'✅ 已复制话题，快去聊天吧！\')"> 一键发送</button></div>'}).join("")}}
 function closeChatHelper(){document.getElementById("chatModal").classList.remove("show")}
 function renderSuggestions(){var el=document.getElementById("suggestUsers");var users=[{name:"小樱",handle:"@sakura_chan",mbti:"ENFP"},{name:"阿杰",handle:"@jie_otaku",mbti:"INTJ"},{name:"Momo",handle:"@momo_paint",mbti:"INFP"}];el.innerHTML=users.map(function(u){return'<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)"><div class="u-avatar" style="width:36px;height:36px;font-size:13px">'+u.name.charAt(0)+'</div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600">'+u.name+'</div><div style="font-size:11px;color:var(--text-secondary)">'+u.handle+' · '+u.mbti+'</div></div><button style="padding:4px 14px;border-radius:var(--radius);border:1px solid var(--accent);background:transparent;color:var(--accent);font-size:11px;font-weight:600;cursor:pointer" onclick="showToast(\'✅ 已关注 '+u.name+'\')">关注</button></div>'}).join("")}
 function showToast(msg,type){var t=document.getElementById("toast");t.textContent=msg;t.className="toast"+(type==="error"?" error":"");t.classList.add("show");clearTimeout(t._timer);t._timer=setTimeout(function(){t.classList.remove("show")},2800)}
-document.getElementById("searchInput").addEventListener("keydown",function(e){if(e.key==="Enter"&&this.value.trim())showToast("🔍 搜索: "+this.value.trim())})
+function doSearch(){var v=document.getElementById("searchInput").value.trim();if(v){window.location.href='搜索.html?q='+encodeURIComponent(v)}else{showToast("请输入搜索关键词")}}
+document.getElementById("searchInput").addEventListener("keydown",function(e){if(e.key==="Enter"){doSearch()}})
 function quickMatch(){
 if(!userData.name||!userData.email){window.location.href="注册登录.html";return}
 switchTab("matching");

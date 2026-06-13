@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>EchoZshsamber · 搜索</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}:root{--bg:#000000;--bg-secondary:#16181c;--bg-card:#16181c;--bg-hover:#1d1f23;--bg-elevated:#1d1f23;--bg-input:#202327;--border:#2f3336;--text:#e7e9ea;--text-secondary:#71767b;--accent:#1d9bf0;--accent-hover:#1a8cd8;--purple:#8b5cf6;--pink:#f91880;--green:#00ba7c;--red:#f4212e;--radius:9999px;--radius-md:16px;--radius-sm:12px}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;justify-content:center}a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}.app{display:flex;width:100%;max-width:1265px;min-height:100vh}.sidebar{width:275px;padding:0 12px;display:flex;flex-direction:column;height:100vh;position:sticky;top:0}.side-logo{padding:12px;display:flex;align-items:center;gap:10px;cursor:pointer;border-radius:9999px;width:fit-content;transition:background .2s}.side-logo:hover{background:var(--bg-hover)}.side-logo svg{width:30px;height:30px}.side-logo span{font-size:20px;font-weight:700;color:var(--text);letter-spacing:-0.5px}.nav-list{list-style:none;flex:1;margin-top:4px}.nav-item{display:flex;align-items:center;gap:16px;padding:12px;border-radius:9999px;cursor:pointer;transition:background .2s;color:var(--text);font-size:19px;font-weight:400;text-decoration:none}.nav-item:hover{background:var(--bg-hover)}.nav-item.active{font-weight:700}.nav-item .ni{font-size:26px;width:28px;text-align:center;line-height:1}.post-btn{background:var(--accent);color:#fff;border:none;border-radius:9999px;padding:15px 0;font-size:17px;font-weight:700;cursor:pointer;width:90%;margin:8px 0 16px;transition:background .2s;font-family:inherit}.post-btn:hover{background:var(--accent-hover)}.user-menu{display:flex;align-items:center;gap:10px;padding:10px;border-radius:9999px;cursor:pointer;margin-bottom:8px;transition:background .2s}.user-menu:hover{background:var(--bg-hover)}.u-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff;flex-shrink:0}.u-info{flex:1;min-width:0}.u-name{font-weight:700;font-size:15px}.u-handle{color:var(--text-secondary);font-size:14px}.main{flex:1;max-width:600px;border-left:1px solid var(--border);border-right:1px solid var(--border);min-height:100vh}.main-header{padding:14px 16px;border-bottom:1px solid var(--border);font-size:20px;font-weight:700;position:sticky;top:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);z-index:10;display:flex;align-items:center;gap:12px}.main-header .back-btn{background:none;border:none;color:var(--text);font-size:20px;cursor:pointer;padding:4px 8px;border-radius:50%;transition:background .2s;font-family:inherit}.main-header .back-btn:hover{background:var(--bg-hover)}.right-side{width:350px;padding:0 16px;display:flex;flex-direction:column;height:100vh;position:sticky;top:0}.search-bar{position:sticky;top:0;background:var(--bg);padding:6px 0 12px;z-index:5;display:flex;align-items:center;gap:12px}.search-bar-inner{background:var(--bg-input);border:1px solid transparent;border-radius:9999px;padding:10px 20px;display:flex;align-items:center;gap:12px;flex:1;transition:border .2s;color:var(--text-secondary);font-size:15px}.search-bar-inner:focus-within{border-color:var(--accent);background:transparent}.search-bar-inner input{background:none;border:none;color:var(--text);font-size:15px;outline:none;flex:1;font-family:inherit}.search-bar-inner input::placeholder{color:var(--text-secondary)}.panel-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:16px;overflow:hidden}.panel-title{font-size:20px;font-weight:800;padding:12px 16px}.panel-footer{color:var(--accent);font-size:15px;cursor:pointer;padding:16px}.panel-footer:hover{background:var(--bg-hover)}.footer-links{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;color:var(--text-secondary);font-size:13px}.footer-links span{cursor:pointer}.footer-links span:hover{text-decoration:underline}.post-card{padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s}.post-card:hover{background:var(--bg-hover)}.post-card .pc-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}.post-card .pc-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;background:linear-gradient(135deg,#6366f1,#8b5cf6)}.post-card .pc-anon{color:var(--text-secondary);font-size:13px}.post-card .pc-tag{font-size:11px;padding:2px 8px;border-radius:9999px;background:var(--bg-input);color:var(--text-secondary);margin-left:4px}.post-card .pc-text{font-size:14px;line-height:1.5;margin:4px 0;color:var(--text)}.post-card .pc-silent{font-size:12px;color:var(--green);padding:4px 10px;border-radius:9999px;background:rgba(0,186,124,.08);display:inline-block;margin:4px 0}.post-card .pc-actions{display:flex;justify-content:space-between;margin-top:10px;color:var(--text-secondary);font-size:13px;max-width:380px}.post-card .pc-actions span{cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .2s;padding:4px}.post-card .pc-actions span:hover{color:var(--accent)}.search-result-count{padding:12px 16px;font-size:14px;color:var(--text-secondary);border-bottom:1px solid var(--border)}.search-result-count strong{color:var(--text)}.search-empty{text-align:center;padding:60px 16px;color:var(--text-secondary);font-size:15px}.search-empty .se-icon{font-size:40px;margin-bottom:12px}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%)translateY(80px);padding:10px 24px;border-radius:9999px;background:var(--accent);color:#fff;font-size:14px;font-weight:600;opacity:0;transition:all .3s;z-index:1999;pointer-events:none}.toast.show{opacity:1;transform:translateX(-50%)translateY(0)}.toast.error{background:var(--red)}</style>
+</head><body>
+<div class="app">
+<div class="sidebar">
+<div class="side-logo" onclick="window.location.href='主页.html'"><svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.45" r="0.65">
+      <stop offset="0%" stop-color="#27283b"/>
+      <stop offset="100%" stop-color="#14141f"/>
+    </radialGradient>
+    <linearGradient id="zGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b9cf7"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="xGrad" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect x="64" y="64" width="896" height="896" rx="224" ry="224" fill="url(#bg)"/>
+  <rect x="64" y="64" width="896" height="896" rx="224" ry="224" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="2"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+    <line x1="222" y1="378" x2="482" y2="378" stroke="url(#zGrad)"/>
+    <line x1="482" y1="378" x2="222" y2="648" stroke="url(#zGrad)"/>
+    <line x1="222" y1="648" x2="482" y2="648" stroke="url(#zGrad)"/>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+    <line x1="542" y1="378" x2="802" y2="648" stroke="url(#xGrad)"/>
+    <line x1="802" y1="378" x2="542" y2="648" stroke="url(#xGrad)"/>
+  </g>
+</svg></div>
+<ul class="nav-list">
+<li class="nav-item" onclick="window.location.href='主页.html'"><span class="ni">🔍</span>探索</li>
+<li class="nav-item" onclick="window.location.href='主页.html'"><span class="ni">💬</span>社区</li>
+<li class="nav-item" onclick="window.location.href='主页.html'"><span class="ni">🔥</span>话题</li>
+<li class="nav-item" onclick="showToast('💬 消息功能开发中')"><span class="ni">💌</span>消息</li>
+</ul></div>
+<div class="main">
+<div class="main-header">
+<button class="back-btn" onclick="window.location.href='主页.html'">←</button>
+<span id="searchResultTitle">搜索结果</span>
+</div>
+<div id="searchQueryDisplay" style="padding:12px 16px;font-size:15px;color:var(--text-secondary);border-bottom:1px solid var(--border)">搜索: <strong id="queryText" style="color:var(--text)"></strong></div>
+<div id="searchResults"></div>
+</div>
+<div class="right-side">
+<div class="panel-card"><div class="panel-title">关于</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.6;padding:0 16px 16px">此处为测试版本，所有数据存储在浏览器本地。</div></div>
+<div class="footer-links"><span>服务条款</span><span>隐私政策</span><span style="width:100%;margin-top:4px">© 2026 EchoZshsamber</span></div>
+</div></div>
+<div class="toast" id="toast"></div>
+<script>
+// Load user-published posts from localStorage
+var pendingPosts=JSON.parse(localStorage.getItem("zx_pendingPosts")||"[]");
+var userPosts=pendingPosts.map(function(p){return{cat:p.cats&&p.cats.length>0?p.cats[0]:"social",text:p.text,tag:p.tag||"日常",silent:false,comments:0,likes:0}});
+
+// All forum posts (same as主页.html)
+var forumPosts=userPosts.concat([
+  {cat:"anime",text:"刚看完无职转生第二季...",tag:"动漫讨论",silent:false,comments:24,likes:56},
+  {cat:"social",text:"今天在公司群被@了...",tag:"社恐日常",silent:true,comments:43,likes:128},
+  {cat:"game",text:"求推荐适合社恐人玩的联机游戏！",tag:"游戏求助",silent:false,comments:67,likes:89},
+  {cat:"match",text:"我是INFP，想找一个ENFJ或者ENFP的朋友！",tag:"交友",silent:false,comments:31,likes:72},
+  {cat:"cos",text:"第一次去漫展出了cos...",tag:"Cosplay",silent:false,comments:18,likes:210},
+  {cat:"anime",text:"有人看今年的四月新番吗？",tag:"新番推荐",silent:false,comments:56,likes:134},
+  {cat:"social",text:"聊了三个月的网友提出要见面...",tag:"社恐日常",silent:true,comments:89,likes:203}
+]);
+
+// Also match user names and MBTI types from matching data
+var matchUsers=[
+  {name:"小夜",mbti:"INFP",need:"companion",interests:["动漫","音乐","绘画"]},
+  {name:"星野",mbti:"INFJ",need:"partner",interests:["游戏","轻小说","V Tuber"]},
+  {name:"阿空",mbti:"ENFP",need:"companion",interests:["动漫","Cosplay","影视"]},
+  {name:"琉璃",mbti:"INTJ",need:"partner",interests:["游戏","音乐","轻小说"]},
+  {name:"晓",mbti:"ISTP",need:"attraction",interests:["动漫","游戏","Cosplay"]},
+  {name:"桃子",mbti:"ENFJ",need:"companion",interests:["绘画","音乐","影视"]}
+];
+
+function showToast(m,t){var e=document.getElementById("toast");if(!e)return;e.textContent=m;e.className="toast"+(t==="error"?" error":"");e.classList.add("show");clearTimeout(e._timer);e._timer=setTimeout(function(){e.classList.remove("show")},2800)}
+
+function getQueryParam(name){
+  var url=new URL(window.location.href);
+  return url.searchParams.get(name)||"";
+}
+
+function renderSearchResults(query){
+  if(!query.trim()){
+    document.getElementById("searchResults").innerHTML='<div class="search-empty"><div class="se-icon">🔍</div><div>请输入搜索关键词</div></div>';
+    document.getElementById("searchResultTitle").textContent="搜索结果";
+    return;
+  }
+  document.getElementById("queryText").textContent=query;
+  var q=query.toLowerCase();
+  var results=[];
+
+  // Search in forum posts
+  forumPosts.forEach(function(p){
+    if(p.text.toLowerCase().includes(q)||p.tag.toLowerCase().includes(q)||p.cat.toLowerCase().includes(q)){
+      results.push({type:"post",data:p,matchedField:"帖子内容"});
+    }
+  });
+
+  // Search in match users (name, MBTI, interests)
+  matchUsers.forEach(function(u){
+    if(u.name.toLowerCase().includes(q)||u.mbti.toLowerCase().includes(q)){
+      results.push({type:"user",data:u,matchedField:"用户"});
+    }else{
+      u.interests.forEach(function(i){
+        if(i.toLowerCase().includes(q)){
+          results.push({type:"user",data:u,matchedField:"兴趣"});
+        }
+      });
+    }
+  });
+
+  document.getElementById("searchResultTitle").textContent='搜索结果: '+query;
+
+  if(results.length===0){
+    document.getElementById("searchResults").innerHTML='<div class="search-empty"><div class="se-icon">😕</div><div>未找到与 "<strong style="color:var(--text)">'+query+'</strong>" 相关的内容</div><div style="font-size:13px;margin-top:8px">请尝试其他关键词</div></div>';
+    return;
+  }
+
+  var html='<div class="search-result-count">找到 <strong>'+results.length+'</strong> 条结果</div>';
+  results.forEach(function(r){
+    if(r.type==="post"){
+      var p=r.data;
+      var sil=p.silent?'<div class="pc-silent">🌿 只想倾诉，不需要建议</div>':"";
+      html+='<div class="post-card"><div class="pc-header"><div class="pc-avatar" style="background:linear-gradient(135deg,var(--accent),var(--purple))">?</div><span class="pc-anon">匿名用户</span><span class="pc-tag">#'+p.tag+'</span></div><div class="pc-text">'+p.text+'</div>'+sil+'<div class="pc-actions"><span>💬 '+p.comments+'</span><span>❤️ '+p.likes+'</span></div></div>';
+    }else if(r.type==="user"){
+      var u=r.data;
+      var needMap={companion:"🤗陪伴型",partner:"🤝搭档型",attraction:"✨吸引型"};
+      html+='<div class="post-card"><div class="pc-header"><div class="pc-avatar" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">'+u.name.charAt(0)+'</div><span style="font-weight:600;font-size:14px">'+u.name+'</span><span class="pc-tag">'+u.mbti+'</span></div><div style="font-size:13px;color:var(--text-secondary);margin:4px 0">'+needMap[u.need]+' · '+u.interests.join("、")+'</div></div>';
+    }
+  });
+  document.getElementById("searchResults").innerHTML=html;
+}
+
+// Initialize
+var q=getQueryParam("q");
+renderSearchResults(q);
+</script>
+</body></html>
