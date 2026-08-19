@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>EchoZshsamber · 话题</title>
+<style>*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#000000;--bg-secondary:#16181c;--bg-card:#16181c;--bg-hover:#1d1f23;--bg-elevated:#1d1f23;--bg-input:#202327;--border:#2f3336;--text:#e7e9ea;--text-secondary:#71767b;--accent:#1d9bf0;--accent-hover:#1a8cd8;--purple:#8b5cf6;--pink:#f91880;--green:#00ba7c;--red:#f4212e;--radius:9999px;--radius-md:16px;--radius-sm:12px}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;justify-content:center}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.app{display:flex;width:100%;max-width:1265px;min-height:100vh}
+.sidebar{width:275px;padding:0 12px;display:flex;flex-direction:column;height:100vh;position:sticky;top:0}
+.side-logo{padding:12px;display:flex;align-items:center;gap:10px;cursor:pointer;border-radius:9999px;width:fit-content;transition:background .2s}
+.side-logo:hover{background:var(--bg-hover)}.side-logo svg{width:30px;height:30px}
+.nav-list{list-style:none;flex:1;margin-top:4px}
+.nav-item{display:flex;align-items:center;gap:16px;padding:12px;border-radius:9999px;cursor:pointer;transition:background .2s;color:var(--text);font-size:19px;font-weight:400;text-decoration:none}
+.nav-item:hover{background:var(--bg-hover)}.nav-item.active{font-weight:700}
+.nav-item .ni{font-size:26px;width:28px;text-align:center;line-height:1}
+.post-btn{background:var(--accent);color:#fff;border:none;border-radius:9999px;padding:15px 0;font-size:17px;font-weight:700;cursor:pointer;width:90%;margin:8px 0 16px;transition:background .2s;font-family:inherit}
+.post-btn:hover{background:var(--accent-hover)}
+.user-menu{display:flex;align-items:center;gap:10px;padding:10px;border-radius:9999px;cursor:pointer;margin-bottom:8px;transition:background .2s}
+.user-menu:hover{background:var(--bg-hover)}
+.u-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px;color:#fff;flex-shrink:0}
+.u-info{flex:1;min-width:0}.u-name{font-weight:700;font-size:15px}.u-handle{color:var(--text-secondary);font-size:14px}
+.main{flex:1;max-width:600px;border-left:1px solid var(--border);border-right:1px solid var(--border);min-height:100vh}
+.main-header{padding:14px 16px;border-bottom:1px solid var(--border);font-size:20px;font-weight:700;position:sticky;top:0;background:rgba(0,0,0,.85);backdrop-filter:blur(12px);z-index:10;display:flex;align-items:center;gap:12px}
+.main-header .back-btn{background:none;border:none;color:var(--text);font-size:20px;cursor:pointer;padding:4px 8px;border-radius:50%;transition:background .2s;font-family:inherit}
+.main-header .back-btn:hover{background:var(--bg-hover)}
+.main-header .mh-title{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.right-side{width:350px;padding:0 16px;display:flex;flex-direction:column;height:100vh;position:sticky;top:0}
+.search-bar{position:sticky;top:0;background:var(--bg);padding:6px 0 12px;z-index:5;display:flex;align-items:center;gap:12px}
+.search-bar-inner{background:var(--bg-input);border:1px solid transparent;border-radius:9999px;padding:10px 20px;display:flex;align-items:center;gap:12px;flex:1;transition:border .2s;color:var(--text-secondary);font-size:15px}
+.search-bar-inner:focus-within{border-color:var(--accent);background:transparent}
+.search-bar-inner input{background:none;border:none;color:var(--text);font-size:15px;outline:none;flex:1;font-family:inherit}
+.search-bar-inner input::placeholder{color:var(--text-secondary)}
+.panel-card{background:var(--bg-secondary);border:1px solid var(--border);border-radius:var(--radius-md);margin-bottom:16px;overflow:hidden}
+.panel-title{font-size:20px;font-weight:800;padding:12px 16px}
+.trend-item{padding:12px 16px;cursor:pointer;transition:background .2s}
+.trend-item:hover{background:var(--bg-hover)}
+.trend-cat{font-size:13px;color:var(--text-secondary)}.trend-name{font-size:15px;font-weight:700;margin:2px 0}.trend-count{font-size:13px;color:var(--text-secondary)}
+.footer-links{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;color:var(--text-secondary);font-size:13px}
+.footer-links span{cursor:pointer}.footer-links span:hover{text-decoration:underline}
+.post-card{padding:14px 16px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s}
+.post-card:hover{background:var(--bg-hover)}
+.post-card .pc-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.post-card .pc-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0;background:linear-gradient(135deg,#6366f1,#8b5cf6)}
+.post-card .pc-anon{color:var(--text-secondary);font-size:13px}
+.post-card .pc-tag{font-size:11px;padding:2px 8px;border-radius:9999px;background:var(--bg-input);color:var(--accent);margin-left:4px;cursor:pointer}
+.post-card .pc-tag:hover{background:rgba(29,155,240,.12)}
+.post-card .pc-text{font-size:14px;line-height:1.5;margin:4px 0;color:var(--text)}
+.post-card .pc-silent{font-size:12px;color:var(--green);padding:4px 10px;border-radius:9999px;background:rgba(0,186,124,.08);display:inline-block;margin:4px 0}
+.post-card .pc-actions{display:flex;justify-content:space-between;margin-top:10px;color:var(--text-secondary);font-size:13px;max-width:380px}
+.post-card .pc-actions span{cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .2s;padding:4px}
+.post-card .pc-actions span:hover{color:var(--accent)}
+.post-card .pc-actions span.liked{color:var(--pink)!important}
+.modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);z-index:1998;display:none;justify-content:center;align-items:flex-start;padding-top:8vh}
+.modal-overlay.show{display:flex}
+.modal-box{background:var(--bg);border:1px solid var(--border);border-radius:16px;width:min(520px,92vw);max-height:80vh;overflow-y:auto;padding:20px}
+.modal-title{font-size:18px;font-weight:700;margin-bottom:12px}
+.comment-list{margin-bottom:12px}
+.c-empty{color:var(--text-secondary);font-size:13px;text-align:center;padding:12px 0}
+.comment-item{padding:10px 0;border-bottom:1px solid var(--border)}
+.comment-item .c-head{font-size:13px;font-weight:600}
+.comment-item .c-time{color:var(--text-secondary);font-weight:400;font-size:11px;margin-left:8px}
+.comment-item .c-text{font-size:14px;color:var(--text);margin-top:4px;line-height:1.5}
+#commentInput{width:100%;min-height:80px;background:var(--bg-input);border:1px solid var(--border);border-radius:12px;color:var(--text);font-size:14px;padding:10px 12px;outline:none;font-family:inherit;resize:none;box-sizing:border-box}
+#commentInput:focus{border-color:var(--accent)}
+.modal-actions{display:flex;gap:8px;margin-top:12px}
+.modal-actions button{flex:1;padding:10px 0;border-radius:9999px;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.modal-actions .cancel{background:transparent;border:1px solid var(--border);color:var(--text)}
+.modal-actions .cancel:hover{background:var(--bg-hover)}
+.topic-empty{padding:60px 20px;text-align:center;color:var(--text-secondary)}
+.topic-empty .te-icon{font-size:40px;margin-bottom:12px}
+.topic-empty .te-btn{display:inline-block;margin-top:16px;padding:10px 26px;border-radius:9999px;background:var(--accent);color:#fff;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;border:none}
+.topic-empty .te-btn:hover{background:var(--accent-hover)}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%)translateY(80px);padding:10px 24px;border-radius:9999px;background:var(--accent);color:#fff;font-size:14px;font-weight:600;opacity:0;transition:all .3s;z-index:1999;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%)translateY(0)}
+.toast.error{background:var(--red)}
+</style>
+</head><body>
+<div class="app">
+<div class="sidebar">
+<div class="side-logo" onclick="window.location.href='主页.html'"><svg width="30" height="30" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bg" cx="0.5" cy="0.45" r="0.65">
+      <stop offset="0%" stop-color="#27283b"/>
+      <stop offset="100%" stop-color="#14141f"/>
+    </radialGradient>
+    <linearGradient id="zGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b9cf7"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="xGrad" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect x="64" y="64" width="896" height="896" rx="224" ry="224" fill="url(#bg)"/>
+  <rect x="64" y="64" width="896" height="896" rx="224" ry="224" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="2"/>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+    <line x1="222" y1="378" x2="482" y2="378" stroke="url(#zGrad)"/>
+    <line x1="482" y1="378" x2="222" y2="648" stroke="url(#zGrad)"/>
+    <line x1="222" y1="648" x2="482" y2="648" stroke="url(#zGrad)"/>
+  </g>
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="54">
+    <line x1="542" y1="378" x2="802" y2="648" stroke="url(#xGrad)"/>
+    <line x1="802" y1="378" x2="542" y2="648" stroke="url(#xGrad)"/>
+  </g>
+</svg></div>
+<ul class="nav-list">
+<li class="nav-item" onclick="window.location.href='主页.html'"><span class="ni">🔍</span>探索</li>
+<li class="nav-item" onclick="window.location.href='主页.html'"><span class="ni">💬</span>社区</li>
+<li class="nav-item active" onclick="window.location.href='话题.html'"><span class="ni">🔥</span>话题</li>
+<li class="nav-item" onclick="window.location.href='消息.html'"><span class="ni">💌</span>消息</li>
+</ul>
+<button class="post-btn" onclick="goPublish()">发布</button>
+<div class="user-menu" id="userMenuBottom">
+<div class="u-avatar" id="uAvatar">U</div>
+<div class="u-info"><div class="u-name" id="uName">加载中...</div><div class="u-handle" id="uHandle">@user</div></div>
+</div>
+</div>
+<div class="main">
+<div class="main-header">
+<span class="mh-title" id="mhTitle">话题</span>
+</div>
+<div id="topicPosts"></div>
+</div>
+<div class="right-side">
+<div class="search-bar"><div class="search-bar-inner"><input type="text" placeholder="搜索话题或内容" id="topicSearchInput"><span style="cursor:pointer;font-size:16px;color:var(--text-secondary);display:flex;align-items:center" onclick="doSearch()" title="搜索">🔍</span></div></div>
+<div class="panel-card"><div class="panel-title">正在发生</div>
+<div class="trend-item" onclick="window.location.href='话题.html?topic=%E5%AD%A4%E7%8B%AC%E6%91%87%E6%BB%9A'"><div class="trend-cat">动漫 · 趋势</div><div class="trend-name">#孤独摇滚</div><div class="trend-count">12.4万 讨论</div></div>
+<div class="trend-item" onclick="window.location.href='话题.html?topic=%E5%8E%9F%E7%A5%9E'"><div class="trend-cat">游戏 · 趋势</div><div class="trend-name">#原神</div><div class="trend-count">8.7万 讨论</div></div>
+<div class="trend-item" onclick="window.location.href='话题.html?topic=INFP%E6%97%A5%E5%B8%B8'"><div class="trend-cat">MBTI · 趋势</div><div class="trend-name">#INFP日常</div><div class="trend-count">5.2万 讨论</div></div>
+<div class="trend-item" onclick="window.location.href='话题.html?topic=%E6%96%B0%E7%95%AA%E6%8E%A8%E8%8D%90'"><div class="trend-cat">二次元 · 趋势</div><div class="trend-name">#新番推荐</div><div class="trend-count">3.8万 讨论</div></div>
+<div class="panel-footer" onclick="window.location.href='话题.html'" style="color:var(--accent);font-size:15px;cursor:pointer;padding:16px">显示更多</div></div>
+<div class="panel-card"><div class="panel-title">关于话题</div><div style="font-size:13px;color:var(--text-secondary);line-height:1.6;padding:0 16px 16px">点击任意话题，即可查看所有用户发布的与该话题相关的内容。你也可以在发布页为动态添加话题标签。</div></div>
+<div class="footer-links"><span onclick="window.location.href='主页.html'">服务条款</span><span onclick="window.location.href='主页.html'">隐私政策</span><span style="width:100%;margin-top:4px">© 2026 EchoZshsamber</span></div>
+</div></div>
+<div class="modal-overlay" id="commentOverlay" onclick="if(event.target===this)closeComment()">
+<div class="modal-box">
+<div class="modal-title">💬 评论</div>
+<div class="comment-list" id="commentList"></div>
+<textarea id="commentInput" placeholder="写下你的评论..." maxlength="200"></textarea>
+<div class="modal-actions">
+<button style="background:var(--accent);color:#fff" onclick="submitComment()">发布评论</button>
+<button class="cancel" onclick="closeComment()">取消</button>
+</div>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+var userData=JSON.parse(localStorage.getItem("zx_user")||"{}");
+function showToast(m,t){var e=document.getElementById("toast");if(!e)return;e.textContent=m;e.className="toast"+(t==="error"?" error":"");e.classList.add("show");clearTimeout(e._timer);e._timer=setTimeout(function(){e.classList.remove("show")},2800)}
+function getQueryParam(name){var url=new URL(window.location.href);return url.searchParams.get(name)||""}
+function esc(s){return (s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function currentTopic(){return getQueryParam("topic").trim().replace(/^#/,"")}
+function goPublish(){var tp=currentTopic();window.location.href='发布.html'+(tp?'?topic='+encodeURIComponent(tp):'')}
+
+// 内置示例帖子（与主页一致，带话题）
+var demoPosts=[
+{cat:"anime",text:"刚看完无职转生第二季，父辈的故事太催泪了...",tag:"动漫讨论",topic:"动漫讨论",silent:false,comments:0,likes:56,anonymous:true},
+{cat:"anime",text:"#孤独摇滚 第十二集真的封神！波奇的吉他solo太燃了🔥",tag:"孤独摇滚",topic:"孤独摇滚",silent:false,comments:0,likes:320,anonymous:true},
+{cat:"game",text:"#原神 新版本地图设计太惊艳了，探索感拉满！",tag:"原神",topic:"原神",silent:false,comments:0,likes:210,anonymous:true},
+{cat:"social",text:"#INFP日常 周末宅家看番打游戏，感觉这就是幸福...",tag:"INFP日常",topic:"INFP日常",silent:true,comments:0,likes:128,anonymous:true},
+{cat:"social",text:"今天在公司群被@了，作为社恐直接原地消失...",tag:"社恐日常",topic:"社恐日常",silent:true,comments:0,likes:128,anonymous:true},
+{cat:"game",text:"求推荐适合社恐人玩的联机游戏！",tag:"游戏求助",topic:"游戏求助",silent:false,comments:0,likes:89,anonymous:true},
+{cat:"match",text:"我是INFP，想找一个ENFJ或者ENFP的朋友！",tag:"交友",topic:"交友",silent:false,comments:0,likes:72,anonymous:true},
+{cat:"cos",text:"第一次去漫展出了cos，全程社恐但超开心！",tag:"Cosplay",topic:"Cosplay",silent:false,comments:0,likes:210,anonymous:true},
+{cat:"anime",text:"有人看今年的四月新番吗？#新番推荐 求安利！",tag:"新番推荐",topic:"新番推荐",silent:false,comments:0,likes:134,anonymous:true},
+{cat:"social",text:"聊了三个月的网友提出要见面，怎么办在线等！",tag:"社恐日常",topic:"社恐日常",silent:true,comments:0,likes:203,anonymous:true}
+];
+
+// 所有用户发布的内容（来自 localStorage）
+var pendingPosts=JSON.parse(localStorage.getItem("zx_pendingPosts")||"[]");
+var userPosts=pendingPosts.map(function(p){
+  return {cat:p.cats&&p.cats.length?p.cats[0]:"social",text:p.text,tag:p.tag||"日常",topic:p.topic||"",silent:!!p.silent,anonymous:!!p.anonymous,comments:p.comments||0,likes:p.likes||0,time:p.time||0};
+});
+var allPosts=userPosts.map(function(p,i){p.id="u"+i+"_"+ (p.time||0);return p}).concat(demoPosts.map(function(p,i){p.id="d"+i;return p}));
+
+function linkTopics(txt){return esc(txt).replace(/#([\u4e00-\u9fa5A-Za-z0-9_·]+)/g,'<span onclick="event.stopPropagation();window.location.href=\'话题.html?topic=$1\'" style="color:var(--accent);cursor:pointer">#$1</span>')}
+
+function topicPosts(topic){
+  if(!topic) return allPosts;
+  var q=topic.toLowerCase();
+  return allPosts.filter(function(p){
+    var text=(p.text||"").toLowerCase(),tag=(p.tag||"").toLowerCase(),tp=(p.topic||"").toLowerCase(),cat=(p.cat||"").toLowerCase();
+    return tp===q||tp.indexOf(q)>=0||tag.indexOf(q)>=0||cat.indexOf(q)>=0||text.indexOf("#"+q)>=0||text.indexOf(q)>=0;
+  });
+}
+
+function renderHeader(topic){
+  if(!topic){
+    document.getElementById("mhTitle").textContent="话题";
+    document.title="EchoZshsamber · 话题";
+  }else{
+    document.getElementById("mhTitle").textContent="#"+topic;
+    document.title="EchoZshsamber · #"+topic;
+  }
+}
+
+function renderPosts(topic){
+  var el=document.getElementById("topicPosts");
+  var items=topicPosts(topic);
+  if(!items.length){
+    el.innerHTML='<div class="topic-empty"><div class="te-icon">🌵</div><div>这个话题还没有内容</div><div style="font-size:13px;margin-top:6px">来发布第一条相关内容吧！</div><button class="te-btn" onclick="goPublish()">✍️ 立即发布</button></div>';
+    return;
+  }
+  el.innerHTML=items.map(function(p){
+    var sil=p.silent?'<div class="pc-silent">🌿 只想倾诉，不需要建议</div>':"";
+    var who=(p.anonymous||!userData.name)?"匿名用户":userData.name;
+    var avatar=(p.anonymous||!userData.name)?"?":userData.name.charAt(0);
+    var tagName=(p.topic||p.tag||"日常").replace(/^#/,"");
+    var liked=likedMap[p.id]||false;
+    var coms=commentMap[p.id]||[];
+    var likeCount=(p.likes||0)+(liked?1:0);
+    var commentCount=coms.length;
+    return '<div class="post-card"><div class="pc-header"><div class="pc-avatar" style="background:linear-gradient(135deg,var(--accent),var(--purple))">'+avatar+'</div><span class="pc-anon">'+esc(who)+'</span><span class="pc-tag" onclick="event.stopPropagation();window.location.href=\'话题.html?topic='+encodeURIComponent(tagName)+'\'">#'+esc(tagName)+'</span></div><div class="pc-text">'+linkTopics(p.text)+'</div>'+sil+'<div class="pc-actions"><span data-id="'+p.id+'" data-likes="'+(p.likes||0)+'" class="'+(liked?"liked":"")+'" onclick="toggleLike(\''+p.id+'\',this)">❤️ '+likeCount+'</span><span data-id="'+p.id+'" onclick="openComment(\''+p.id+'\')">💬 '+commentCount+'</span><span onclick="showToast(\'✅ 匹配请求已发送！\')">🤝 申请匹配</span></div></div>';
+  }).join("");
+}
+
+var likedMap=JSON.parse(localStorage.getItem("zx_liked")||"{}");
+var commentMap=JSON.parse(localStorage.getItem("zx_comments")||"{}");
+var currentCommentId="";
+
+function toggleLike(id,el){
+  var liked=likedMap[id]||false;
+  var base=parseInt(el.getAttribute("data-likes")||"0",10);
+  if(liked){
+    delete likedMap[id];
+    el.classList.remove("liked");
+    el.textContent="❤️ "+(base>0?base-1:0);
+    showToast("💔 已取消点赞");
+  }else{
+    likedMap[id]=true;
+    el.classList.add("liked");
+    el.textContent="❤️ "+(base+1);
+    showToast("✅ 已点赞！");
+  }
+  localStorage.setItem("zx_liked",JSON.stringify(likedMap));
+}
+
+function openComment(id){
+  currentCommentId=id;
+  var coms=commentMap[id]||[];
+  document.getElementById("commentList").innerHTML=coms.length?coms.map(function(c){
+    return '<div class="comment-item"><div class="c-head">'+esc(c.name)+'<span class="c-time">'+new Date(c.time).toLocaleString()+'</span></div><div class="c-text">'+esc(c.text)+'</div></div>';
+  }).join(""):'<div class="c-empty">还没有评论，来抢沙发～</div>';
+  document.getElementById("commentInput").value="";
+  document.getElementById("commentOverlay").classList.add("show");
+}
+
+function closeComment(){document.getElementById("commentOverlay").classList.remove("show")}
+
+function submitComment(){
+  var inp=document.getElementById("commentInput");
+  var txt=inp.value.trim();
+  if(!txt){showToast("请输入评论内容");return;}
+  commentMap[currentCommentId]=commentMap[currentCommentId]||[];
+  commentMap[currentCommentId].push({name:(userData.name&&userData.email?userData.name:"匿名用户"),text:txt,time:Date.now()});
+  localStorage.setItem("zx_comments",JSON.stringify(commentMap));
+  closeComment();
+  showToast("✅ 评论已发布！");
+  renderPosts(currentTopic());
+}
+
+function init(){
+  var topic=currentTopic();
+  renderHeader(topic);
+  renderPosts(topic);
+  var nm=document.getElementById("uName"),hd=document.getElementById("uHandle"),av=document.getElementById("uAvatar");
+  if(userData.name&&userData.email){
+    nm.textContent=userData.name;av.textContent=userData.name.charAt(0);
+    if(userData.handle)hd.textContent=userData.handle;
+    document.getElementById("userMenuBottom").onclick=function(){window.location.href="个人主页.html"};
+  }else{
+    nm.textContent="未登录";hd.textContent="点击登录";av.textContent="?";
+    document.getElementById("userMenuBottom").onclick=function(){window.location.href="注册登录.html"};
+  }
+}
+function doSearch(){var v=document.getElementById("topicSearchInput").value.trim();if(v){window.location.href='搜索.html?q='+encodeURIComponent(v)+'&type=post'}else{showToast("请输入搜索关键词")}}
+document.getElementById("topicSearchInput").addEventListener("keydown",function(e){if(e.key==="Enter"){doSearch()}});
+init();
+</script>
+</body></html>
+
+
